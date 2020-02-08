@@ -23,7 +23,7 @@ export default function AuthRoute<T>(props: IProps<T>) {
           return (
             <Layout>
               <Header />
-              <Layout.Content>
+              <Layout.Content style={{ padding: '30px' }}>
                 <Component {...routeProps} />
               </Layout.Content>
             </Layout>
