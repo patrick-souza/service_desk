@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import history from 'App/Util/history';
 import './index.css';
-import history from '../../../util/history';
 
 export default function NormalLoginForm() {
   const [isLoading, setLoading] = useState(false);
@@ -66,7 +66,7 @@ export default function NormalLoginForm() {
           disabled={isLoading}
         />
       </Form.Item>
-      <Button type="primary" htmlType="submit" loading={isLoading}>
+      <Button type="primary" htmlType="submit" size="large" loading={isLoading}>
         Entrar
       </Button>
     </Form>

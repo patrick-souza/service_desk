@@ -1,9 +1,10 @@
 import React from 'react';
 import { Row, Col, Typography } from 'antd';
-import contaAqui from '../../../assets/conta-aqui.png';
+import contaAqui from 'assets/conta-aqui.png';
+import homeWallpaper from 'assets/home-wallpaper.png';
+
 import FormLogin from './Form';
 import './index.css';
-import homeWallpaper from '../../../assets/home-wallpaper.png';
 
 export default function LoginPage() {
   return (
@@ -14,12 +15,12 @@ export default function LoginPage() {
       style={{ minHeight: '100vh' }}
     >
       <Col span={12} className="content">
-        <div>
+        <div className="logo">
           <Row type="flex" justify="center">
             <img src={contaAqui} alt="conta aqui logo" />
           </Row>
           <Row type="flex" justify="center">
-            <Typography.Paragraph type="secondary">
+            <Typography.Paragraph type="secondary" disabled>
               Seja bem-vindo! Por favor faça o login na sua conta.
             </Typography.Paragraph>
           </Row>
