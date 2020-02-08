@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col, Typography } from 'antd';
-import { Link } from 'react-router-dom';
 import contaAqui from '../../../assets/conta-aqui.png';
 import FormLogin from './Form';
 import './index.css';
@@ -26,11 +25,6 @@ export default function LoginPage() {
           </Row>
         </div>
         <FormLogin />
-        <Row type="flex" justify="center">
-          <Typography.Text type="secondary">
-            <Link to="/">Termo de Uso e Política de Privacidade</Link>
-          </Typography.Text>
-        </Row>
       </Col>
       <Col span={12} className="content">
         <img src={homeWallpaper} alt="" height="100%" />

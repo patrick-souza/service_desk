@@ -30,6 +30,7 @@ module.exports = {
       },
     ],
     'no-console': 0,
+    'react/jsx-props-no-spreading': 0,
   },
   settings: {
     'import/resolver': {
