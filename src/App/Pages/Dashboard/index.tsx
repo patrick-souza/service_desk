@@ -1,11 +1,19 @@
 import React from 'react';
 import Weather from './Weather';
-import { Row } from 'antd';
+import { Row, Col, Divider } from 'antd';
+import Search from './Search';
+import FastAccess from './FastAccess';
 
 export default function Dashboard() {
   return (
     <Row type="flex">
-      <Weather />
+      <Col span={6}>
+        <Weather />
+        <Divider />
+        <Search />
+        <Divider />
+        <FastAccess />
+      </Col>
     </Row>
   );
 }

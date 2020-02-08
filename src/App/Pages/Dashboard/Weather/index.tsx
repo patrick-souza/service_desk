@@ -53,21 +53,23 @@ export default function Weather() {
   return (
     <Row>
       <Card
-        style={{ backgroundColor: '#122a4e', width: '316px' }}
+        style={{ backgroundColor: '#122a4e' }}
         loading={weahterLoading || quoteLoading}
       >
         <Row type="flex" align="middle" justify="space-around">
           <Row type="flex" align="middle" justify="center">
             <Col>
-              <Icon type="clock-circle" />
-              {formatDate(now, 'HH:mm')}
+              <Typography.Text type="secondary">
+                <Icon type="clock-circle" />
+                {formatDate(now, 'HH:mm')}
+              </Typography.Text>
             </Col>
           </Row>
           <Divider type="vertical" />
           <Row type="flex" align="middle" justify="center">
             <Col>
               <img src={icon} alt={icon} width={40} height={40} />
-              {temp} ºC
+              <Typography.Text type="secondary">{temp} ºC</Typography.Text>
             </Col>
           </Row>
         </Row>
@@ -88,7 +90,8 @@ export default function Weather() {
         </Typography.Text>
         <Divider type="horizontal" style={{ height: '0px' }} />
         <Typography.Paragraph
-          ellipsis={{ rows: 3, expandable: true }}
+          type="secondary"
+          ellipsis={{ rows: 4, expandable: true }}
           style={{ fontStyle: 'italic' }}
         >
           &quot; {quote} &quot;

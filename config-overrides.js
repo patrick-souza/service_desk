@@ -10,8 +10,8 @@ module.exports = override(
     javascriptEnabled: true,
     modifyVars: {
       '@primary-color': '#122a4e',
-      '@text-color': 'fade(@white, 65%)',
-      '@text-color-secondary': 'fade(@white, 45%)',
+      '@text-color': 'fade(@primary-color, 65%)',
+      '@text-color-secondary': 'fade(#FFF, 50%)',
       '@text-color-inverse': '@black',
       '@heading-color': '@primary-color',
     },
