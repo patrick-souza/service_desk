@@ -31,6 +31,9 @@ module.exports = {
     ],
     'no-console': 0,
     'react/jsx-props-no-spreading': 0,
+    camelcase: 0,
+    'no-param-reassign': 0,
+    'react/jsx-wrap-multilines': 0,
   },
   settings: {
     'import/resolver': {

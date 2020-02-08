@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Icon, Input, Button } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import history from 'App/Util/history';
 import './index.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAuth } from 'App/Redux/modules/Auth';
+import { IApplicationState } from 'App/Redux/modules';
 
 export default function NormalLoginForm() {
-  const [isLoading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -18,14 +21,12 @@ export default function NormalLoginForm() {
         .email(),
       password: Yup.string().required(),
     }),
-    onSubmit: values => {
-      console.log(values);
-      setLoading(true);
-      setTimeout(() => {
-        history.push('dashboard');
-      }, 3000);
+    onSubmit: ({ username, password }) => {
+      dispatch(fetchAuth(username, password));
     },
   });
+  const { isLoading } = useSelector((state: IApplicationState) => state.auth);
+
   return (
     <Form
       onSubmit={e => {

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="274" height="51.375" viewBox="0 0 274 51.375">
+    <defs>
+        <style>
+            .cls-1,.cls-3,.cls-6{fill:none}.cls-2{clip-path:url(#clip-path)}.cls-3,.cls-4,.cls-6{stroke:#fbfbfb;stroke-width:2px}.cls-4,.cls-5,.cls-7{fill:#fbfbfb}.cls-6{stroke-linecap:round;stroke-linejoin:round}.cls-7{font-size:28px;font-family:BubbleboddyNeueTrial-Regular,Bubbleboddy Neue Trial;letter-spacing:.127em}
+        </style>
+        <clipPath id="clip-path">
+            <path d="M0 0h274v51.375H0z" class="cls-1"/>
+        </clipPath>
+    </defs>
+    <g id="Componente" class="cls-2">
+        <g id="Grupo_3503" data-name="Grupo 3503" transform="translate(1 1)">
+            <path id="Caminho_852" d="M27.716 34.737v10.98a3.476 3.476 0 0 1-3.261 3.657H3.261A3.476 3.476 0 0 1 0 45.718V3.657A3.476 3.476 0 0 1 3.261 0s17.294.005 20.718 0 3.761 1.895 3.737 3.657 0 10.233 0 10.233" class="cls-3" data-name="Caminho 852"/>
+            <path id="Caminho_853" d="M16.258 0H2.815A2.609 2.609 0 0 0 0 2.334v26.845a2.609 2.609 0 0 0 2.815 2.334h17.887c2.956 0 3.247-1.209 3.226-2.334s0-12.124 0-12.124" class="cls-3" data-name="Caminho 853" transform="rotate(-90 23.584 7.736)"/>
+            <path id="Linha_26" d="M0 0h26.963" class="cls-3" data-name="Linha 26" transform="translate(.882 7.688)"/>
+            <path id="Caminho_854" d="M0 0h31.153" class="cls-4" data-name="Caminho 854" transform="translate(16.207 20.351)"/>
+            <path id="Linha_27" d="M0 0h26.963" class="cls-3" data-name="Linha 27" transform="translate(.413 39.491)"/>
+            <rect id="Retângulo_1512" width="4.988" height="3.325" class="cls-5" data-name="Retângulo 1512" rx="1.663" transform="translate(11.22 42.716)"/>
+            <path id="Caminho_855" d="M0 0h31.153" class="cls-4" data-name="Caminho 855" transform="translate(16.207 25.187)"/>
+            <path id="Caminho_857" d="M46.013-7.29L49.2-4.119l3-3.171" class="cls-6" data-name="Caminho 857" transform="translate(-21.472 19.089)"/>
+            <path id="Caminho_858" d="M46.013-4.123l2.979-3.162 2.939 3.162" class="cls-6" data-name="Caminho 858" transform="translate(-33.109 20.7)"/>
+            <text id="CONTA_AQUI" class="cls-7" data-name="CONTA AQUI" transform="translate(67.479 33)">
+                <tspan x="0" y="0">CONTA AQUI</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
