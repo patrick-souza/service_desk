@@ -7,7 +7,7 @@ import FastAccess from './FastAccess';
 export default function Dashboard() {
   return (
     <Row type="flex">
-      <Col span={6}>
+      <Col span={4}>
         <Weather />
         <Divider />
         <Search />

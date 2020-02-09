@@ -7,6 +7,7 @@ import endpoints from 'Config/endpoints';
 import API from 'App/Services/Api';
 import history from 'App/Util/history';
 import { fetchBearer } from '../Bearer';
+import { fetchCards } from '../Card';
 
 export function* handleBearer(
   action: IReducerAction<{ typeOfSearch: ITypeOfSearch; termOfSearch: string }>
@@ -34,7 +35,7 @@ export function* handleBearer(
       const [firstCard] = response;
 
       yield all([
-        // put(fetchCards({ cardCodes })),
+        put(fetchCards({ cardCodes, state: 'T' })),
         put(fetchBearer(firstCard.cardholder_id)),
       ]);
 
@@ -57,8 +58,8 @@ function* selectCardOnSearch(action: IReducerAction<number>): Generator {
     yield put(dataSuccess([cardSelected]));
     yield put(hideDialog());
     yield all([
-      // put(fetchCards({ cardCodes: [cardSelected.card_code] })),
-      // put(fetchBearer(cardSelected.cardholder_id)),
+      put(fetchCards({ cardCodes: [cardSelected.card_code], state: 'T' })),
+      put(fetchBearer(cardSelected.cardholder_id)),
     ]);
 
     history.push('/bearer');

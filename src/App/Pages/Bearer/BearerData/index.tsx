@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, Typography, Row, Divider, Icon } from 'antd';
 import './index.css';
-import Description from './Description';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
+import Description from 'App/Components/Description';
+
 export default function BearerData() {
   const { bearer, isLoading } = useSelector(
     (state: IApplicationState) => state.bearer

@@ -20,3 +20,12 @@ export const format_phone = (phone_number: string): string => {
 
   return '';
 };
+
+export const formatCurrency = (value: number): string =>
+  new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(value);
+
+export const formatNumber = (value: number): string =>
+  new Intl.NumberFormat('pt-BR').format(value);

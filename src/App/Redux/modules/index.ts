@@ -5,6 +5,7 @@ import { weatherReducer, weatherSaga, IWeatherState } from './Weather';
 import { IQuoteState, quoteReducer, quoteSaga } from './Quote';
 import { ISearchState, searchReducer, searchSaga } from './Search';
 import { IBearerState, bearerReducer, bearerSaga } from './Bearer';
+import { ICardState, cardsReducer, cardsSaga } from './Card';
 
 export type IApplicationState = {
   auth: IAuthState;
@@ -12,6 +13,7 @@ export type IApplicationState = {
   quote: IQuoteState;
   search: ISearchState;
   bearer: IBearerState;
+  card: ICardState;
 };
 
 export type IReducerAction<T> = { type: string; payload: T };
@@ -22,6 +24,7 @@ const reducers = combineReducers({
   quote: quoteReducer,
   search: searchReducer,
   bearer: bearerReducer,
+  card: cardsReducer,
 });
 
 function* rootSaga() {
@@ -31,6 +34,7 @@ function* rootSaga() {
     fork(quoteSaga),
     fork(searchSaga),
     fork(bearerSaga),
+    fork(cardsSaga),
   ]);
 }
 

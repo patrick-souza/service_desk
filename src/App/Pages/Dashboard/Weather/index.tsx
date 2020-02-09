@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Row, Card, Col, Icon, Divider, Typography } from 'antd';
+import { Row, Card, Icon, Divider, Typography } from 'antd';
 import { formatDate } from 'App/Util/format';
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
@@ -56,22 +56,19 @@ export default function Weather() {
       loading={weahterLoading || quoteLoading}
     >
       <Row type="flex" align="middle" justify="space-around">
-        <Row type="flex" align="middle" justify="center">
-          <Col>
-            <Typography.Text type="secondary">
-              <Icon type="clock-circle" />
-              {formatDate(now, 'HH:mm')}
-            </Typography.Text>
-          </Col>
-        </Row>
+        <Typography.Text type="secondary">
+          <Icon type="clock-circle" />
+          <Divider type="vertical" style={{ height: '0' }} />
+          {formatDate(now, 'HH:mm')}
+        </Typography.Text>
         <Divider type="vertical" />
-        <Row type="flex" align="middle" justify="center">
-          <Col>
-            <img src={icon} alt={icon} width={40} height={40} />
-            <Typography.Text type="secondary">{temp} ºC</Typography.Text>
-          </Col>
-        </Row>
+        <Typography.Text type="secondary">
+          <img src={icon} alt={icon} width={40} height={40} />
+          <Divider type="vertical" style={{ height: '0' }} />
+          {temp} ºC
+        </Typography.Text>
       </Row>
+
       <Divider type="horizontal" style={{ height: '0px' }} />
       <Row>
         <Typography.Title level={3} type="secondary">
@@ -79,7 +76,7 @@ export default function Weather() {
         </Typography.Title>
       </Row>
       <Row>
-        <Typography.Title level={3} type="secondary">
+        <Typography.Title level={4} type="secondary">
           {formatDate(now, 'LL')}
         </Typography.Title>
       </Row>
