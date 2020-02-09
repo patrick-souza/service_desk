@@ -10,7 +10,9 @@ import { IApplicationState } from 'App/Redux/modules';
 import CardHeader from './CardHeader';
 
 export default function CardDetails() {
-  const { cards } = useSelector((state: IApplicationState) => state.card);
+  const { cards, isLoading } = useSelector(
+    (state: IApplicationState) => state.card
+  );
 
   return (
     <Collapse
@@ -18,7 +20,7 @@ export default function CardDetails() {
       bordered={false}
       defaultActiveKey={['1']}
       expandIconPosition="right"
-      style={{ background: '#fff' }}
+      style={{ background: '#fff', width: '100%' }}
     >
       {cards.map(
         ({
@@ -37,6 +39,7 @@ export default function CardDetails() {
             style={{ borderLeft: '4px solid #dda900' }}
             header={
               <CardHeader
+                loading={isLoading}
                 tier={tier}
                 truncate_number={truncate_number}
                 formatted_balance={formatted_balance}

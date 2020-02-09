@@ -9,9 +9,10 @@ export default function CardHeader({
   truncate_number,
   formatted_balance,
   image,
-}: Partial<ICard>) {
+  loading,
+}: Partial<ICard> & { loading: boolean }) {
   return (
-    <Card bordered={false} type="inner">
+    <Card bordered={false} type="inner" loading={loading}>
       <Row type="flex" align="middle">
         <Col
           span={2}

@@ -6,9 +6,11 @@ import CardDetails from './CardDetails';
 import Pagination from 'App/Components/Pagination';
 import CardContext from './CardContext';
 import { IStatusCard, fetchCards } from 'App/Redux/modules/Card';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { IApplicationState } from 'App/Redux/modules';
 
 export default function ListCards() {
+  const { count } = useSelector((state: IApplicationState) => state.card);
   const [activeFilter, setActiveFilter] = useState<IStatusCard>('T');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -37,7 +39,7 @@ export default function ListCards() {
       <Row type="flex">
         <FilterByStatus />
       </Row>
-      <Row>
+      <Row type="flex">
         <CardDetails />
       </Row>
       <Row type="flex" justify="end" align="middle">
@@ -50,7 +52,7 @@ export default function ListCards() {
           }}
           defaultCurrent={1}
           current={currentPage}
-          total={10}
+          total={count}
         />
       </Row>
     </CardContext.Provider>

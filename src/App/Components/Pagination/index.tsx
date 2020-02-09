@@ -28,7 +28,7 @@ export default function CustomPagination({
         onChange={onChange}
         current={current}
         defaultCurrent={defaultCurrent}
-        showTotal={total => `Total ${total} itens`}
+        showTotal={total => `Total ${total} ${total > 1 ? 'Itens' : 'Item'}`}
         total={total}
       />
     </>

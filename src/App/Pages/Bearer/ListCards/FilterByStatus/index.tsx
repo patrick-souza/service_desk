@@ -1,8 +1,13 @@
 import React, { useContext } from 'react';
-import { Row, Radio, Card, Typography } from 'antd';
+import { Row, Radio, Card, Typography, Badge } from 'antd';
 import CardContext from '../CardContext';
+import { useSelector } from 'react-redux';
+import { IApplicationState } from 'App/Redux/modules';
 
 export default function FilterByStatus() {
+  const { total, active, blocked, pre_block, canceled } = useSelector(
+    (state: IApplicationState) => state.card
+  );
   const { setFilter, filter } = useContext(CardContext);
   return (
     <Card
@@ -16,11 +21,11 @@ export default function FilterByStatus() {
           buttonStyle="solid"
           onChange={e => setFilter(e.target.value)}
         >
-          <Radio.Button value="T">Total</Radio.Button>
-          <Radio.Button value="A">Ativos</Radio.Button>
-          <Radio.Button value="C">Cancelados</Radio.Button>
-          <Radio.Button value="P">Pré-Bloqueio</Radio.Button>
-          <Radio.Button value="B">Bloqueados</Radio.Button>
+          <Radio.Button value="T">Total - {total}</Radio.Button>
+          <Radio.Button value="A">Ativos - {active}</Radio.Button>
+          <Radio.Button value="C">Cancelados - {canceled}</Radio.Button>
+          <Radio.Button value="P">Pré-Bloqueio - {pre_block}</Radio.Button>
+          <Radio.Button value="B">Bloqueados - {blocked}</Radio.Button>
         </Radio.Group>
         <Typography.Text>
           <strong>Nº De Conta</strong> 1/10
