@@ -1,7 +1,12 @@
 import React from 'react';
 import { Row, Card, Typography, Input, Divider } from 'antd';
+import Dialog from './Dialog';
+import { useDispatch } from 'react-redux';
+import { showDialog } from 'App/Redux/modules/Search';
 
 export default function Search() {
+  const dispatch = useDispatch();
+
   return (
     <Row>
       <Card>
@@ -11,12 +16,13 @@ export default function Search() {
           <Input.Search
             placeholder="CPF, CNPJ, ID do cartão e conta"
             onFocus={() => {
-              console.log('on focus');
+              dispatch(showDialog());
             }}
             enterButton
           />
         </Row>
       </Card>
+      <Dialog />
     </Row>
   );
 }
