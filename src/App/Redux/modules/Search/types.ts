@@ -11,7 +11,7 @@ export type IResultSearch = {
   image: string;
 };
 
-export type typeOfSearch =
+export type ITypeOfSearch =
   | 'CPF'
   | 'CNPJ'
   | 'ACCOUNT_ID'

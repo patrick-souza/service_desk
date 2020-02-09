@@ -8,7 +8,7 @@ import { IApplicationState } from 'App/Redux/modules';
 import {
   hideDialog,
   fetchDataBearer,
-  typeOfSearch,
+  ITypeOfSearch,
 } from 'App/Redux/modules/Search';
 
 export default function Dialog() {
@@ -17,7 +17,7 @@ export default function Dialog() {
   );
   const dispatch = useDispatch();
 
-  const [activeTab, setActiveTab] = useState<typeOfSearch>('CPF');
+  const [activeTab, setActiveTab] = useState<ITypeOfSearch>('CPF');
 
   const formik = useFormik({
     initialValues: {
@@ -27,7 +27,6 @@ export default function Dialog() {
       termSearch: Yup.string().required(),
     }),
     onSubmit: ({ termSearch }) => {
-      console.log(termSearch, activeTab);
       const unmasked = termSearch.replace(/\D+/g, '');
 
       dispatch(fetchDataBearer(activeTab, unmasked));
@@ -71,7 +70,7 @@ export default function Dialog() {
   );
 
   const handleChangeTab = (key: string) => {
-    setActiveTab(key as typeOfSearch);
+    setActiveTab(key as ITypeOfSearch);
     formik.resetForm();
   };
 

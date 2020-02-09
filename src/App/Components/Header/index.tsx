@@ -3,6 +3,7 @@ import { Row, Menu, Layout, Icon, Avatar, Typography, Divider } from 'antd';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import logoContaAqui from 'assets/logo-contaaqui.svg';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   const { name, email } = useSelector(
@@ -16,7 +17,9 @@ export default function Header() {
         align="middle"
         style={{ height: '100%' }}
       >
-        <img src={logoContaAqui} height={32} alt="logo conta aqui" />
+        <Link to="/dashboard">
+          <img src={logoContaAqui} height={32} alt="logo conta aqui" />
+        </Link>
         <Menu mode="horizontal" theme="dark">
           <Menu.Item key={1}>Contatos</Menu.Item>
           <Menu.Item key={2}>Contas</Menu.Item>

@@ -1,11 +1,11 @@
 import { IReducerAction } from '..';
-import { SearchActionTypes, IResultSearch, typeOfSearch } from './types';
+import { SearchActionTypes, IResultSearch, ITypeOfSearch } from './types';
 import FactoryAction from 'App/Util/FactoryAction';
 
 export const fetchDataBearer = (
-  typeOfSearch: typeOfSearch,
+  typeOfSearch: ITypeOfSearch,
   termOfSearch: string
-): IReducerAction<{ typeOfSearch: typeOfSearch; termOfSearch: string }> =>
+): IReducerAction<{ typeOfSearch: ITypeOfSearch; termOfSearch: string }> =>
   FactoryAction(SearchActionTypes.FETCH, { typeOfSearch, termOfSearch });
 
 export const dataSuccess = (

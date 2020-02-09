@@ -1,16 +1,15 @@
 import { all, takeLatest, call, put, select } from 'redux-saga/effects';
 import { IReducerAction, IApplicationState } from '..';
-import { IResultSearch, SearchActionTypes, typeOfSearch } from './types';
+import { IResultSearch, SearchActionTypes, ITypeOfSearch } from './types';
 import { SearchError, hideDialog, dataSuccess } from './actions';
-// import { fetchCards } from '../cards';
-// import { fetchBearer } from '../bearer';
 import { notification } from 'antd';
 import endpoints from 'Config/endpoints';
 import API from 'App/Services/Api';
 import history from 'App/Util/history';
+import { fetchBearer } from '../Bearer';
 
 export function* handleBearer(
-  action: IReducerAction<{ typeOfSearch: typeOfSearch; termOfSearch: string }>
+  action: IReducerAction<{ typeOfSearch: ITypeOfSearch; termOfSearch: string }>
 ): Generator {
   try {
     notification.destroy();
@@ -36,7 +35,7 @@ export function* handleBearer(
 
       yield all([
         // put(fetchCards({ cardCodes })),
-        // put(fetchBearer(firstCard.cardholder_id)),
+        put(fetchBearer(firstCard.cardholder_id)),
       ]);
 
       history.push('/bearer');
