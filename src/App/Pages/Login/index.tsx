@@ -6,7 +6,7 @@ import homeWallpaper from 'assets/home-wallpaper.png';
 import FormLogin from './Form';
 import './index.css';
 
-export default function LoginPage() {
+export default function Login() {
   return (
     <Row
       type="flex"

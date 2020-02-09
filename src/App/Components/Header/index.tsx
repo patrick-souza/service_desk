@@ -25,7 +25,8 @@ export default function Header() {
             title={
               <Row type="flex" justify="center" align="middle">
                 Atividades
-                <Icon type="arrow-down" title="Atividades" />
+                <Divider type="vertical" style={{ height: '0px' }} />
+                <Icon type="down" />
               </Row>
             }
           >

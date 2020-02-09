@@ -51,58 +51,56 @@ export default function Weather() {
   }, [dispatch]);
 
   return (
-    <Row>
-      <Card
-        style={{ backgroundColor: '#122a4e' }}
-        loading={weahterLoading || quoteLoading}
+    <Card
+      style={{ backgroundColor: '#122a4e' }}
+      loading={weahterLoading || quoteLoading}
+    >
+      <Row type="flex" align="middle" justify="space-around">
+        <Row type="flex" align="middle" justify="center">
+          <Col>
+            <Typography.Text type="secondary">
+              <Icon type="clock-circle" />
+              {formatDate(now, 'HH:mm')}
+            </Typography.Text>
+          </Col>
+        </Row>
+        <Divider type="vertical" />
+        <Row type="flex" align="middle" justify="center">
+          <Col>
+            <img src={icon} alt={icon} width={40} height={40} />
+            <Typography.Text type="secondary">{temp} ºC</Typography.Text>
+          </Col>
+        </Row>
+      </Row>
+      <Divider type="horizontal" style={{ height: '0px' }} />
+      <Row>
+        <Typography.Title level={3} type="secondary">
+          {handleGreeting}
+        </Typography.Title>
+      </Row>
+      <Row>
+        <Typography.Title level={3} type="secondary">
+          {formatDate(now, 'LL')}
+        </Typography.Title>
+      </Row>
+      <Divider type="horizontal" orientation="center" />
+      <Typography.Text strong type="secondary">
+        Frase do Dia
+      </Typography.Text>
+      <Divider type="horizontal" style={{ height: '0px' }} />
+      <Typography.Paragraph
+        type="secondary"
+        ellipsis={{ rows: 4, expandable: true }}
+        style={{ fontStyle: 'italic' }}
       >
-        <Row type="flex" align="middle" justify="space-around">
-          <Row type="flex" align="middle" justify="center">
-            <Col>
-              <Typography.Text type="secondary">
-                <Icon type="clock-circle" />
-                {formatDate(now, 'HH:mm')}
-              </Typography.Text>
-            </Col>
-          </Row>
-          <Divider type="vertical" />
-          <Row type="flex" align="middle" justify="center">
-            <Col>
-              <img src={icon} alt={icon} width={40} height={40} />
-              <Typography.Text type="secondary">{temp} ºC</Typography.Text>
-            </Col>
-          </Row>
-        </Row>
-        <Divider type="horizontal" style={{ height: '0px' }} />
-        <Row>
-          <Typography.Title level={3} type="secondary">
-            {handleGreeting}
-          </Typography.Title>
-        </Row>
-        <Row>
-          <Typography.Title level={3} type="secondary">
-            {formatDate(now, 'LL')}
-          </Typography.Title>
-        </Row>
-        <Divider type="horizontal" orientation="center" />
-        <Typography.Text strong type="secondary">
-          Frase do Dia
-        </Typography.Text>
-        <Divider type="horizontal" style={{ height: '0px' }} />
-        <Typography.Paragraph
-          type="secondary"
-          ellipsis={{ rows: 4, expandable: true }}
-          style={{ fontStyle: 'italic' }}
-        >
-          &quot; {quote} &quot;
-        </Typography.Paragraph>
-        <Typography.Text
-          type="secondary"
-          style={{ display: 'flex', justifyContent: 'flex-end' }}
-        >
-          {author}
-        </Typography.Text>
-      </Card>
-    </Row>
+        &quot; {quote} &quot;
+      </Typography.Paragraph>
+      <Typography.Text
+        type="secondary"
+        style={{ display: 'flex', justifyContent: 'flex-end' }}
+      >
+        {author}
+      </Typography.Text>
+    </Card>
   );
 }
