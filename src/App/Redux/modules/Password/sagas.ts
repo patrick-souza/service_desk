@@ -15,6 +15,7 @@ import { notification } from 'antd';
 import endpoints from 'Config/endpoints';
 import { formatDate } from 'App/Util/format';
 import API from 'App/Services/Api';
+import * as Yup from 'yup';
 
 function* handlePostResendPassword(
   action: IReducerAction<{ type: string; recipient: string }>
@@ -46,15 +47,11 @@ function* handlePostResendPassword(
       (state: IApplicationState) => state.historicResendPassword.cardId
     );
 
-    const response = yield call(
-      API.post,
-      `${endpoints.telaunica_api}/resendPass`,
-      {
-        recipient,
-        type,
-        card_id: cardCode,
-      }
-    );
+    yield call(API.post, `${endpoints.telaunica_api}/resendPass`, {
+      recipient,
+      type,
+      card_id: cardCode,
+    });
 
     yield put(postResendPasswordSuccess());
     yield put(hideDialogResendPassword());
@@ -90,9 +87,10 @@ function* handleHistoricPassword(): Generator {
     yield put(fetchHistoricSuccess(historic));
   } catch (error) {
     yield put(resendPasswordError());
-    error.data.errors.foreach((e: any) =>
-      notification.error({ message: e.message })
-    );
+    if (error.data.errors)
+      error.data.errors.foreach((e: any) =>
+        notification.error({ message: e.message })
+      );
   }
 }
 function* handleShowDialog(): Generator {

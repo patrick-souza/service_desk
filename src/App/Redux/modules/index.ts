@@ -6,6 +6,15 @@ import { IQuoteState, quoteReducer, quoteSaga } from './Quote';
 import { ISearchState, searchReducer, searchSaga } from './Search';
 import { IBearerState, bearerReducer, bearerSaga } from './Bearer';
 import { ICardState, cardsReducer, cardsSaga } from './Card';
+import { IBlockCardState, blockCardReducer, blockCardSaga } from './Block';
+import { ICancelCardState, cancelCardReducer, cancelCardSaga } from './Cancel';
+import {
+  IHistoricResendPasswordState,
+  historicResendPasswordReducer,
+  historicResendPasswordSaga,
+} from './Password';
+import { IReasonState, reasonReducer, reasonSaga } from './Reasons';
+import { IOrderState, orderReducer, orderSaga } from './Orders';
 
 export type IApplicationState = {
   auth: IAuthState;
@@ -14,6 +23,11 @@ export type IApplicationState = {
   search: ISearchState;
   bearer: IBearerState;
   card: ICardState;
+  blockCard: IBlockCardState;
+  cancelCard: ICancelCardState;
+  reason: IReasonState;
+  historicResendPassword: IHistoricResendPasswordState;
+  order: IOrderState;
 };
 
 export type IReducerAction<T> = { type: string; payload: T };
@@ -25,6 +39,11 @@ const reducers = combineReducers({
   search: searchReducer,
   bearer: bearerReducer,
   card: cardsReducer,
+  blockCard: blockCardReducer,
+  cancelCard: cancelCardReducer,
+  reason: reasonReducer,
+  historicResendPassword: historicResendPasswordReducer,
+  order: orderReducer,
 });
 
 function* rootSaga() {
@@ -35,6 +54,11 @@ function* rootSaga() {
     fork(searchSaga),
     fork(bearerSaga),
     fork(cardsSaga),
+    fork(blockCardSaga),
+    fork(cancelCardSaga),
+    fork(reasonSaga),
+    fork(historicResendPasswordSaga),
+    fork(orderSaga),
   ]);
 }
 

@@ -8,6 +8,9 @@ import CardContext from './CardContext';
 import { IStatusCard, fetchCards } from 'App/Redux/modules/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
+import BlockCard from './Dialog/BlockCard';
+import CancelCard from './Dialog/CancelCard';
+import ResendPassword from './Dialog/ResendPassword';
 
 export default function ListCards() {
   const { count } = useSelector((state: IApplicationState) => state.card);
@@ -21,13 +24,13 @@ export default function ListCards() {
       dispatch(fetchCards({ page, rowsPerPage, state }));
       setCurrentPage(page);
     },
-    [setCurrentPage]
+    [setCurrentPage, dispatch]
   );
 
   useEffect(() => {
     updateData(1, 5, activeFilter);
     setCurrentPage(1);
-  }, [activeFilter]);
+  }, [activeFilter, updateData]);
 
   return (
     <CardContext.Provider
@@ -55,6 +58,9 @@ export default function ListCards() {
           total={count}
         />
       </Row>
+      <BlockCard />
+      <CancelCard />
+      <ResendPassword />
     </CardContext.Provider>
   );
 }

@@ -97,12 +97,7 @@ export default function Dialog() {
         Selecione o que você quer buscar?
       </Typography.Text>
       <Form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-        <Tabs
-          defaultActiveKey="CPF"
-          onChange={handleChangeTab}
-          tabBarGutter={1}
-          type="card"
-        >
+        <Tabs defaultActiveKey="CPF" onChange={handleChangeTab} type="card">
           {tabs.map(tab => (
             <Tabs.TabPane tab={tab.placeholder} key={tab.key}>
               <Row type="flex" style={{ minHeight: '100px' }} align="middle">

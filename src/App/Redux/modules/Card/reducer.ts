@@ -1,7 +1,6 @@
 import { IReducerAction } from '..';
 import {
   ICardState,
-  ICard,
   CardsActionTypes,
   ICardsPagination,
   IStatusCard,

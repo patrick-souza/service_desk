@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Typography, Divider, Row } from 'antd';
 import { IStatusCard } from 'App/Redux/modules/Card';
 
-const stateDictionary = {
+export const stateDictionary = {
   A: { label: 'Ativo', color: '#24c35b' },
   C: { label: 'Cancelado', color: '#d60000' },
   P: { label: 'Pré-Bloqueio', color: '#bebebe' },

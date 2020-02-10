@@ -10,7 +10,7 @@ export default function Header() {
     (state: IApplicationState) => state.auth.user
   );
   return (
-    <Layout.Header>
+    <Layout.Header style={{ padding: '0 30px' }}>
       <Row
         type="flex"
         justify="space-between"

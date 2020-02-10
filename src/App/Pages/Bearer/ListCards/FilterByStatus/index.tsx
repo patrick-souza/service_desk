@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Row, Radio, Card, Typography, Badge } from 'antd';
+import { Row, Radio, Card, Typography } from 'antd';
 import CardContext from '../CardContext';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';

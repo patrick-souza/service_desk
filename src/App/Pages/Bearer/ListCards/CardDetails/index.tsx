@@ -4,7 +4,7 @@ import './index.css';
 import CardActions from './CardActions';
 
 import Description from 'App/Components/Description';
-import LabelStatus from 'App/Components/LabelStatus';
+import LabelStatus, { stateDictionary } from 'App/Components/LabelStatus';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import CardHeader from './CardHeader';
@@ -20,23 +20,31 @@ export default function CardDetails() {
       bordered={false}
       defaultActiveKey={['1']}
       expandIconPosition="right"
-      style={{ background: '#fff', width: '100%' }}
+      style={{ background: '#F0F2F5', width: '100%' }}
     >
       {cards.map(
-        ({
-          tier,
-          truncate_number,
-          formatted_balance,
-          image,
-          card_code,
-          card_name,
-          card_specifications,
-          formatted_document,
-          formatted_expiration_date,
-          status,
-        }) => (
+        (
+          {
+            tier,
+            truncate_number,
+            formatted_balance,
+            image,
+            card_code,
+            card_name,
+            card_specifications,
+            formatted_document,
+            formatted_expiration_date,
+            status,
+          },
+          index
+        ) => (
           <Collapse.Panel
-            style={{ borderLeft: '4px solid #dda900' }}
+            style={{
+              borderLeft: `4px solid ${stateDictionary[status].color}`,
+              background: '#fff',
+              borderTop: '1px solid #ddd',
+              marginBottom: '16px',
+            }}
             header={
               <CardHeader
                 loading={isLoading}
@@ -46,7 +54,7 @@ export default function CardDetails() {
                 image={image}
               />
             }
-            key={card_code}
+            key={index}
           >
             <Row>
               <Col span={18}>
@@ -97,7 +105,7 @@ export default function CardDetails() {
               </Col>
             </Row>
             <Divider style={{ margin: '12px 0' }} />
-            <CardActions cardCode={1} />
+            <CardActions cardCode={card_code} />
           </Collapse.Panel>
         )
       )}
