@@ -38,7 +38,7 @@ function* blockCard(
     yield put(hideDialogBlockCard());
   } catch (error) {
     yield put(blockCardError());
-    error.data.errors.foreach((e: any) =>
+    error.data.errors.map((e: any) =>
       notification.error({ message: e.message })
     );
   }

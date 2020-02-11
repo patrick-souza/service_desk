@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import * as Yup from 'yup';
-import { hideDialogBlockCard } from 'App/Redux/modules/Block';
+import { hideDialogBlockCard, PostBlockCard } from 'App/Redux/modules/Block';
 import Modal from 'App/Components/Modal';
 
 export default function BlockCard() {
@@ -29,14 +29,16 @@ export default function BlockCard() {
 
   const formik = useFormik({
     initialValues: {
-      reason: '',
+      reason: 0,
       description: '',
     },
     validationSchema: Yup.object().shape({
       reason: Yup.string().required(),
       description: Yup.string().required(),
     }),
-    onSubmit: values => console.log(values),
+    onSubmit: ({ reason, description }) => {
+      dispatch(PostBlockCard(reason, description));
+    },
   });
 
   const handleChangeTab = (key: string) => {
@@ -60,6 +62,7 @@ export default function BlockCard() {
       key: 'formatted_createdAt',
     },
   ];
+
   return (
     <Modal
       visible={openDialog}
@@ -95,7 +98,7 @@ export default function BlockCard() {
                     key={reason.codigoSituacao}
                     value={reason.codigoSituacao}
                   >
-                    {reason.situacao}
+                    {reason.nome}
                   </Select.Option>
                 ))}
               </Select>

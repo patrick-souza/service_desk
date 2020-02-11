@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { Tabs, Form, Select, Input, Table } from 'antd';
 import * as Yup from 'yup';
 import Modal from 'App/Components/Modal';
-import { HideDialogCancelCard } from 'App/Redux/modules/Cancel';
+import { HideDialogCancelCard, PostCancelCard } from 'App/Redux/modules/Cancel';
 
 export default function CancelCard() {
   const {
@@ -29,14 +29,16 @@ export default function CancelCard() {
 
   const formik = useFormik({
     initialValues: {
-      reason: '',
+      reason: 0,
       description: '',
     },
     validationSchema: Yup.object().shape({
       reason: Yup.string().required(),
       description: Yup.string().required(),
     }),
-    onSubmit: values => console.log(values),
+    onSubmit: ({ reason, description }) => {
+      dispatch(PostCancelCard(reason, description));
+    },
   });
 
   const handleChangeTab = (key: string) => {
@@ -51,8 +53,8 @@ export default function CancelCard() {
     },
     {
       title: 'Motivo',
-      dataIndex: 'payload.situacao.situacao',
-      key: 'payload.situacao.situacao',
+      dataIndex: 'payload.situacao.nome',
+      key: 'payload.situacao.nome',
     },
     {
       title: 'Data e Hora',
@@ -95,7 +97,7 @@ export default function CancelCard() {
                     key={reason.codigoSituacao}
                     value={reason.codigoSituacao}
                   >
-                    {reason.situacao}
+                    {reason.nome}
                   </Select.Option>
                 ))}
               </Select>

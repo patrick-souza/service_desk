@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ICard } from 'App/Redux/modules/Card';
 import { Row, Col } from 'antd';
 import Description from 'App/Components/Description';
@@ -11,6 +11,7 @@ export default function CardHeader({
   image,
   loading,
 }: Partial<ICard> & { loading: boolean }) {
+  const [errorImage, setErrorImage] = useState(false);
   return (
     <Row type="flex" align="middle">
       <Col
@@ -19,10 +20,16 @@ export default function CardHeader({
           display: 'flex',
           width: 102,
           height: 64,
-          margin: '0 24px 0 4px',
+          margin: '0 24px 6px 16px',
         }}
       >
-        <img src={image || cardNotFound} width={102} height={64} alt="card " />
+        <img
+          src={errorImage ? cardNotFound : image}
+          width={102}
+          height={64}
+          alt="card"
+          onError={() => setErrorImage(true)}
+        />
       </Col>
       <Col span={20}>
         <Row type="flex" align="middle" justify="space-between">

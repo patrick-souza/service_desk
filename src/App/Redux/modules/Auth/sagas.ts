@@ -30,14 +30,11 @@ export function* handleAuth(action: IReducerAction<ISignin>): Generator {
 
     history.push('/dashboard');
   } catch (err) {
-    // if (err.data.errors)
-    // toast.error(err.data.errors.map((e: any) => e.message).join('\br'), {
-    //   position: ToastPosition.TOP_LEFT,
-    // });
-    notification.error({
-      message: 'Login e/ou Senha inválidos',
-      placement: 'topLeft',
-    });
+    if (err.data.errors)
+      notification.error({
+        message: 'Login e/ou Senha inválidos',
+        placement: 'topLeft',
+      });
     yield put(fetchAuthError());
   }
 }
