@@ -14,13 +14,16 @@ export const dataSuccess = (
   FactoryAction(SearchActionTypes.FETCH_SUCCESS, data);
 
 export const SearchError = (): IReducerAction<{}> =>
-  FactoryAction(SearchActionTypes.FETCH_ERROR, {});
+  FactoryAction(SearchActionTypes.FETCH_ERROR);
 
 export const showDialog = (): IReducerAction<{}> =>
-  FactoryAction(SearchActionTypes.SHOW_DIALOG, {});
+  FactoryAction(SearchActionTypes.SHOW_DIALOG);
 
 export const hideDialog = (): IReducerAction<{}> =>
-  FactoryAction(SearchActionTypes.HIDE_DIALOG, {});
+  FactoryAction(SearchActionTypes.HIDE_DIALOG);
 
 export const selectCard = (card_code: number): IReducerAction<number> =>
   FactoryAction(SearchActionTypes.SELECT_CARD, card_code);
+
+export const resetSearch = (): IReducerAction<{}> =>
+  FactoryAction(SearchActionTypes.RESET);

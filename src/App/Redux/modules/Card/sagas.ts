@@ -24,7 +24,6 @@ function* fetchCards(
 ): Generator {
   try {
     const payload = action.payload;
-    console.log(payload);
 
     const cardCodes = yield payload.cardCodes
       ? payload.cardCodes.join(',')

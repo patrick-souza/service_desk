@@ -25,4 +25,5 @@ export const SearchActionTypes = {
   SHOW_DIALOG: '@@search/SHOW_DIALOG',
   HIDE_DIALOG: '@@search/HIDE_DIALOG',
   SELECT_CARD: '@@search/SELECT_CARD',
+  RESET: '@@search/RESET',
 };

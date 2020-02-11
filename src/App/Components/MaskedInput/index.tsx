@@ -1,5 +1,5 @@
 import React from 'react';
-import Masked, { InputState, MaskOptions } from 'react-input-mask';
+import Masked from 'react-input-mask';
 import { Input } from 'antd';
 
 type IProps = {
@@ -25,16 +25,6 @@ export default function MaskedInput({
   return (
     <Masked
       mask={mask}
-      beforeMaskedValueChange={(
-        newState: InputState,
-        oldState: InputState,
-        userInput: string,
-        maskOptions: MaskOptions
-      ): InputState => {
-        console.log(newState, oldState, userInput, maskOptions);
-
-        return newState;
-      }}
       name={name}
       placeholder={placeholder}
       value={value}
@@ -42,6 +32,7 @@ export default function MaskedInput({
       onBlur={onBlur}
       id={id}
       disabled={disabled}
+      maskChar=""
     >
       {(props: any) => <Input {...props} />}
     </Masked>

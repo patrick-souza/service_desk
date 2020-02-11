@@ -27,14 +27,17 @@ export default function ListCards() {
     [setCurrentPage, dispatch]
   );
 
-  useEffect(() => {
-    updateData(1, 5, activeFilter);
-    setCurrentPage(1);
-  }, [activeFilter, updateData]);
+  const handleFilter = useCallback(
+    (newFilter: IStatusCard) => {
+      setActiveFilter(newFilter);
+      updateData(1, 5, newFilter);
+    },
+    [setActiveFilter, updateData]
+  );
 
   return (
     <CardContext.Provider
-      value={{ filter: activeFilter, setFilter: setActiveFilter }}
+      value={{ filter: activeFilter, setFilter: handleFilter }}
     >
       <Row type="flex">
         <LabelbyStatus />

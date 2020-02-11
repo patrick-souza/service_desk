@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Modal, Typography, Tabs, Row, Form } from 'antd';
+import { Typography, Tabs, Row, Form, Divider } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import MaskedInput from 'App/Components/MaskedInput';
@@ -9,10 +9,12 @@ import {
   hideDialog,
   fetchDataBearer,
   ITypeOfSearch,
+  resetSearch,
 } from 'App/Redux/modules/Search';
-
+import ResultCards from './ResultCards';
+import Modal from 'App/Components/Modal';
 export default function Dialog() {
-  const { isLoading, openDialog } = useSelector(
+  const { isLoading, openDialog, result } = useSelector(
     (state: IApplicationState) => state.search
   );
   const dispatch = useDispatch();
@@ -58,12 +60,14 @@ export default function Dialog() {
         placeholder: 'Nº do Pedido',
         mask: '99999999999999999',
         name: 'nº_pedido',
+        resultList: true,
       },
       {
         key: 'ORDER_ITEM_ID',
         placeholder: 'Nº do Item',
         mask: '99999999999999999',
         name: 'nº_item_do_pedido',
+        resultList: true,
       },
     ],
     []
@@ -72,21 +76,15 @@ export default function Dialog() {
   const handleChangeTab = (key: string) => {
     setActiveTab(key as ITypeOfSearch);
     formik.resetForm();
+    dispatch(resetSearch());
   };
 
   return (
     <Modal
-      mask
       title={<Typography.Text strong>Buscar</Typography.Text>}
-      centered
       visible={openDialog}
-      okButtonProps={{
-        title: 'Buscar',
-        size: 'large',
-        loading: isLoading,
-      }}
-      cancelButtonProps={{ title: 'Cancelar', size: 'large' }}
       okText="Buscar"
+      loading={isLoading}
       cancelText="Cancelar"
       onOk={() => formik.submitForm()}
       onCancel={() => {
@@ -121,6 +119,19 @@ export default function Dialog() {
                   />
                 </Form.Item>
               </Row>
+              {tab.resultList && result.length >= 1 && (
+                <>
+                  {result.map(({ image, truncated_number, card_code }) => (
+                    <Row type="flex" justify="center" key={card_code}>
+                      <ResultCards
+                        image={image}
+                        truncatedNumber={truncated_number}
+                        cardCode={card_code}
+                      />
+                    </Row>
+                  ))}
+                </>
+              )}
             </Tabs.TabPane>
           ))}
         </Tabs>

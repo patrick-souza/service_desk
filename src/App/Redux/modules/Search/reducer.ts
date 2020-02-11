@@ -41,6 +41,12 @@ export const searchReducer = (
         draft.result = [];
       });
     }
+    case SearchActionTypes.RESET: {
+      return produce(state, draft => {
+        draft.isLoading = false;
+        draft.result = [];
+      });
+    }
     default:
       return state;
   }
