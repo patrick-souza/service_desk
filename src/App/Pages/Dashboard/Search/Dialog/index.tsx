@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, createRef, useRef, useEffect } from 'react';
 import { Typography, Tabs, Row, Form, Divider } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -13,6 +13,7 @@ import {
 } from 'App/Redux/modules/Search';
 import ResultCards from './ResultCards';
 import Modal from 'App/Components/Modal';
+import Search from 'antd/lib/input/Search';
 export default function Dialog() {
   const { isLoading, openDialog, result } = useSelector(
     (state: IApplicationState) => state.search

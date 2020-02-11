@@ -3,9 +3,9 @@ import { Modal, Icon } from 'antd';
 
 type IProps = {
   visible: boolean;
-  okText: string;
+  okText?: string;
   cancelText: string;
-  onOk: () => void;
+  onOk?: () => void;
   onCancel: () => void;
   title?: string | React.ReactNode;
   loading?: boolean;

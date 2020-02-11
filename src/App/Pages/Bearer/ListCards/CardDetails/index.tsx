@@ -1,114 +1,71 @@
 import React from 'react';
-import { Collapse, Row, Col, Button, Divider } from 'antd';
+import { Row, Col, Button, Divider } from 'antd';
 import './index.css';
 import CardActions from './CardActions';
-
 import Description from 'App/Components/Description';
-import LabelStatus, { stateDictionary } from 'App/Components/LabelStatus';
-import { useSelector } from 'react-redux';
-import { IApplicationState } from 'App/Redux/modules';
-import CardHeader from './CardHeader';
+import LabelStatus from 'App/Components/LabelStatus';
+import { ICard } from 'App/Redux/modules/Card';
 
-export default function CardDetails() {
-  const { cards, isLoading } = useSelector(
-    (state: IApplicationState) => state.card
-  );
-
+export default function CardDetails({
+  card_name,
+  card_specifications,
+  formatted_document,
+  formatted_expiration_date,
+  status,
+  card_code,
+}: ICard) {
   return (
-    <Collapse
-      accordion
-      bordered={false}
-      defaultActiveKey={['1']}
-      expandIconPosition="right"
-      style={{ background: '#F0F2F5', width: '100%' }}
-    >
-      {cards.map(
-        (
-          {
-            tier,
-            truncate_number,
-            formatted_balance,
-            image,
-            card_code,
-            card_name,
-            card_specifications,
-            formatted_document,
-            formatted_expiration_date,
-            status,
-          },
-          index
-        ) => (
-          <Collapse.Panel
-            style={{
-              borderLeft: `4px solid ${stateDictionary[status].color}`,
-              background: '#fff',
-              borderTop: '1px solid #ddd',
-              marginBottom: '16px',
-            }}
-            header={
-              <CardHeader
-                loading={isLoading}
-                tier={tier}
-                truncate_number={truncate_number}
-                formatted_balance={formatted_balance}
-                image={image}
+    <>
+      <Row>
+        <Col span={18}>
+          <Row type="flex" justify="space-between">
+            <Col span={6}>
+              <Description label="Nome cartão" value={card_name} />
+              <Description
+                label="Características"
+                value={card_specifications ? card_specifications.summary : ''}
+                extraAction={() => {
+                  console.log('fetch caracteristicas');
+                }}
               />
-            }
-            key={index}
+            </Col>
+            <Col span={6}>
+              <Description label="Documento" value={formatted_document} />
+              <Description label="Aviso Viagem" value="" />
+            </Col>
+            <Col span={6}>
+              <Description
+                label="Data Expiração"
+                value={formatted_expiration_date}
+              />
+              <Description
+                label="Status"
+                value={<LabelStatus state={status} />}
+              />
+            </Col>
+          </Row>
+        </Col>
+        <Col span={6}>
+          <Row
+            type="flex"
+            justify="center"
+            align="middle"
+            style={{ height: '100px' }}
           >
-            <Row>
-              <Col span={18}>
-                <Row type="flex" justify="space-between">
-                  <Col span={6}>
-                    <Description label="Nome cartão" value={card_name} />
-                    <Description
-                      label="Características"
-                      value={card_specifications.summary}
-                      extraAction={() => {
-                        console.log('fetch caracteristicas');
-                      }}
-                    />
-                  </Col>
-                  <Col span={6}>
-                    <Description label="Documento" value={formatted_document} />
-                    <Description label="Aviso Viagem" value="" />
-                  </Col>
-                  <Col span={6}>
-                    <Description
-                      label="Data Expiração"
-                      value={formatted_expiration_date}
-                    />
-                    <Description
-                      label="Status"
-                      value={<LabelStatus state={status} />}
-                    />
-                  </Col>
-                </Row>
-              </Col>
-              <Col span={6}>
-                <Row
-                  type="flex"
-                  justify="center"
-                  align="middle"
-                  style={{ height: '100px' }}
-                >
-                  <Button
-                    type="primary"
-                    size="large"
-                    onClick={() => {
-                      console.log(card_code);
-                    }}
-                  >
-                    Ver Extrato
-                  </Button>
-                </Row>
-              </Col>
-            </Row>
-            <Divider style={{ margin: '12px 0' }} />
-            <CardActions cardCode={card_code} />
-          </Collapse.Panel>
-        )
-      )}
-    </Collapse>
+            <Button
+              type="primary"
+              size="large"
+              onClick={() => {
+                console.log(card_code);
+              }}
+            >
+              Ver Extrato
+            </Button>
+          </Row>
+        </Col>
+      </Row>
+      <Divider style={{ margin: '12px 0' }} />
+      <CardActions cardCode={card_code} />
+    </>
   );
 }

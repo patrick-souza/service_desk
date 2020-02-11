@@ -7,7 +7,7 @@ export const stateDictionary = {
   C: { label: 'Cancelado', color: '#d60000' },
   P: { label: 'Pré-Bloqueio', color: '#bebebe' },
   B: { label: 'Bloqueado', color: '#dda900' },
-  T: { label: '', color: '' },
+  T: { label: '', color: '#FFF' },
 };
 
 function Circle({ color }: { color: string }) {

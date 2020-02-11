@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Row } from 'antd';
+import { Row, Collapse } from 'antd';
 import LabelbyStatus from './LabelbyStatus';
 import FilterByStatus from './FilterByStatus';
 import CardDetails from './CardDetails';
@@ -11,9 +11,15 @@ import { IApplicationState } from 'App/Redux/modules';
 import BlockCard from './Dialog/BlockCard';
 import CancelCard from './Dialog/CancelCard';
 import ResendPassword from './Dialog/ResendPassword';
+import OrderDialog from './Dialog/Order';
+
+import { stateDictionary } from 'App/Components/LabelStatus';
+import CardHeader from './CardDetails/CardHeader';
 
 export default function ListCards() {
-  const { count } = useSelector((state: IApplicationState) => state.card);
+  const { count, cards } = useSelector(
+    (state: IApplicationState) => state.card
+  );
   const [activeFilter, setActiveFilter] = useState<IStatusCard>('T');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -46,7 +52,35 @@ export default function ListCards() {
         <FilterByStatus />
       </Row>
       <Row type="flex">
-        <CardDetails />
+        <Collapse
+          accordion
+          bordered={false}
+          defaultActiveKey={['0']}
+          expandIconPosition="right"
+          style={{ background: '#F0F2F5', width: '100%' }}
+        >
+          {cards.map((card, index) => (
+            <Collapse.Panel
+              style={{
+                borderLeft: `4px solid ${stateDictionary[card.status].color}`,
+                background: '#fff',
+                borderTop: '1px solid #ddd',
+                marginBottom: '16px',
+              }}
+              header={
+                <CardHeader
+                  tier={card.tier}
+                  truncate_number={card.truncate_number}
+                  formatted_balance={card.formatted_balance}
+                  image={card.image}
+                />
+              }
+              key={index}
+            >
+              <CardDetails {...card} />
+            </Collapse.Panel>
+          ))}
+        </Collapse>
       </Row>
       <Row type="flex" justify="end" align="middle">
         <Pagination
@@ -64,6 +98,7 @@ export default function ListCards() {
       <BlockCard />
       <CancelCard />
       <ResendPassword />
+      <OrderDialog />
     </CardContext.Provider>
   );
 }

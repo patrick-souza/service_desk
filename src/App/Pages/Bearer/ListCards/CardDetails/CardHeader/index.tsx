@@ -9,7 +9,7 @@ export default function CardHeader({
   truncate_number,
   formatted_balance,
   image,
-}: Partial<ICard> & { loading: boolean }) {
+}: Partial<ICard>) {
   return (
     <Row type="flex" align="middle">
       <CardImage image={image} />

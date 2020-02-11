@@ -11,6 +11,7 @@ type IProps = {
   id?: string;
   placeholder?: string;
   disabled?: boolean;
+  ref?: React.RefObject<HTMLInputElement>;
 };
 export default function MaskedInput({
   mask,
@@ -21,10 +22,12 @@ export default function MaskedInput({
   id,
   placeholder,
   disabled,
+  ref,
 }: IProps) {
   return (
     <Masked
       mask={mask}
+      inputRef={ref}
       name={name}
       placeholder={placeholder}
       value={value}
