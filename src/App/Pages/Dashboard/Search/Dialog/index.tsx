@@ -1,5 +1,5 @@
-import React, { useState, useMemo, createRef, useRef, useEffect } from 'react';
-import { Typography, Tabs, Row, Form, Divider } from 'antd';
+import React, { useState, useMemo, useCallback } from 'react';
+import { Typography, Tabs, Row, Form } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import MaskedInput from 'App/Components/MaskedInput';
@@ -13,7 +13,6 @@ import {
 } from 'App/Redux/modules/Search';
 import ResultCards from './ResultCards';
 import Modal from 'App/Components/Modal';
-import Search from 'antd/lib/input/Search';
 export default function Dialog() {
   const { isLoading, openDialog, result } = useSelector(
     (state: IApplicationState) => state.search
@@ -74,11 +73,14 @@ export default function Dialog() {
     []
   );
 
-  const handleChangeTab = (key: string) => {
-    setActiveTab(key as ITypeOfSearch);
-    formik.resetForm();
-    dispatch(resetSearch());
-  };
+  const handleChangeTab = useCallback(
+    (key: string) => {
+      setActiveTab(key as ITypeOfSearch);
+      formik.resetForm();
+      dispatch(resetSearch());
+    },
+    [setActiveTab, dispatch, formik]
+  );
 
   return (
     <Modal

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Row, Collapse } from 'antd';
 import LabelbyStatus from './LabelbyStatus';
 import FilterByStatus from './FilterByStatus';
@@ -15,6 +15,7 @@ import OrderDialog from './Dialog/Order';
 
 import { stateDictionary } from 'App/Components/LabelStatus';
 import CardHeader from './CardDetails/CardHeader';
+import ReissueDialog from './Dialog/Reissue';
 
 export default function ListCards() {
   const { count, cards } = useSelector(
@@ -99,6 +100,7 @@ export default function ListCards() {
       <CancelCard />
       <ResendPassword />
       <OrderDialog />
+      <ReissueDialog />
     </CardContext.Provider>
   );
 }

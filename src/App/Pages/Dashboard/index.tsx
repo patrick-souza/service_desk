@@ -9,9 +9,9 @@ export default function Dashboard() {
     <Row type="flex">
       <Col span={4}>
         <Weather />
-        <Divider />
+        <Divider style={{ margin: '12px 0' }} />
         <Search />
-        <Divider />
+        <Divider style={{ margin: '12px 0' }} />
         <FastAccess />
       </Col>
     </Row>

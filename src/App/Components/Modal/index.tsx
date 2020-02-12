@@ -9,6 +9,7 @@ type IProps = {
   onCancel: () => void;
   title?: string | React.ReactNode;
   loading?: boolean;
+  width?: number | string;
 };
 export default function CustomModal({
   visible,
@@ -19,9 +20,11 @@ export default function CustomModal({
   children,
   title,
   loading,
+  width,
 }: PropsWithChildren<IProps>) {
   return (
     <Modal
+      width={width}
       title={title}
       mask
       centered
@@ -30,6 +33,7 @@ export default function CustomModal({
         size: 'large',
         loading,
         htmlType: 'submit',
+        disabled: !!!onOk,
       }}
       cancelButtonProps={{ size: 'large' }}
       okText={okText}

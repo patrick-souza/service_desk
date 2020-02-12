@@ -65,6 +65,7 @@ export default function BlockCard() {
 
   return (
     <Modal
+      width={620}
       visible={openDialog}
       okText="Salvar"
       cancelText="Cancelar"

@@ -5,6 +5,7 @@ import { showDialogBlockCard } from 'App/Redux/modules/Block';
 import { ShowDialogCancelCard } from 'App/Redux/modules/Cancel';
 import { showDialogResendPassword } from 'App/Redux/modules/Password';
 import { ShowDialogOrderCard } from 'App/Redux/modules/Orders';
+import { showDialogReissueCard } from 'App/Redux/modules/Reissue';
 
 type IProps = {
   cardCode: number;
@@ -24,7 +25,14 @@ export default function CardActions({ cardCode }: IProps) {
       </Button>
       <Divider type="vertical" style={{ height: 0 }} />
 
-      <Button size="large">Reemitir</Button>
+      <Button
+        size="large"
+        onClick={() => {
+          dispatch(showDialogReissueCard(cardCode));
+        }}
+      >
+        Reemitir
+      </Button>
       <Divider type="vertical" style={{ height: 0 }} />
 
       <Button
@@ -50,7 +58,7 @@ export default function CardActions({ cardCode }: IProps) {
       <Button
         size="large"
         onClick={() => {
-          dispatch(ShowDialogOrderCard(7777777));
+          dispatch(ShowDialogOrderCard(cardCode));
         }}
       >
         Pedidos

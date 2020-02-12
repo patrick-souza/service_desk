@@ -30,7 +30,6 @@ function* fetchCards(
       : select((state: IApplicationState) =>
           state.search.result.map(r => r.card_code).join(',')
         );
-    console.log(cardCodes);
 
     const page = payload.page === undefined ? 1 : payload.page;
     const rowsPerPage = payload.rowsPerPage || 5;
