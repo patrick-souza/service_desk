@@ -15,6 +15,7 @@ import {
 } from './Password';
 import { IReasonState, reasonReducer, reasonSaga } from './Reasons';
 import { IOrderState, orderReducer, orderSaga } from './Orders';
+import { IExtractState, extractReducer, extractSaga } from './Extract';
 
 export type IApplicationState = {
   auth: IAuthState;
@@ -28,6 +29,7 @@ export type IApplicationState = {
   reason: IReasonState;
   historicResendPassword: IHistoricResendPasswordState;
   order: IOrderState;
+  extract: IExtractState;
 };
 
 export type IReducerAction<T> = { type: string; payload: T };
@@ -44,6 +46,7 @@ const reducers = combineReducers({
   reason: reasonReducer,
   historicResendPassword: historicResendPasswordReducer,
   order: orderReducer,
+  extract: extractReducer,
 });
 
 function* rootSaga() {
@@ -59,6 +62,7 @@ function* rootSaga() {
     fork(reasonSaga),
     fork(historicResendPasswordSaga),
     fork(orderSaga),
+    fork(extractSaga),
   ]);
 }
 

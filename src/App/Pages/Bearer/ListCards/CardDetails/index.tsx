@@ -5,6 +5,9 @@ import CardActions from './CardActions';
 import Description from 'App/Components/Description';
 import LabelStatus from 'App/Components/LabelStatus';
 import { ICard } from 'App/Redux/modules/Card';
+import { Link } from 'react-router-dom';
+import { updateCardCode } from 'App/Redux/modules/Extract';
+import { useDispatch } from 'react-redux';
 
 export default function CardDetails({
   card_name,
@@ -14,6 +17,7 @@ export default function CardDetails({
   status,
   card_code,
 }: ICard) {
+  const dispatch = useDispatch();
   return (
     <>
       <Row>
@@ -52,15 +56,17 @@ export default function CardDetails({
             align="middle"
             style={{ height: '100px' }}
           >
-            <Button
-              type="primary"
-              size="large"
-              onClick={() => {
-                console.log(card_code);
-              }}
-            >
-              Ver Extrato
-            </Button>
+            <Link to="/extract">
+              <Button
+                type="primary"
+                size="large"
+                onClick={(): void => {
+                  dispatch(updateCardCode(card_code));
+                }}
+              >
+                Ver Extrato
+              </Button>
+            </Link>
           </Row>
         </Col>
       </Row>

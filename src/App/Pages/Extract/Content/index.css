@@ -1,0 +1,15 @@
+.ant-collapse-content-box {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.ant-collapse-content > .ant-collapse-content-box {
+  padding: 0;
+}
+
+.ant-collapse .ant-card-small > .ant-card-body {
+  padding: 12px 0;
+}
+.ant-collapse-icon-position-right > .ant-collapse-item > .ant-collapse-header {
+  padding-right: 0 !important;
+}
