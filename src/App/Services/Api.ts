@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const api = axios.create();
+const API = axios.create();
 
-api.interceptors.response.use(
+API.interceptors.response.use(
   response => {
     return response.data;
   },
@@ -13,4 +13,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export default API;
