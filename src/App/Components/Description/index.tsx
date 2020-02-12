@@ -23,7 +23,9 @@ export default function Description({
         {React.isValidElement(value) ? (
           value
         ) : (
-          <Typography.Text>{value || '-'}</Typography.Text>
+          <Typography.Text style={{ overflow: 'auto' }}>
+            {value || '-'}
+          </Typography.Text>
         )}
       </Row>
       <Divider style={{ height: '0px', margin: '12px 0px' }} />

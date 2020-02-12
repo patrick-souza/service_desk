@@ -19,7 +19,7 @@ export default function CardImage({ image }: { image?: string }) {
         src={errorImage ? cardNotFound : image}
         width={102}
         height={64}
-        alt="card image"
+        alt="card"
         onError={() => setErrorImage(true)}
       />
     </Col>

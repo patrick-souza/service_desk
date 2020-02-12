@@ -64,6 +64,7 @@ export default function CancelCard() {
   ];
   return (
     <Modal
+      width={620}
       visible={openDialog}
       okText="Salvar"
       cancelText="Cancelar"

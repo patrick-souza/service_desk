@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card } from 'antd';
+import { Row, Card } from 'antd';
 import CardImage from 'App/Components/CardImage';
 import Description from 'App/Components/Description';
 import { useDispatch } from 'react-redux';
