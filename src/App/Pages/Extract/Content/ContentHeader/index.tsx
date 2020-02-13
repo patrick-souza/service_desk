@@ -1,43 +1,41 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row } from 'antd';
 import Description from 'App/Components/Description';
-import './index.css';
 import { IExtract } from 'App/Redux/modules/Extract';
 
 type IProps = {
   transactions: IExtract;
 };
 
-export default function Header(props: IProps) {
+export default function ContentHeader(props: IProps) {
   return (
-    <Row type="flex" align="middle">
+    <Row type="flex" align="middle" style={{ marginRight: '-20px' }}>
       {console.log(props.transactions)}
       <Description
         label="Estabelecimento"
         value={props.transactions.establishmentCode}
-        span={3}
+        span={5}
       />
       <Description
         label="Data e hora"
         value={props.transactions.formatted_registrationDate}
-        span={3}
+        span={5}
       />
       <Description
         label="Status da transação"
         value={props.transactions.situationTransaction.name}
-        span={3}
+        span={5}
       />
       <Description
         label="Tipo de transação"
         value={props.transactions.typeTransaction.name}
-        span={3}
+        span={5}
       />
       <Description
         label="Valor"
         value={props.transactions.formatted_value}
-        span={3}
+        span={4}
       />
-      <Col span={3} />
     </Row>
   );
 }

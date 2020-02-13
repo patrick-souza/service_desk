@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col, Button, Divider } from 'antd';
-import './index.css';
 import CardActions from './CardActions';
 import Description from 'App/Components/Description';
 import LabelStatus from 'App/Components/LabelStatus';
