@@ -3,7 +3,7 @@ import { IReducerAction } from '..';
 import { IReissueState, ReissueActionTypes } from './types';
 
 export const initialState: IReissueState = {
-  cardId: 0,
+  cardCode: 0,
   openDialog: false,
   isLoading: false,
   historic: [],
@@ -33,13 +33,13 @@ export const reissueReducer = (
     case ReissueActionTypes.SHOW_DIALOG: {
       return produce(state, draft => {
         draft.openDialog = true;
-        draft.cardId = action.payload;
+        draft.cardCode = action.payload;
       });
     }
     case ReissueActionTypes.HIDE_DIALOG: {
       return produce(state, draft => {
         draft.openDialog = false;
-        draft.cardId = 0;
+        draft.cardCode = 0;
       });
     }
     default:

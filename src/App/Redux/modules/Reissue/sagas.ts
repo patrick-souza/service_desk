@@ -10,7 +10,7 @@ import API from 'App/Services/Api';
 function* postReissueCard(action: IReducerAction<IReissueCard>) {
   try {
     const cardId = yield select(
-      (state: IApplicationState) => state.reissue.cardId
+      (state: IApplicationState) => state.reissue.cardCode
     );
 
     const response = yield call(
@@ -18,7 +18,7 @@ function* postReissueCard(action: IReducerAction<IReissueCard>) {
       `${endpoints.telaunica_api}/cards/reissue`,
       {
         ...action.payload,
-        card_id: cardId,
+        cardCode: cardId,
         reason_id: action.payload.reason,
       }
     );
