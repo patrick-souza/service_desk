@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Form, Select, Input, Table } from 'antd';
+import { Tabs, Form, Select, Input } from 'antd';
 import { useFormik } from 'formik';
 import Modal from 'App/Components/Modal';
 import { IApplicationState } from 'App/Redux/modules';
@@ -111,6 +111,9 @@ export default function ReissueDialog() {
                   </Select.Option>
                 ))}
               </Select>
+            </Form.Item>
+            <Form.Item>
+              <Input placeholder="Número Truncado" disabled />
             </Form.Item>
           </Form>
         </Tabs.TabPane>
