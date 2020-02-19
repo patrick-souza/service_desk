@@ -6,6 +6,8 @@ export type ICancelCardState = {
   readonly historicLoading: boolean;
 };
 
+export type ICancelCard = { reason: number; description: string };
+
 export type IHistoricCancel = {
   _id: string;
   user: string;

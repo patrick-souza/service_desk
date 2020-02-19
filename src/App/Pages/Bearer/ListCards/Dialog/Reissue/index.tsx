@@ -9,20 +9,17 @@ import {
   postReissueCard,
 } from 'App/Redux/modules/Reissue';
 import FormReissue from './Form';
-
+import * as Yup from 'yup';
+import Historic from './Historic';
 export default function ReissueDialog() {
   const {
     openDialog,
     truncate_number,
     zip_code,
-    loadingReissue,
+    isLoading,
     portador,
   } = useSelector((state: IApplicationState) => {
-    const {
-      isLoading: loadingReissue,
-      openDialog,
-      cardCode: cardCode,
-    } = state.reissue;
+    const { isLoading, openDialog, cardCode } = state.reissue;
     const card = state.card.cards.find(card => card.card_code === cardCode);
 
     const { zip_code, name: portador } = state.bearer.bearer;
@@ -30,7 +27,7 @@ export default function ReissueDialog() {
     if (card && card.truncate_number) truncate_number = card.truncate_number;
 
     return {
-      loadingReissue,
+      isLoading,
       openDialog,
       truncate_number,
       zip_code,
@@ -58,12 +55,30 @@ export default function ReissueDialog() {
         state: '',
       },
     },
+    validationSchema: Yup.object().shape({
+      channel: Yup.string().required(),
+      reason: Yup.string().required(),
+      card_id: Yup.number().required(),
+      truncated_number: Yup.string().required(),
+      cardholder_name: Yup.string().required(),
+      receiver: Yup.string().required(),
+      address: Yup.object().shape({
+        street: Yup.string().required(),
+        number: Yup.number().required(),
+        complement: Yup.string().required(),
+        district: Yup.string().required(),
+        zipcode: Yup.number().required(),
+        city: Yup.string().required(),
+        state: Yup.string().required(),
+      }),
+    }),
     enableReinitialize: true,
     onSubmit: values => {
       dispatch(postReissueCard(values));
     },
   });
-  const handleChangeTab = (key: string) => {
+
+  const handleChangeTab = () => {
     formik.resetForm();
   };
 
@@ -73,7 +88,7 @@ export default function ReissueDialog() {
       visible={openDialog}
       okText="Salvar"
       cancelText="Cancelar"
-      loading={loadingReissue}
+      loading={isLoading}
       onOk={() => {
         formik.submitForm();
       }}
@@ -85,10 +100,9 @@ export default function ReissueDialog() {
         <Tabs.TabPane tab="Reimissão de cartão" key={'reissue'}>
           <FormReissue formik={formik} />
         </Tabs.TabPane>
-        <Tabs.TabPane
-          tab="Histórico de reemissão"
-          key={'historic'}
-        ></Tabs.TabPane>
+        <Tabs.TabPane tab="Histórico de reemissão" key={'historic'}>
+          <Historic />
+        </Tabs.TabPane>
       </Tabs>
     </Modal>
   );

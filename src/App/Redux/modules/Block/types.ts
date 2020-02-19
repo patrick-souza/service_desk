@@ -6,6 +6,8 @@ export type IBlockCardState = {
   readonly historicLoading: boolean;
 };
 
+export type IBlockCard = { reason: number; description: string };
+
 export type IHistoricBlock = {
   _id: string;
   user: string;

@@ -16,7 +16,7 @@ import {
 import { IReasonState, reasonReducer, reasonSaga } from './Reasons';
 import { IOrderState, orderReducer, orderSaga } from './Orders';
 import { IExtractState, extractReducer, extractSaga } from './Extract';
-import { IReissueState, reissueReducer, reissueSaga } from './Reissue';
+import { reissueReducer, reissueSaga, IReissueState } from './Reissue';
 
 export type IApplicationState = {
   auth: IAuthState;

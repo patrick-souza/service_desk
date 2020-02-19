@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Form,
   Row,
@@ -8,26 +8,48 @@ import {
   Input,
   Typography,
   Divider,
+  notification,
 } from 'antd';
 import { FormikProps } from 'formik';
 import { IReissueCard } from 'App/Redux/modules/Reissue';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
+import cepPromisse from 'cep-promise';
 
 type IProps = {
   formik: FormikProps<IReissueCard>;
 };
 export default function FormReissue({ formik }: IProps) {
-  const { loadingReasons, reasons } = useSelector(
-    (state: IApplicationState) => {
-      const { isLoading: loadingReasons, reasons } = state.reason;
-
-      return {
-        loadingReasons,
-        reasons,
-      };
-    }
+  const { isLoading, reasons } = useSelector(
+    (state: IApplicationState) => state.reason
   );
+
+  const [fetchingAddress, setFetchingAddress] = useState(false);
+  const handleAddress = async (zipcode: string) => {
+    setFetchingAddress(true);
+    try {
+      const { city, neighborhood, state, street } = await cepPromisse(zipcode);
+      formik.setValues({
+        ...formik.values,
+        address: {
+          ...formik.values.address,
+          district: neighborhood,
+          city,
+          state,
+          street,
+        },
+      });
+    } catch (error) {
+      formik.setFieldValue('address.street', '');
+      formik.setFieldValue('address.district', '');
+      formik.setFieldValue('address.city', '');
+      formik.setFieldValue('address.state', '');
+      notification.error({ message: 'Cep não encontrado' });
+    } finally {
+      setFetchingAddress(false);
+    }
+  };
+
   return (
     <Form onSubmit={formik.handleSubmit} layout="vertical">
       <Row type="flex" gutter={16} justify="space-between" align="middle">
@@ -42,9 +64,11 @@ export default function FormReissue({ formik }: IProps) {
             <Select
               style={{ width: '100%' }}
               onChange={(value: string) => {
-                formik.setFieldValue('reason', value);
+                console.log(value);
+
+                formik.setFieldValue('channel', value);
               }}
-              onBlur={() => formik.setFieldTouched('reason')}
+              onBlur={() => formik.setFieldTouched('channel')}
             >
               {[
                 { value: 'email', label: 'E-mail' },
@@ -68,7 +92,7 @@ export default function FormReissue({ formik }: IProps) {
             help={formik.errors.reason}
           >
             <Select
-              loading={loadingReasons}
+              loading={isLoading}
               style={{ width: '100%' }}
               onChange={(value: string) => {
                 formik.setFieldValue('reason', value);
@@ -127,18 +151,31 @@ export default function FormReissue({ formik }: IProps) {
           </Form.Item>
         </Col>
         <Col span={6}>
-          <Form.Item label={'CEP'}>
+          <Form.Item
+            label={'CEP'}
+            hasFeedback
+            validateStatus={fetchingAddress ? 'validating' : ''}
+          >
             <Input
+              maxLength={8}
+              onPressEnter={e => {
+                handleAddress(e.currentTarget.value);
+              }}
+              disabled={fetchingAddress}
               value={formik.values.address.zipcode}
               onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              name="zipcode"
+              onBlur={e => {
+                handleAddress(e.target.value);
+                formik.handleBlur(e);
+              }}
+              name="address.zipcode"
             />
           </Form.Item>
         </Col>
         <Col span={9}>
           <Form.Item label={'Endereço'}>
             <Input
+              disabled
               value={formik.values.address.street}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -171,6 +208,7 @@ export default function FormReissue({ formik }: IProps) {
         <Col span={6}>
           <Form.Item label="Bairro">
             <Input
+              disabled
               value={formik.values.address.district}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -181,6 +219,7 @@ export default function FormReissue({ formik }: IProps) {
         <Col span={6}>
           <Form.Item label="Cidade">
             <Input
+              disabled
               value={formik.values.address.city}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -191,6 +230,7 @@ export default function FormReissue({ formik }: IProps) {
         <Col span={3}>
           <Form.Item label="Estado">
             <Input
+              disabled
               value={formik.values.address.state}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

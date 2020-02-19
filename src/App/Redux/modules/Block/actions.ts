@@ -1,11 +1,11 @@
 import { IReducerAction } from '..';
-import { BlockCardActionTypes, IHistoricBlock } from './types';
+import { BlockCardActionTypes, IHistoricBlock, IBlockCard } from './types';
 import FactoryAction from 'App/Util/FactoryAction';
 
 export const PostBlockCard = (
   reason: number,
   description: string
-): IReducerAction<{ reason: number; description: string }> =>
+): IReducerAction<IBlockCard> =>
   FactoryAction(BlockCardActionTypes.POST, { reason, description });
 
 export const postBlockCardSuccess = (): IReducerAction<{}> =>
