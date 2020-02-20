@@ -40,3 +40,11 @@ export const updateStateCard = (
   newState: IStatusCard
 ): IReducerAction<{ cardCode: string; newState: IStatusCard }> =>
   FactoryAction(CardsActionTypes.UPDATE_CARD_STATUS, { cardCode, newState });
+
+export const toggleContactless = (cardCode: string): IReducerAction<string> =>
+  FactoryAction(CardsActionTypes.TOGGLE_CONTACTLESS, cardCode);
+
+export const updateCardContactless = (
+  cardCode: string
+): IReducerAction<string> =>
+  FactoryAction(CardsActionTypes.UPDATE_CARD_CONTACTLESS, cardCode);

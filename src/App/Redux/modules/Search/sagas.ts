@@ -44,7 +44,7 @@ export function* handleBearer(
   } catch (err) {
     if (err.data.errors) {
       const [error] = err.data.errors;
-      notification.error({ message: error.message });
+      notification.error({ message: 'Oops!', description: error.message });
     }
     yield put(SearchError());
   }

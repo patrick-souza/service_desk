@@ -6,7 +6,12 @@ import {
   Pagination,
   ICardsPagination,
 } from './types';
-import { fetchCardsSuccess, cardsError, loadCharacteristics } from './actions';
+import {
+  fetchCardsSuccess,
+  cardsError,
+  loadCharacteristics,
+  updateCardContactless,
+} from './actions';
 import { IReducerAction, IApplicationState } from '..';
 import API from 'App/Services/Api';
 import endpoints from 'Config/endpoints';
@@ -18,6 +23,7 @@ import {
   formatNumber,
 } from 'App/Util/format';
 import history from 'App/Util/history';
+import { notification } from 'antd';
 
 function* fetchCards(
   action: IReducerAction<Pagination & FilterByState>
@@ -73,6 +79,31 @@ function* fetchCards(
   }
 }
 
+function* handleContactless(action: IReducerAction<string>): Generator {
+  try {
+    console.log('chegou aqui');
+    notification.destroy();
+    const card = (yield select((state: IApplicationState) =>
+      state.card.cards.find(card => card.card_code === action.payload)
+    )) as ICard;
+
+    if (!card.contactless) {
+      return;
+    }
+
+    const response = (yield call(
+      API.put,
+      `${endpoints.telaunica_api}/cards/${action.payload}/contactless`,
+      { status: !card.contactless.status }
+    )) as { message: string };
+
+    notification.success({ message: 'Sucesso', description: response.message });
+    yield put(updateCardContactless(action.payload));
+  } catch (error) {
+    yield put(cardsError());
+  }
+}
+
 function* handleCharacteristics(action: IReducerAction<string>): Generator {
   try {
     const cardCode = action.payload;
@@ -105,6 +136,7 @@ function* watchFetchRequest(): Generator {
       CardsActionTypes.SHOW_DIALOG_CHARACTERISTICS,
       handleCharacteristics
     ),
+    takeLatest(CardsActionTypes.TOGGLE_CONTACTLESS, handleContactless),
   ]);
 }
 

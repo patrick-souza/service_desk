@@ -20,12 +20,13 @@ export const initialState: ICardState = {
   openDialog: false,
   characteristics: [],
   loadingCharacteristics: false,
+  loadingContactless: '',
 };
 export const cardsReducer = (
   state = initialState,
   action: IReducerAction<
     | ICardsPagination
-    | number
+    | string
     | { cardCode: string; newState: IStatusCard }
     | Characteristics[]
   >
@@ -83,6 +84,24 @@ export const cardsReducer = (
         const card = draft.cards.find(card => card.card_code === cardCode);
 
         if (card) card.status = newState;
+      });
+    }
+
+    case CardsActionTypes.TOGGLE_CONTACTLESS: {
+      return produce(state, draft => {
+        draft.loadingContactless = action.payload as string;
+      });
+    }
+
+    case CardsActionTypes.UPDATE_CARD_CONTACTLESS: {
+      return produce(state, draft => {
+        const card = draft.cards.find(
+          card => card.card_code === action.payload
+        );
+        if (card && card.contactless) {
+          card.contactless.status = !card.contactless.status;
+          draft.loadingContactless = '';
+        }
       });
     }
     default:

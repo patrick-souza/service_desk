@@ -10,6 +10,7 @@ export type ICardState = {
   readonly openDialog: boolean;
   readonly characteristics: Characteristics[];
   readonly loadingCharacteristics: boolean;
+  readonly loadingContactless: string;
 };
 
 export type ICard = {
@@ -30,6 +31,9 @@ export type ICard = {
   cashback: number;
   formatted_cashback: string;
   tier: Tier;
+  contactless?: {
+    status: boolean;
+  };
 };
 
 export type Specification = {
@@ -77,4 +81,6 @@ export const CardsActionTypes = {
   HIDE_DIALOG_CHARACTERISTICS: '@@cards/HIDE_DIALOG_CHARACTERISTICS',
   LOAD_CHARACTERISTICS_SUCCESS: '@@cards/LOAD_CHARACTERISTICS_SUCCESS',
   UPDATE_CARD_STATUS: '@@cards/UPDATE_CARD_STATUS',
+  TOGGLE_CONTACTLESS: '@@cards/TOGGLE_CONTACTLESS',
+  UPDATE_CARD_CONTACTLESS: '@@cards/UPDATE_CARD_CONTACTLESS',
 };

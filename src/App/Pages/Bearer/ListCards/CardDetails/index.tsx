@@ -1,12 +1,12 @@
 import React from 'react';
-import { Row, Col, Button, Divider } from 'antd';
+import { Row, Col, Button, Divider, Switch } from 'antd';
 import CardActions from './CardActions';
 import Description from 'App/Components/Description';
 import LabelStatus from 'App/Components/LabelStatus';
-import { ICard } from 'App/Redux/modules/Card';
 import { Link } from 'react-router-dom';
 import { updateCardCode } from 'App/Redux/modules/Extract';
 import { useDispatch } from 'react-redux';
+import { toggleContactless } from 'App/Redux/modules/Card';
 
 export default function CardDetails({
   card_name,
@@ -15,7 +15,9 @@ export default function CardDetails({
   formatted_expiration_date,
   status,
   card_code,
-}: ICard) {
+  contactless,
+  loadingContactless,
+}: any) {
   const dispatch = useDispatch();
   return (
     <>
@@ -34,8 +36,52 @@ export default function CardDetails({
             </Col>
             <Col span={6}>
               <Description label="Documento" value={formatted_document} />
-              <Description label="Aviso Viagem" value="" />
+              <Description
+                label="Contactless"
+                value={
+                  contactless ? (
+                    <Switch
+                      loading={loadingContactless}
+                      size="small"
+                      checked={contactless.status}
+                      onChange={() => dispatch(toggleContactless(card_code))}
+                    />
+                  ) : (
+                    '-'
+                  )
+                }
+              />
             </Col>
+
+            {/* 
+            <GroupData
+              loading={props.loadingContactless}
+              label={
+                <Box display="flex" alignItems="center" flex={1}>
+                  <Typography size="xs" color="dark" bolder>
+                    Contactless
+                  </Typography>
+                </Box>
+              }
+              value={
+                props.card.contactless ? (
+                  <Box display="flex" flex={1}>
+                    <Switch
+                      id="bearer__card__button_contactless"
+                      checked={props.card.contactless.status}
+                      classes={{ thumb, switchBase }}
+                      size="small"
+                      color="primary"
+                      onChange={() => {
+                        dispatch(toggleContactless(props.card.card_code));
+                      }}
+                    />
+                  </Box>
+                ) : (
+                  undefined
+                )
+              }
+            /> */}
             <Col span={6}>
               <Description
                 label="Data Expiração"
