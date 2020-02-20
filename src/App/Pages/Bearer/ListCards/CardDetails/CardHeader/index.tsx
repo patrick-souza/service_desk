@@ -1,6 +1,6 @@
 import React from 'react';
 import { ICard } from 'App/Redux/modules/Card';
-import { Row, Col } from 'antd';
+import { Row, Col, Typography, Divider } from 'antd';
 import Description from 'App/Components/Description';
 import CardImage from 'App/Components/CardImage';
 
@@ -15,7 +15,23 @@ export default function CardHeader({
       <CardImage image={image} />
       <Col span={20}>
         <Row type="flex" align="middle" justify="space-between">
-          <Description label="Tier" value={tier} />
+          {tier && (
+            <Description
+              label="Tier"
+              value={
+                <>
+                  <img src={require(`assets/tier-${tier}.svg`)} width={20} />
+                  <Divider
+                    type="vertical"
+                    style={{ margin: '0 6px', height: 0 }}
+                  />
+                  <Typography.Text style={{ textTransform: 'capitalize' }}>
+                    {tier}
+                  </Typography.Text>
+                </>
+              }
+            />
+          )}
           <Description label="Número do Cartão" value={truncate_number} />
           <Description label="Saldo Disponivel" value={formatted_balance} />
         </Row>
