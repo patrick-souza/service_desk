@@ -20,6 +20,7 @@ export default function CustomPagination({
       <Divider style={{ height: 0 }} />
       <Pagination
         pageSizeOptions={['5']}
+        defaultPageSize={5}
         onChange={onChange}
         current={current}
         defaultCurrent={defaultCurrent}
