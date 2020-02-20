@@ -19,9 +19,13 @@ import CardHeaderSkeleton from './CardDetails/CardHeader/HeaderSkeleton';
 import { fetchBearer } from 'App/Redux/modules/Bearer';
 
 export default function ListCards() {
-  const { count, cards, isLoading, activeFilter } = useSelector(
-    (state: IApplicationState) => state.card
-  );
+  const {
+    count,
+    cards,
+    isLoading,
+    loadingContactless,
+    activeFilter,
+  } = useSelector((state: IApplicationState) => state.card);
   const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
@@ -85,7 +89,10 @@ export default function ListCards() {
                   }
                   key={card.card_code}
                 >
-                  <CardDetails {...card} />
+                  <CardDetails
+                    {...card}
+                    loadingContactless={loadingContactless === card.card_code}
+                  />
                 </Collapse.Panel>
               ))}
         </Collapse>

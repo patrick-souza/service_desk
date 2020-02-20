@@ -21,12 +21,13 @@ export const initialState: ICardState = {
   characteristics: [],
   loadingCharacteristics: false,
   activeFilter: 'T',
+  loadingContactless: '',
 };
 export const cardsReducer = (
   state = initialState,
   action: IReducerAction<
     | ICardsPagination
-    | number
+    | string
     | { cardCode: string; newState: IStatusCard }
     | Characteristics[]
     | IStatusCard
@@ -91,6 +92,22 @@ export const cardsReducer = (
       return produce(state, draft => {
         draft.activeFilter = action.payload as IStatusCard;
         draft.isLoading = true;
+
+    case CardsActionTypes.TOGGLE_CONTACTLESS: {
+      return produce(state, draft => {
+        draft.loadingContactless = action.payload as string;
+      });
+    }
+
+    case CardsActionTypes.UPDATE_CARD_CONTACTLESS: {
+      return produce(state, draft => {
+        const card = draft.cards.find(
+          card => card.card_code === action.payload
+        );
+        if (card && card.contactless) {
+          card.contactless.status = !card.contactless.status;
+          draft.loadingContactless = '';
+        }
       });
     }
     default:

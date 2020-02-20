@@ -11,6 +11,7 @@ export type ICardState = {
   readonly characteristics: Characteristics[];
   readonly loadingCharacteristics: boolean;
   readonly activeFilter: IStatusCard;
+  readonly loadingContactless: string;
 };
 
 export type ICard = {
@@ -31,6 +32,9 @@ export type ICard = {
   cashback: number;
   formatted_cashback: string;
   tier: Tier;
+  contactless?: {
+    status: boolean;
+  };
 };
 
 export type Specification = {
@@ -75,4 +79,6 @@ export const CardsActionTypes = {
   LOAD_CHARACTERISTICS_SUCCESS: '@@cards/LOAD_CHARACTERISTICS_SUCCESS',
   UPDATE_CARD_STATUS: '@@cards/UPDATE_CARD_STATUS',
   TOGGLE_ACTIVE_FILTER: '@@cards/TOGGLE_ACTIVE_FILTER',
+  TOGGLE_CONTACTLESS: '@@cards/TOGGLE_CONTACTLESS',
+  UPDATE_CARD_CONTACTLESS: '@@cards/UPDATE_CARD_CONTACTLESS',
 };
