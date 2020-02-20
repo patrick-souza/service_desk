@@ -73,7 +73,7 @@ function* fetchCards(
   }
 }
 
-function* handleCharacteristics(action: IReducerAction<number>): Generator {
+function* handleCharacteristics(action: IReducerAction<string>): Generator {
   try {
     const cardCode = action.payload;
     const card = (yield select((state: IApplicationState) =>

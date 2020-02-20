@@ -16,9 +16,11 @@ import OrderDialog from './Dialog/Order';
 import { stateDictionary } from 'App/Components/LabelStatus';
 import CardHeader from './CardDetails/CardHeader';
 import ReissueDialog from './Dialog/Reissue';
+import CardHeaderSkeleton from './CardDetails/CardHeader/HeaderSkeleton';
+import { fetchBearer } from 'App/Redux/modules/Bearer';
 
 export default function ListCards() {
-  const { count, cards } = useSelector(
+  const { count, cards, isLoading } = useSelector(
     (state: IApplicationState) => state.card
   );
   const [activeFilter, setActiveFilter] = useState<IStatusCard>('T');
@@ -56,31 +58,45 @@ export default function ListCards() {
         <Collapse
           accordion
           bordered={false}
-          defaultActiveKey={['0']}
           expandIconPosition="right"
+          onChange={(cardCode: string | string[]) => {
+            if (Array.isArray(cardCode)) {
+              console.log('isArray');
+              return;
+            }
+            const card = cards.find(({ card_code }) => card_code === cardCode);
+
+            if (card) {
+              dispatch(fetchBearer(card.cardholder_id));
+            }
+          }}
           style={{ background: '#F0F2F5', width: '100%' }}
         >
-          {cards.map((card, index) => (
-            <Collapse.Panel
-              style={{
-                borderLeft: `4px solid ${stateDictionary[card.status].color}`,
-                background: '#fff',
-                borderTop: '1px solid #ddd',
-                marginBottom: '16px',
-              }}
-              header={
-                <CardHeader
-                  tier={card.tier}
-                  truncate_number={card.truncate_number}
-                  formatted_balance={card.formatted_balance}
-                  image={card.image}
-                />
-              }
-              key={index}
-            >
-              <CardDetails {...card} />
-            </Collapse.Panel>
-          ))}
+          {isLoading
+            ? [1, 2, 3].map(i => <CardHeaderSkeleton key={i} />)
+            : cards.map(card => (
+                <Collapse.Panel
+                  style={{
+                    borderLeft: `4px solid ${
+                      stateDictionary[card.status].color
+                    }`,
+                    background: '#fff',
+                    borderTop: '1px solid #ddd',
+                    marginBottom: '16px',
+                  }}
+                  header={
+                    <CardHeader
+                      tier={card.tier}
+                      truncate_number={card.truncate_number}
+                      formatted_balance={card.formatted_balance}
+                      image={card.image}
+                    />
+                  }
+                  key={card.card_code}
+                >
+                  <CardDetails {...card} />
+                </Collapse.Panel>
+              ))}
         </Collapse>
       </Row>
       <Row type="flex" justify="end" align="middle">

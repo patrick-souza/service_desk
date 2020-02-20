@@ -36,7 +36,7 @@ export const loadCharacteristics = (
   FactoryAction(CardsActionTypes.LOAD_CHARACTERISTICS_SUCCESS, characteristics);
 
 export const updateStateCard = (
-  cardCode: number,
+  cardCode: string,
   newState: IStatusCard
-): IReducerAction<{ cardCode: number; newState: IStatusCard }> =>
+): IReducerAction<{ cardCode: string; newState: IStatusCard }> =>
   FactoryAction(CardsActionTypes.UPDATE_CARD_STATUS, { cardCode, newState });

@@ -21,7 +21,7 @@ function* cancelCard(action: IReducerAction<ICancelCard>): Generator {
 
     const cardCode = (yield select(
       (state: IApplicationState) => state.cancelCard.cardCode
-    )) as number;
+    )) as string;
 
     const response = (yield call(
       API.post,

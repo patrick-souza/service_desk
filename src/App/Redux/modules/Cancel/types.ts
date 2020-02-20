@@ -1,7 +1,7 @@
 export type ICancelCardState = {
   readonly isLoading: boolean;
   readonly openDialog: boolean;
-  readonly cardCode: number;
+  readonly cardCode: string;
   readonly historic: IHistoricCancel[];
   readonly historicLoading: boolean;
 };

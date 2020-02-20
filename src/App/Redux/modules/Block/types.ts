@@ -1,7 +1,7 @@
 export type IBlockCardState = {
   readonly isLoading: boolean;
   readonly openDialog: boolean;
-  readonly cardCode: number;
+  readonly cardCode: string;
   readonly historic: IHistoricBlock[];
   readonly historicLoading: boolean;
 };

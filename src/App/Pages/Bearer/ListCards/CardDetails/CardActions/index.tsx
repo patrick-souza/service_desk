@@ -8,7 +8,7 @@ import { ShowDialogOrderCard } from 'App/Redux/modules/Orders';
 import { showDialogReissueCard } from 'App/Redux/modules/Reissue';
 
 type IProps = {
-  cardCode: number;
+  cardCode: string;
 };
 export default function CardActions({ cardCode }: IProps) {
   const dispatch = useDispatch();

@@ -15,8 +15,8 @@ export const cancelCardError = (): IReducerAction<{}> =>
   FactoryAction(CancelCardActionTypes.CANCEL_CARD_ERROR, {});
 
 export const ShowDialogCancelCard = (
-  cardCode: number
-): IReducerAction<number> =>
+  cardCode: string
+): IReducerAction<string> =>
   FactoryAction(CancelCardActionTypes.SHOW_DIALOG, cardCode);
 
 export const HideDialogCancelCard = (): IReducerAction<{}> =>

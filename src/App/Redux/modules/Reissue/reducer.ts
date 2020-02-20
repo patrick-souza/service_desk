@@ -7,7 +7,7 @@ import {
 } from './types';
 
 export const initialState: IReissueState = {
-  cardCode: 0,
+  cardCode: '',
   openDialog: false,
   isLoading: false,
   historic: [],
@@ -16,7 +16,7 @@ export const initialState: IReissueState = {
 
 export const reissueReducer = (
   state = initialState,
-  action: IReducerAction<number | IHistoricReissueCard[]>
+  action: IReducerAction<string | IHistoricReissueCard[]>
 ): IReissueState => {
   switch (action.type) {
     case ReissueActionTypes.POST: {
@@ -37,13 +37,13 @@ export const reissueReducer = (
     case ReissueActionTypes.SHOW_DIALOG: {
       return produce(state, draft => {
         draft.openDialog = true;
-        draft.cardCode = action.payload as number;
+        draft.cardCode = action.payload as string;
       });
     }
     case ReissueActionTypes.HIDE_DIALOG: {
       return produce(state, draft => {
         draft.openDialog = false;
-        draft.cardCode = 0;
+        draft.cardCode = '';
       });
     }
     case ReissueActionTypes.FETCH_HISTORIC: {

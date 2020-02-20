@@ -9,6 +9,7 @@ export default function BearerData() {
   const { bearer, isLoading } = useSelector(
     (state: IApplicationState) => state.bearer
   );
+
   return (
     <Card loading={isLoading}>
       <Row type="flex" justify="space-between" align="middle">

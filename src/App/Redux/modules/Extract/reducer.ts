@@ -6,12 +6,12 @@ export const initialState: IExtractState = {
   transactions: [],
   isLoading: false,
   transationTotal: 0,
-  cardCode: 0,
+  cardCode: '',
 };
 
 export const extractReducer = (
   state: IExtractState = initialState,
-  action: IReducerAction<IExtractPagination | { cardCode: number }>
+  action: IReducerAction<IExtractPagination | { cardCode: string }>
 ): IExtractState => {
   switch (action.type) {
     case ExtractActionTypes.FETCH: {
@@ -30,7 +30,7 @@ export const extractReducer = (
     case ExtractActionTypes.UPDATE_CARD_CODE: {
       return produce(state, draft => {
         draft.isLoading = true;
-        const { cardCode } = action.payload as { cardCode: number };
+        const { cardCode } = action.payload as { cardCode: string };
         draft.cardCode = cardCode;
       });
     }

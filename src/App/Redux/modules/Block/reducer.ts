@@ -5,13 +5,13 @@ import produce from 'immer';
 export const initialState: IBlockCardState = {
   isLoading: false,
   openDialog: false,
-  cardCode: 0,
+  cardCode: '',
   historic: [],
   historicLoading: false,
 };
 export const blockCardReducer = (
   state = initialState,
-  action: IReducerAction<number | IHistoricBlock[]>
+  action: IReducerAction<string | IHistoricBlock[]>
 ): IBlockCardState => {
   switch (action.type) {
     case BlockCardActionTypes.POST: {
@@ -33,7 +33,7 @@ export const blockCardReducer = (
     case BlockCardActionTypes.SHOW_DIALOG: {
       return produce(state, draft => {
         draft.openDialog = true;
-        draft.cardCode = action.payload as number;
+        draft.cardCode = action.payload as string;
       });
     }
     case BlockCardActionTypes.HIDE_DIALOG: {

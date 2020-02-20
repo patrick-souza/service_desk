@@ -5,8 +5,8 @@ export type ISearchState = {
 };
 
 export type IResultSearch = {
-  cardholder_id: number;
-  card_code: number;
+  cardholder_id: string;
+  card_code: string;
   truncated_number: string;
   image: string;
 };

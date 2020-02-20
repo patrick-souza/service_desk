@@ -37,7 +37,7 @@ export default function MaskedInput({
       disabled={disabled}
       maskChar=""
     >
-      {(props: any) => <Input {...props} />}
+      {(props: any) => <Input {...props} disabled={disabled} />}
     </Masked>
   );
 }

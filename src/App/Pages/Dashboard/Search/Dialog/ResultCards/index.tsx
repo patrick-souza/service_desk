@@ -8,7 +8,7 @@ import { selectCard } from 'App/Redux/modules/Search';
 type IProps = {
   image?: string;
   truncatedNumber: string;
-  cardCode: number;
+  cardCode: string;
 };
 export default function ResultCards({
   image,

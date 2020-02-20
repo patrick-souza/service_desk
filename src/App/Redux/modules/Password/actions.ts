@@ -15,8 +15,8 @@ export const postResendPasswordSuccess = (): IReducerAction<{}> =>
   FactoryAction(HistoricResendPasswordActionTypes.POST_SUCCESS, {});
 
 export const showDialogResendPassword = (
-  cardCode: number
-): IReducerAction<number> =>
+  cardCode: string
+): IReducerAction<string> =>
   FactoryAction(HistoricResendPasswordActionTypes.SHOW_DIALOG, cardCode);
 
 export const hideDialogResendPassword = (): IReducerAction<{}> =>

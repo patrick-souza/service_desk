@@ -6,7 +6,7 @@ import {
   IHistoricResendPassword,
 } from './types';
 export const initialState: IHistoricResendPasswordState = {
-  cardId: 0,
+  cardCode: '',
   openDialog: false,
   isLoading: false,
   historic: [],
@@ -15,7 +15,7 @@ export const initialState: IHistoricResendPasswordState = {
 
 export const historicResendPasswordReducer = (
   state = initialState,
-  action: IReducerAction<number | IHistoricResendPassword[]>
+  action: IReducerAction<string | IHistoricResendPassword[]>
 ): IHistoricResendPasswordState => {
   switch (action.type) {
     case HistoricResendPasswordActionTypes.POST: {
@@ -49,7 +49,7 @@ export const historicResendPasswordReducer = (
     case HistoricResendPasswordActionTypes.SHOW_DIALOG: {
       return produce(state, draft => {
         draft.openDialog = true;
-        draft.cardId = action.payload as number;
+        draft.cardCode = action.payload as string;
       });
     }
     case HistoricResendPasswordActionTypes.HIDE_DIALOG: {

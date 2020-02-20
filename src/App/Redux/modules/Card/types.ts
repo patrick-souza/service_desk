@@ -13,8 +13,8 @@ export type ICardState = {
 };
 
 export type ICard = {
-  cardholder_id: number;
-  card_code: number;
+  cardholder_id: string;
+  card_code: string;
   card_name: string;
   expiration_date: Date;
   formatted_expiration_date: string;
@@ -60,7 +60,7 @@ type Tier = 'partner' | 'gold' | 'diamond' | 'platinum';
 export type Pagination = {
   rowsPerPage?: number;
   page?: number;
-  cardCodes?: number[];
+  cardCodes?: string[];
 };
 
 export type FilterByState = {

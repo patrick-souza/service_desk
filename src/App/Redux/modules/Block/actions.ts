@@ -14,7 +14,7 @@ export const postBlockCardSuccess = (): IReducerAction<{}> =>
 export const blockCardError = (): IReducerAction<{}> =>
   FactoryAction(BlockCardActionTypes.BLOCK_CARD_ERROR, {});
 
-export const showDialogBlockCard = (cardCode: number): IReducerAction<number> =>
+export const showDialogBlockCard = (cardCode: string): IReducerAction<string> =>
   FactoryAction(BlockCardActionTypes.SHOW_DIALOG, cardCode);
 
 export const hideDialogBlockCard = (): IReducerAction<{}> =>

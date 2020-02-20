@@ -26,7 +26,7 @@ export const cardsReducer = (
   action: IReducerAction<
     | ICardsPagination
     | number
-    | { cardCode: number; newState: IStatusCard }
+    | { cardCode: string; newState: IStatusCard }
     | Characteristics[]
   >
 ): ICardState => {
@@ -76,7 +76,7 @@ export const cardsReducer = (
     case CardsActionTypes.UPDATE_CARD_STATUS: {
       return produce(state, draft => {
         const { cardCode, newState } = action.payload as {
-          cardCode: number;
+          cardCode: string;
           newState: IStatusCard;
         };
 

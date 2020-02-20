@@ -21,7 +21,7 @@ function* blockCard(action: IReducerAction<IBlockCard>): Generator {
 
     const cardCode = (yield select(
       (state: IApplicationState) => state.blockCard.cardCode
-    )) as number;
+    )) as string;
 
     const response = (yield call(
       API.post,

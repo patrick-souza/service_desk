@@ -28,7 +28,7 @@ export function* handleBearer(
       yield put(hideDialog());
 
       const cardCodes = response.reduce(
-        (codes: number[], result) => [...codes, result.card_code],
+        (codes: string[], result) => [...codes, result.card_code],
         []
       );
 
@@ -49,7 +49,7 @@ export function* handleBearer(
     yield put(SearchError());
   }
 }
-function* selectCardOnSearch(action: IReducerAction<number>): Generator {
+function* selectCardOnSearch(action: IReducerAction<string>): Generator {
   try {
     const cardSelected = (yield select((state: IApplicationState) =>
       state.search.result.find(r => r.card_code === action.payload)

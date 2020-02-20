@@ -9,8 +9,8 @@ export const postReissueCardSuccess = (): IReducerAction<{}> =>
   FactoryAction(ReissueActionTypes.POST_SUCCESS, {});
 
 export const showDialogReissueCard = (
-  cardCode: number
-): IReducerAction<number> =>
+  cardCode: string
+): IReducerAction<string> =>
   FactoryAction(ReissueActionTypes.SHOW_DIALOG, cardCode);
 
 export const hideDialogReissueCard = (): IReducerAction<{}> =>

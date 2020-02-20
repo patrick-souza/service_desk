@@ -1,7 +1,7 @@
 export type IReissueState = {
   readonly isLoading: boolean;
   readonly openDialog: boolean;
-  readonly cardCode: number;
+  readonly cardCode: string;
   readonly historic: IHistoricReissueCard[];
   readonly historicLoading: boolean;
 };
