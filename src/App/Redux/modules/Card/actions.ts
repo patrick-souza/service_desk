@@ -42,3 +42,10 @@ export const setActiveFilter = (
   status: IStatusCard
 ): IReducerAction<IStatusCard> =>
   FactoryAction(CardsActionTypes.TOGGLE_ACTIVE_FILTER, status);
+export const toggleContactless = (cardCode: string): IReducerAction<string> =>
+  FactoryAction(CardsActionTypes.TOGGLE_CONTACTLESS, cardCode);
+
+export const updateCardContactless = (
+  cardCode: string
+): IReducerAction<string> =>
+  FactoryAction(CardsActionTypes.UPDATE_CARD_CONTACTLESS, cardCode);

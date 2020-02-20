@@ -1,12 +1,12 @@
 import React from 'react';
-import { Row, Col, Button, Divider } from 'antd';
+import { Row, Col, Button, Divider, Switch } from 'antd';
 import CardActions from './CardActions';
 import Description from 'App/Components/Description';
 import LabelStatus from 'App/Components/LabelStatus';
-import { ICard } from 'App/Redux/modules/Card';
 import { Link } from 'react-router-dom';
 import { updateCardCode } from 'App/Redux/modules/Extract';
 import { useDispatch } from 'react-redux';
+import { toggleContactless, ICard } from 'App/Redux/modules/Card';
 
 export default function CardDetails({
   card_name,
@@ -15,7 +15,9 @@ export default function CardDetails({
   formatted_expiration_date,
   status,
   card_code,
-}: ICard) {
+  contactless,
+  loadingContactless,
+}: ICard & { loadingContactless: boolean }) {
   const dispatch = useDispatch();
   return (
     <>
@@ -34,7 +36,21 @@ export default function CardDetails({
             </Col>
             <Col span={6}>
               <Description label="Documento" value={formatted_document} />
-              <Description label="Aviso Viagem" value="" />
+              <Description
+                label="Contactless"
+                value={
+                  contactless ? (
+                    <Switch
+                      loading={loadingContactless}
+                      size="small"
+                      checked={contactless.status}
+                      onChange={() => dispatch(toggleContactless(card_code))}
+                    />
+                  ) : (
+                    '-'
+                  )
+                }
+              />
             </Col>
             <Col span={6}>
               <Description
