@@ -1,7 +1,6 @@
 import React from 'react';
 import { Pagination, Divider } from 'antd';
 type IProps = {
-  onShowSizeChange?: ((current: number, size: number) => void) | undefined;
   onChange?:
     | ((page: number, pageSize?: number | undefined) => void)
     | undefined;
@@ -13,7 +12,6 @@ type IProps = {
 export default function CustomPagination({
   total,
   onChange,
-  onShowSizeChange,
   defaultCurrent,
   current,
 }: IProps) {
@@ -21,10 +19,7 @@ export default function CustomPagination({
     <>
       <Divider style={{ height: 0 }} />
       <Pagination
-        showSizeChanger
-        defaultPageSize={5}
-        pageSizeOptions={['5', '10']}
-        onShowSizeChange={onShowSizeChange}
+        pageSizeOptions={['5']}
         onChange={onChange}
         current={current}
         defaultCurrent={defaultCurrent}

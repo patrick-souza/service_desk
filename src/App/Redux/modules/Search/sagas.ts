@@ -35,7 +35,7 @@ export function* handleBearer(
       const [firstCard] = response;
 
       yield all([
-        put(fetchCards({ cardCodes, state: 'T' })),
+        put(fetchCards({ cardCodes })),
         put(fetchBearer(firstCard.cardholder_id)),
       ]);
 
@@ -58,7 +58,7 @@ function* selectCardOnSearch(action: IReducerAction<string>): Generator {
     yield put(dataSuccess([cardSelected]));
     yield put(hideDialog());
     yield all([
-      put(fetchCards({ cardCodes: [cardSelected.card_code], state: 'T' })),
+      put(fetchCards({ cardCodes: [cardSelected.card_code] })),
       put(fetchBearer(cardSelected.cardholder_id)),
     ]);
 

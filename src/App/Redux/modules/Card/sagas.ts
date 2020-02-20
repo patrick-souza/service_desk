@@ -2,9 +2,9 @@ import { fork, all, takeLatest, put, call, select } from 'redux-saga/effects';
 import {
   CardsActionTypes,
   ICard,
-  FilterByState,
   Pagination,
   ICardsPagination,
+  IStatusCard,
 } from './types';
 import { fetchCardsSuccess, cardsError, loadCharacteristics } from './actions';
 import { IReducerAction, IApplicationState } from '..';
@@ -19,9 +19,24 @@ import {
 } from 'App/Util/format';
 import history from 'App/Util/history';
 
-function* fetchCards(
-  action: IReducerAction<Pagination & FilterByState>
-): Generator {
+function* handleFilter(): Generator {
+  const activeFilter = (yield select(
+    (state: IApplicationState) => state.card.activeFilter
+  )) as IStatusCard;
+
+  const typeFilter = {
+    A: 'ACTIVE',
+    P: 'INITIAL_BLOCK',
+    B: 'BLOCKED',
+    C: 'CANCELED',
+    T: '',
+  };
+
+  if (activeFilter !== 'T') return `&filter=${typeFilter[activeFilter]}`;
+
+  return '';
+}
+function* fetchCards(action: IReducerAction<Pagination>): Generator {
   try {
     const payload = action.payload;
 
@@ -32,18 +47,10 @@ function* fetchCards(
         );
 
     const page = payload.page === undefined ? 1 : payload.page;
-    const rowsPerPage = payload.rowsPerPage || 5;
 
-    const typeFilter = {
-      A: 'ACTIVE',
-      P: 'INITIAL_BLOCK',
-      B: 'BLOCKED',
-      C: 'CANCELED',
-      T: '',
-    };
+    const rowsPerPage = 5;
 
-    let filter = '';
-    if (payload.state !== 'T') filter = `&filter=${typeFilter[payload.state]}`;
+    const filter = yield handleFilter();
 
     const cardDetails = (yield call(
       API.get,
@@ -105,6 +112,7 @@ function* watchFetchRequest(): Generator {
       CardsActionTypes.SHOW_DIALOG_CHARACTERISTICS,
       handleCharacteristics
     ),
+    takeLatest(CardsActionTypes.TOGGLE_ACTIVE_FILTER, fetchCards),
   ]);
 }
 

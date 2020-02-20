@@ -1,11 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Row, Collapse } from 'antd';
 import LabelbyStatus from './LabelbyStatus';
 import FilterByStatus from './FilterByStatus';
 import CardDetails from './CardDetails';
 import Pagination from 'App/Components/Pagination';
-import CardContext from './CardContext';
-import { IStatusCard, fetchCards } from 'App/Redux/modules/Card';
+import { fetchCards } from 'App/Redux/modules/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import BlockCard from './Dialog/BlockCard';
@@ -20,34 +19,26 @@ import CardHeaderSkeleton from './CardDetails/CardHeader/HeaderSkeleton';
 import { fetchBearer } from 'App/Redux/modules/Bearer';
 
 export default function ListCards() {
-  const { count, cards, isLoading } = useSelector(
+  const { count, cards, isLoading, activeFilter } = useSelector(
     (state: IApplicationState) => state.card
   );
-  const [activeFilter, setActiveFilter] = useState<IStatusCard>('T');
   const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
 
   const updateData = useCallback(
-    (page: number, rowsPerPage: number, state: IStatusCard) => {
-      dispatch(fetchCards({ page, rowsPerPage, state }));
+    (page: number) => {
+      dispatch(fetchCards({ page }));
       setCurrentPage(page);
     },
     [setCurrentPage, dispatch]
   );
-
-  const handleFilter = useCallback(
-    (newFilter: IStatusCard) => {
-      setActiveFilter(newFilter);
-      updateData(1, 5, newFilter);
-    },
-    [setActiveFilter, updateData]
-  );
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeFilter]);
 
   return (
-    <CardContext.Provider
-      value={{ filter: activeFilter, setFilter: handleFilter }}
-    >
+    <>
       <Row type="flex">
         <LabelbyStatus />
       </Row>
@@ -101,11 +92,8 @@ export default function ListCards() {
       </Row>
       <Row type="flex" justify="end" align="middle">
         <Pagination
-          onShowSizeChange={(current, size) => {
-            updateData(current, size, activeFilter);
-          }}
-          onChange={(page, pageSize) => {
-            updateData(page, pageSize || 5, activeFilter);
+          onChange={page => {
+            updateData(page);
           }}
           defaultCurrent={1}
           current={currentPage}
@@ -117,6 +105,6 @@ export default function ListCards() {
       <ResendPassword />
       <OrderDialog />
       <ReissueDialog />
-    </CardContext.Provider>
+    </>
   );
 }

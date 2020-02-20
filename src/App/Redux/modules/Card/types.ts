@@ -10,6 +10,7 @@ export type ICardState = {
   readonly openDialog: boolean;
   readonly characteristics: Characteristics[];
   readonly loadingCharacteristics: boolean;
+  readonly activeFilter: IStatusCard;
 };
 
 export type ICard = {
@@ -63,10 +64,6 @@ export type Pagination = {
   cardCodes?: string[];
 };
 
-export type FilterByState = {
-  state: IStatusCard;
-};
-
 export type IStatusCard = 'T' | 'A' | 'B' | 'P' | 'C';
 
 export const CardsActionTypes = {
@@ -77,4 +74,5 @@ export const CardsActionTypes = {
   HIDE_DIALOG_CHARACTERISTICS: '@@cards/HIDE_DIALOG_CHARACTERISTICS',
   LOAD_CHARACTERISTICS_SUCCESS: '@@cards/LOAD_CHARACTERISTICS_SUCCESS',
   UPDATE_CARD_STATUS: '@@cards/UPDATE_CARD_STATUS',
+  TOGGLE_ACTIVE_FILTER: '@@cards/TOGGLE_ACTIVE_FILTER',
 };
