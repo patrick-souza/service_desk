@@ -20,10 +20,7 @@ export const initialState: ICardState = {
   openDialog: false,
   characteristics: [],
   loadingCharacteristics: false,
-<<<<<<< HEAD
   activeFilter: 'T',
-=======
->>>>>>> 2bdc8c4cc0a6af9c9b60a2d8871a002ae584c6c4
   loadingContactless: '',
 };
 export const cardsReducer = (
@@ -95,7 +92,8 @@ export const cardsReducer = (
       return produce(state, draft => {
         draft.activeFilter = action.payload as IStatusCard;
         draft.isLoading = true;
-
+      });
+    }
     case CardsActionTypes.TOGGLE_CONTACTLESS: {
       return produce(state, draft => {
         draft.loadingContactless = action.payload as string;
