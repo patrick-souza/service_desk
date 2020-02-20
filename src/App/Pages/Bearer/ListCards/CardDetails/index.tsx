@@ -6,7 +6,7 @@ import LabelStatus from 'App/Components/LabelStatus';
 import { Link } from 'react-router-dom';
 import { updateCardCode } from 'App/Redux/modules/Extract';
 import { useDispatch } from 'react-redux';
-import { toggleContactless } from 'App/Redux/modules/Card';
+import { toggleContactless, ICard } from 'App/Redux/modules/Card';
 
 export default function CardDetails({
   card_name,
@@ -17,7 +17,7 @@ export default function CardDetails({
   card_code,
   contactless,
   loadingContactless,
-}: any) {
+}: ICard & { loadingContactless: boolean }) {
   const dispatch = useDispatch();
   return (
     <>
@@ -52,36 +52,6 @@ export default function CardDetails({
                 }
               />
             </Col>
-
-            {/* 
-            <GroupData
-              loading={props.loadingContactless}
-              label={
-                <Box display="flex" alignItems="center" flex={1}>
-                  <Typography size="xs" color="dark" bolder>
-                    Contactless
-                  </Typography>
-                </Box>
-              }
-              value={
-                props.card.contactless ? (
-                  <Box display="flex" flex={1}>
-                    <Switch
-                      id="bearer__card__button_contactless"
-                      checked={props.card.contactless.status}
-                      classes={{ thumb, switchBase }}
-                      size="small"
-                      color="primary"
-                      onChange={() => {
-                        dispatch(toggleContactless(props.card.card_code));
-                      }}
-                    />
-                  </Box>
-                ) : (
-                  undefined
-                )
-              }
-            /> */}
             <Col span={6}>
               <Description
                 label="Data Expiração"
