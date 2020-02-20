@@ -1,11 +1,11 @@
 import { IReducerAction } from '..';
-import { BlockCardActionTypes, IHistoricBlock } from './types';
+import { BlockCardActionTypes, IHistoricBlock, IBlockCard } from './types';
 import FactoryAction from 'App/Util/FactoryAction';
 
 export const PostBlockCard = (
   reason: number,
   description: string
-): IReducerAction<{ reason: number; description: string }> =>
+): IReducerAction<IBlockCard> =>
   FactoryAction(BlockCardActionTypes.POST, { reason, description });
 
 export const postBlockCardSuccess = (): IReducerAction<{}> =>
@@ -14,7 +14,7 @@ export const postBlockCardSuccess = (): IReducerAction<{}> =>
 export const blockCardError = (): IReducerAction<{}> =>
   FactoryAction(BlockCardActionTypes.BLOCK_CARD_ERROR, {});
 
-export const showDialogBlockCard = (cardCode: number): IReducerAction<number> =>
+export const showDialogBlockCard = (cardCode: string): IReducerAction<string> =>
   FactoryAction(BlockCardActionTypes.SHOW_DIALOG, cardCode);
 
 export const hideDialogBlockCard = (): IReducerAction<{}> =>

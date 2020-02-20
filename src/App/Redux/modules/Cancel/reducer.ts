@@ -9,13 +9,13 @@ import produce from 'immer';
 export const initialState: ICancelCardState = {
   isLoading: false,
   openDialog: false,
-  cardCode: 0,
+  cardCode: '',
   historic: [],
   historicLoading: false,
 };
 export const cancelCardReducer = (
   state = initialState,
-  action: IReducerAction<number | IHistoricCancel[]>
+  action: IReducerAction<string | IHistoricCancel[]>
 ): ICancelCardState => {
   switch (action.type) {
     case CancelCardActionTypes.POST: {
@@ -37,7 +37,7 @@ export const cancelCardReducer = (
     case CancelCardActionTypes.SHOW_DIALOG: {
       return produce(state, draft => {
         draft.openDialog = true;
-        draft.cardCode = action.payload as number;
+        draft.cardCode = action.payload as string;
       });
     }
     case CancelCardActionTypes.HIDE_DIALOG: {

@@ -20,14 +20,16 @@ export const initialState: ICardState = {
   openDialog: false,
   characteristics: [],
   loadingCharacteristics: false,
+  activeFilter: 'T',
 };
 export const cardsReducer = (
   state = initialState,
   action: IReducerAction<
     | ICardsPagination
     | number
-    | { cardCode: number; newState: IStatusCard }
+    | { cardCode: string; newState: IStatusCard }
     | Characteristics[]
+    | IStatusCard
   >
 ): ICardState => {
   switch (action.type) {
@@ -76,13 +78,19 @@ export const cardsReducer = (
     case CardsActionTypes.UPDATE_CARD_STATUS: {
       return produce(state, draft => {
         const { cardCode, newState } = action.payload as {
-          cardCode: number;
+          cardCode: string;
           newState: IStatusCard;
         };
 
         const card = draft.cards.find(card => card.card_code === cardCode);
 
         if (card) card.status = newState;
+      });
+    }
+    case CardsActionTypes.TOGGLE_ACTIVE_FILTER: {
+      return produce(state, draft => {
+        draft.activeFilter = action.payload as IStatusCard;
+        draft.isLoading = true;
       });
     }
     default:

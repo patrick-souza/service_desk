@@ -28,14 +28,14 @@ export function* handleBearer(
       yield put(hideDialog());
 
       const cardCodes = response.reduce(
-        (codes: number[], result) => [...codes, result.card_code],
+        (codes: string[], result) => [...codes, result.card_code],
         []
       );
 
       const [firstCard] = response;
 
       yield all([
-        put(fetchCards({ cardCodes, state: 'T' })),
+        put(fetchCards({ cardCodes })),
         put(fetchBearer(firstCard.cardholder_id)),
       ]);
 
@@ -49,7 +49,7 @@ export function* handleBearer(
     yield put(SearchError());
   }
 }
-function* selectCardOnSearch(action: IReducerAction<number>): Generator {
+function* selectCardOnSearch(action: IReducerAction<string>): Generator {
   try {
     const cardSelected = (yield select((state: IApplicationState) =>
       state.search.result.find(r => r.card_code === action.payload)
@@ -58,7 +58,7 @@ function* selectCardOnSearch(action: IReducerAction<number>): Generator {
     yield put(dataSuccess([cardSelected]));
     yield put(hideDialog());
     yield all([
-      put(fetchCards({ cardCodes: [cardSelected.card_code], state: 'T' })),
+      put(fetchCards({ cardCodes: [cardSelected.card_code] })),
       put(fetchBearer(cardSelected.cardholder_id)),
     ]);
 

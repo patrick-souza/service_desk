@@ -1,7 +1,7 @@
 export type IHistoricResendPasswordState = {
   readonly isLoading: boolean;
   readonly openDialog: boolean;
-  readonly cardId: number;
+  readonly cardCode: string;
   readonly historic: IHistoricResendPassword[];
   readonly historicLoading: boolean;
 };

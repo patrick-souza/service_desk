@@ -1,9 +1,13 @@
 import { produce } from 'immer';
 import { IReducerAction } from '..';
-import { IReissueState, ReissueActionTypes } from './types';
+import {
+  IReissueState,
+  IHistoricReissueCard,
+  ReissueActionTypes,
+} from './types';
 
 export const initialState: IReissueState = {
-  cardId: 0,
+  cardCode: '',
   openDialog: false,
   isLoading: false,
   historic: [],
@@ -12,7 +16,7 @@ export const initialState: IReissueState = {
 
 export const reissueReducer = (
   state = initialState,
-  action: IReducerAction<number>
+  action: IReducerAction<string | IHistoricReissueCard[]>
 ): IReissueState => {
   switch (action.type) {
     case ReissueActionTypes.POST: {
@@ -33,13 +37,24 @@ export const reissueReducer = (
     case ReissueActionTypes.SHOW_DIALOG: {
       return produce(state, draft => {
         draft.openDialog = true;
-        draft.cardId = action.payload;
+        draft.cardCode = action.payload as string;
       });
     }
     case ReissueActionTypes.HIDE_DIALOG: {
       return produce(state, draft => {
         draft.openDialog = false;
-        draft.cardId = 0;
+        draft.cardCode = '';
+      });
+    }
+    case ReissueActionTypes.FETCH_HISTORIC: {
+      return produce(state, draft => {
+        draft.historicLoading = true;
+      });
+    }
+    case ReissueActionTypes.FETCH_HISTORIC_SUCCESS: {
+      return produce(state, draft => {
+        draft.historicLoading = false;
+        draft.historic = [...(action.payload as IHistoricReissueCard[])];
       });
     }
     default:

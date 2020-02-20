@@ -10,11 +10,12 @@ export type ICardState = {
   readonly openDialog: boolean;
   readonly characteristics: Characteristics[];
   readonly loadingCharacteristics: boolean;
+  readonly activeFilter: IStatusCard;
 };
 
 export type ICard = {
-  cardholder_id: number;
-  card_code: number;
+  cardholder_id: string;
+  card_code: string;
   card_name: string;
   expiration_date: Date;
   formatted_expiration_date: string;
@@ -60,11 +61,7 @@ type Tier = 'partner' | 'gold' | 'diamond' | 'platinum';
 export type Pagination = {
   rowsPerPage?: number;
   page?: number;
-  cardCodes?: number[];
-};
-
-export type FilterByState = {
-  state: IStatusCard;
+  cardCodes?: string[];
 };
 
 export type IStatusCard = 'T' | 'A' | 'B' | 'P' | 'C';
@@ -77,4 +74,5 @@ export const CardsActionTypes = {
   HIDE_DIALOG_CHARACTERISTICS: '@@cards/HIDE_DIALOG_CHARACTERISTICS',
   LOAD_CHARACTERISTICS_SUCCESS: '@@cards/LOAD_CHARACTERISTICS_SUCCESS',
   UPDATE_CARD_STATUS: '@@cards/UPDATE_CARD_STATUS',
+  TOGGLE_ACTIVE_FILTER: '@@cards/TOGGLE_ACTIVE_FILTER',
 };

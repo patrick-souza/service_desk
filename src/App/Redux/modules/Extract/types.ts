@@ -1,7 +1,7 @@
 export type IExtractState = {
   readonly transactions: IExtract[];
   readonly transationTotal: number;
-  readonly cardCode: number;
+  readonly cardCode: string;
   readonly isLoading: boolean;
 };
 

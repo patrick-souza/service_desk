@@ -1,7 +1,7 @@
 export type IReissueState = {
   readonly isLoading: boolean;
   readonly openDialog: boolean;
-  readonly cardId: number;
+  readonly cardCode: string;
   readonly historic: IHistoricReissueCard[];
   readonly historicLoading: boolean;
 };
@@ -29,60 +29,11 @@ export type IHistoricReissueCard = {
   user: string;
   cardId: number;
   payload: {
-    cardId: number;
-    reasonId: number;
-    user: string;
-    delivery: {
-      content: {
-        recipient: IRecipient;
-        sender: ISender;
-      };
-    };
-    embossing: IEmbossing;
+    reason: number;
   };
-};
-
-type IEmbossing = {
-  content: {
-    plastic: {
-      holder: string;
-      message: string;
-      imageId: string;
-      image: string;
-    };
-    letter: {
-      color: string;
-      title: string;
-      message: string;
-      signature: string;
-    };
-  };
-};
-
-type ISender = {
-  name: string;
-  address: {
-    street: string;
-    number: string;
-    complement: string;
-    district: string;
-    zipcode: string;
-    city: string;
-    state: string;
-  };
-};
-
-type IRecipient = {
-  name: string;
-  address: {
-    street: string;
-    number: string;
-    complement: string;
-    district: string;
-    zipcode: string;
-    city: string;
-    state: string;
-  };
+  createdAt: string;
+  formatted_createdAt: string;
+  updatedAt: string;
 };
 
 export const ReissueActionTypes = {

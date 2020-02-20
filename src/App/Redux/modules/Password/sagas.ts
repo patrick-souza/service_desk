@@ -44,7 +44,7 @@ function* handlePostResendPassword(
       return;
     }
     const cardCode = yield select(
-      (state: IApplicationState) => state.historicResendPassword.cardId
+      (state: IApplicationState) => state.historicResendPassword.cardCode
     );
 
     yield call(API.post, `${endpoints.telaunica_api}/resendPass`, {
@@ -68,7 +68,7 @@ function* handlePostResendPassword(
 function* handleHistoricPassword(): Generator {
   try {
     const cardCode = yield select(
-      (state: IApplicationState) => state.historicResendPassword.cardId
+      (state: IApplicationState) => state.historicResendPassword.cardCode
     );
 
     const response = (yield call(

@@ -1,10 +1,12 @@
 export type IBlockCardState = {
   readonly isLoading: boolean;
   readonly openDialog: boolean;
-  readonly cardCode: number;
+  readonly cardCode: string;
   readonly historic: IHistoricBlock[];
   readonly historicLoading: boolean;
 };
+
+export type IBlockCard = { reason: number; description: string };
 
 export type IHistoricBlock = {
   _id: string;

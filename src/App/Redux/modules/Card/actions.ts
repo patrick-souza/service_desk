@@ -2,16 +2,13 @@ import { IReducerAction } from '..';
 import {
   CardsActionTypes,
   ICardsPagination,
-  FilterByState,
   Pagination,
   IStatusCard,
   Characteristics,
 } from './types';
 import FactoryAction from 'App/Util/FactoryAction';
 
-export const fetchCards = (
-  params: Pagination & FilterByState
-): IReducerAction<Pagination & FilterByState> =>
+export const fetchCards = (params: Pagination): IReducerAction<Pagination> =>
   FactoryAction(CardsActionTypes.FETCH_CARDS, params);
 
 export const fetchCardsSuccess = (
@@ -36,7 +33,12 @@ export const loadCharacteristics = (
   FactoryAction(CardsActionTypes.LOAD_CHARACTERISTICS_SUCCESS, characteristics);
 
 export const updateStateCard = (
-  cardCode: number,
+  cardCode: string,
   newState: IStatusCard
-): IReducerAction<{ cardCode: number; newState: IStatusCard }> =>
+): IReducerAction<{ cardCode: string; newState: IStatusCard }> =>
   FactoryAction(CardsActionTypes.UPDATE_CARD_STATUS, { cardCode, newState });
+
+export const setActiveFilter = (
+  status: IStatusCard
+): IReducerAction<IStatusCard> =>
+  FactoryAction(CardsActionTypes.TOGGLE_ACTIVE_FILTER, status);

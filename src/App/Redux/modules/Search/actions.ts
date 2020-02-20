@@ -22,7 +22,7 @@ export const showDialog = (): IReducerAction<{}> =>
 export const hideDialog = (): IReducerAction<{}> =>
   FactoryAction(SearchActionTypes.HIDE_DIALOG);
 
-export const selectCard = (card_code: number): IReducerAction<number> =>
+export const selectCard = (card_code: string): IReducerAction<string> =>
   FactoryAction(SearchActionTypes.SELECT_CARD, card_code);
 
 export const resetSearch = (): IReducerAction<{}> =>

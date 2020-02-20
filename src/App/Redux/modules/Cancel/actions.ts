@@ -1,11 +1,11 @@
 import { IReducerAction } from '..';
-import { CancelCardActionTypes, IHistoricCancel } from './types';
+import { CancelCardActionTypes, IHistoricCancel, ICancelCard } from './types';
 import FactoryAction from 'App/Util/FactoryAction';
 
 export const PostCancelCard = (
   reason: number,
   description: string
-): IReducerAction<{ reason: number; description: string }> =>
+): IReducerAction<ICancelCard> =>
   FactoryAction(CancelCardActionTypes.POST, { reason, description });
 
 export const PostCancelCardSuccess = (): IReducerAction<{}> =>
@@ -15,8 +15,8 @@ export const cancelCardError = (): IReducerAction<{}> =>
   FactoryAction(CancelCardActionTypes.CANCEL_CARD_ERROR, {});
 
 export const ShowDialogCancelCard = (
-  cardCode: number
-): IReducerAction<number> =>
+  cardCode: string
+): IReducerAction<string> =>
   FactoryAction(CancelCardActionTypes.SHOW_DIALOG, cardCode);
 
 export const HideDialogCancelCard = (): IReducerAction<{}> =>

@@ -7,7 +7,7 @@ import {
   fetchHistoricSuccess,
   fetchHistoric,
 } from './actions';
-import { CancelCardActionTypes, IHistoricCancel } from './types';
+import { CancelCardActionTypes, IHistoricCancel, ICancelCard } from './types';
 import endpoints from 'Config/endpoints';
 import { formatDate } from 'App/Util/format';
 import { notification } from 'antd';
@@ -15,15 +15,13 @@ import API from 'App/Services/Api';
 import { updateStateCard } from '../Card';
 import { fetchReasons, ReasonsGroups } from '../Reasons';
 
-function* cancelCard(
-  action: IReducerAction<{ reason: number; description: string }>
-): Generator {
+function* cancelCard(action: IReducerAction<ICancelCard>): Generator {
   try {
     const { reason, description } = action.payload;
 
     const cardCode = (yield select(
       (state: IApplicationState) => state.cancelCard.cardCode
-    )) as number;
+    )) as string;
 
     const response = (yield call(
       API.post,

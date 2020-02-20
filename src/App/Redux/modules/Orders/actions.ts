@@ -8,7 +8,7 @@ export const fetchOrderSuccess = (order: IOrder): IReducerAction<{}> =>
 export const fetchOrderError = (): IReducerAction<{}> =>
   FactoryAction(OrderActionTypes.FETCH_ERROR, {});
 
-export const ShowDialogOrderCard = (cardCode: number): IReducerAction<number> =>
+export const ShowDialogOrderCard = (cardCode: string): IReducerAction<string> =>
   FactoryAction(OrderActionTypes.SHOW_DIALOG, cardCode);
 
 export const HideDialogOrderCard = (): IReducerAction<{}> =>

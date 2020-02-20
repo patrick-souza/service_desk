@@ -21,6 +21,6 @@ export const fetchExtractError = (): IReducerAction<{}> =>
   FactoryAction(ExtractActionTypes.FETCH_ERROR);
 
 export const updateCardCode = (
-  cardCode: number
-): IReducerAction<{ cardCode: number }> =>
+  cardCode: string
+): IReducerAction<{ cardCode: string }> =>
   FactoryAction(ExtractActionTypes.UPDATE_CARD_CODE, { cardCode });

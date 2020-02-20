@@ -7,7 +7,7 @@ import {
   fetchHistoricSuccess,
   fetchHistoric,
 } from './actions';
-import { BlockCardActionTypes, IHistoricBlock } from './types';
+import { BlockCardActionTypes, IHistoricBlock, IBlockCard } from './types';
 import endpoints from 'Config/endpoints';
 import { updateStateCard } from '../Card';
 import { formatDate } from 'App/Util/format';
@@ -15,15 +15,13 @@ import { notification } from 'antd';
 import API from 'App/Services/Api';
 import { fetchReasons, ReasonsGroups } from '../Reasons';
 
-function* blockCard(
-  action: IReducerAction<{ reason: number; description: string }>
-): Generator {
+function* blockCard(action: IReducerAction<IBlockCard>): Generator {
   try {
     const { reason, description } = action.payload;
 
     const cardCode = (yield select(
       (state: IApplicationState) => state.blockCard.cardCode
-    )) as number;
+    )) as string;
 
     const response = (yield call(
       API.post,
