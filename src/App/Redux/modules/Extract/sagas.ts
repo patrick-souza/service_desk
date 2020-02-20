@@ -64,7 +64,7 @@ export function* handleExtract(
       filterPerDate = `&start_date=${start_date}&end_date=${end_date}`;
 
     const page = payload.page === undefined ? 1 : payload.page + 1;
-    const rowsPerPage = payload.rowsPerPage || 10;
+    const rowsPerPage = payload.rowsPerPage || 5;
     const cardCode = yield payload.cardCode
       ? payload.cardCode
       : select((state: IApplicationState) => {
