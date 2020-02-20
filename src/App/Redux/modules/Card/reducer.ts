@@ -20,7 +20,10 @@ export const initialState: ICardState = {
   openDialog: false,
   characteristics: [],
   loadingCharacteristics: false,
+<<<<<<< HEAD
   activeFilter: 'T',
+=======
+>>>>>>> 2bdc8c4cc0a6af9c9b60a2d8871a002ae584c6c4
   loadingContactless: '',
 };
 export const cardsReducer = (
