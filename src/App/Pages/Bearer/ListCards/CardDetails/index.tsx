@@ -1,12 +1,16 @@
 import React from 'react';
 import { Row, Col, Button, Divider, Switch } from 'antd';
-import CardActions from './CardActions';
 import Description from 'App/Components/Description';
 import LabelStatus from 'App/Components/LabelStatus';
 import { Link } from 'react-router-dom';
 import { updateCardCode } from 'App/Redux/modules/Extract';
 import { useDispatch } from 'react-redux';
-import { toggleContactless, ICard } from 'App/Redux/modules/Card';
+import {
+  toggleContactless,
+  ICard,
+  showDialogCharacteristics,
+} from 'App/Redux/modules/Card';
+import CardActions from './CardActions';
 
 export default function CardDetails({
   card_name,
@@ -30,7 +34,7 @@ export default function CardDetails({
                 label="Características"
                 value={card_specifications ? card_specifications.summary : ''}
                 extraAction={() => {
-                  console.log('fetch caracteristicas');
+                  dispatch(showDialogCharacteristics(card_code));
                 }}
               />
             </Col>

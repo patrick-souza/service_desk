@@ -34,6 +34,7 @@ module.exports = {
     camelcase: 0,
     'no-param-reassign': 0,
     'react/jsx-wrap-multilines': 0,
+    'no-nested-ternary': 'off',
   },
   settings: {
     'import/resolver': {

@@ -1,17 +1,5 @@
 import { fork, all, takeLatest, put, call, select } from 'redux-saga/effects';
-import {
-  CardsActionTypes,
-  ICard,
-  Pagination,
-  ICardsPagination,
-  IStatusCard,
-} from './types';
-import {
-  fetchCardsSuccess,
-  cardsError,
-  loadCharacteristics,
-  updateCardContactless,
-} from './actions';
+import { notification } from 'antd';
 import { IReducerAction, IApplicationState } from '..';
 import API from 'App/Services/Api';
 import endpoints from 'Config/endpoints';
@@ -23,7 +11,19 @@ import {
   formatNumber,
 } from 'App/Util/format';
 import history from 'App/Util/history';
-import { notification } from 'antd';
+import {
+  fetchCardsSuccess,
+  cardsError,
+  loadCharacteristics,
+  updateCardContactless,
+} from './actions';
+import {
+  CardsActionTypes,
+  ICard,
+  Pagination,
+  ICardsPagination,
+  IStatusCard,
+} from './types';
 
 function* handleFilter(): Generator {
   const activeFilter = (yield select(
@@ -130,7 +130,6 @@ function* handleCharacteristics(action: IReducerAction<string>): Generator {
               : characteristic.value,
         })
       );
-
       yield put(loadCharacteristics(formattedCharacteristics));
     }
   } catch (error) {}

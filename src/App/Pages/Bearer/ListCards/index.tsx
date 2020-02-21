@@ -11,6 +11,7 @@ import BlockCard from './Dialog/BlockCard';
 import CancelCard from './Dialog/CancelCard';
 import ResendPassword from './Dialog/ResendPassword';
 import OrderDialog from './Dialog/Order';
+import CharacteristicsDialog from './Dialog/Characteristic';
 
 import { stateDictionary } from 'App/Components/LabelStatus';
 import CardHeader from './CardDetails/CardHeader';
@@ -111,6 +112,7 @@ export default function ListCards() {
       <CancelCard />
       <ResendPassword />
       <OrderDialog />
+      <CharacteristicsDialog />
       <ReissueDialog />
     </>
   );

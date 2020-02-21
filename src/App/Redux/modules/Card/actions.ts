@@ -20,8 +20,8 @@ export const cardsError = (): IReducerAction<{}> =>
   FactoryAction(CardsActionTypes.CARDS_ERROR, {});
 
 export const showDialogCharacteristics = (
-  cardCode: number
-): IReducerAction<number> =>
+  cardCode: string
+): IReducerAction<string> =>
   FactoryAction(CardsActionTypes.SHOW_DIALOG_CHARACTERISTICS, cardCode);
 
 export const hideDialogCharacteristics = (): IReducerAction<{}> =>
