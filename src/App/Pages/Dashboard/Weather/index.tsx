@@ -15,10 +15,14 @@ export default function Weather() {
     weahterLoading,
     quoteLoading,
   } = useSelector((state: IApplicationState) => {
-    const { icon, temp, isLoading: weahterLoading } = state.weather;
-    const { author, quote, isLoading: quoteLoading } = state.quote;
-
-    return { icon, temp, author, quote, weahterLoading, quoteLoading };
+    return {
+      icon: state.weather.icon,
+      temp: state.weather.temp,
+      author: state.quote.author,
+      quote: state.quote.quote,
+      weahterLoading: state.weather.isLoading,
+      quoteLoading: state.quote.isLoading,
+    };
   });
   const dispatch = useDispatch();
 

@@ -3,6 +3,7 @@ import { ICard } from 'App/Redux/modules/Card';
 import { Row, Col, Typography, Divider } from 'antd';
 import Description from 'App/Components/Description';
 import CardImage from 'App/Components/CardImage';
+import Tier from './Tier';
 
 export default function CardHeader({
   tier,
@@ -20,7 +21,7 @@ export default function CardHeader({
               label="Tier"
               value={
                 <>
-                  <img src={require(`assets/tier-${tier}.svg`)} width={20} />
+                  <Tier tier={tier} />
                   <Divider
                     type="vertical"
                     style={{ margin: '0 6px', height: 0 }}

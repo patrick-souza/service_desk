@@ -44,10 +44,10 @@ export default function ResendPassword() {
       }}
     >
       <Tabs defaultActiveKey="resend" onChange={handleChangeTab} type="card">
-        <Tabs.TabPane tab="Reenviar Senha" key={'resend'}>
+        <Tabs.TabPane tab="Reenviar Senha" key="resend">
           <FormResendPassword formik={formik} />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Histórico de Reenvio" key={'historic'}>
+        <Tabs.TabPane tab="Histórico de Reenvio" key="historic">
           <Historic />
         </Tabs.TabPane>
       </Tabs>

@@ -1,8 +1,11 @@
+import moment from 'moment';
+
 export type IExtractState = {
   readonly transactions: IExtract[];
   readonly transationTotal: number;
   readonly cardCode: string;
   readonly isLoading: boolean;
+  readonly filter: moment.Moment[];
 };
 
 export type IExtract = {
@@ -35,19 +38,16 @@ export type IExtractPagination = {
 };
 
 export type Pagination = {
-  rowsPerPage?: number;
   page?: number;
-  cardCode?: number;
+  cardCode?: string;
 };
 
-export type FilterPerDate = {
-  start_date?: Date;
-  end_date?: Date;
-};
+export type FilterPerDate = moment.Moment[];
 
 export const ExtractActionTypes = {
   FETCH: '@@extract/FETCH_EXTRACT',
   FETCH_SUCCESS: '@@extract/FETCH_SUCCESS_EXTRACT',
   FETCH_ERROR: '@@extract/FETCH_ERROR',
-  UPDATE_CARD_CODE: '@@extract/UPDATE_CARD_CODE',
+  SET_ACTIVE_FILTER: '@@extract/SET_ACTIVE_FILTER',
+  RESET_FILTER: '@@extract/RESET_FILTER',
 };

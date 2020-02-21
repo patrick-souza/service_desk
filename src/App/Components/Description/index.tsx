@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Row, Typography, Divider, Col, Icon } from 'antd';
+
 type IProps = {
   label: string;
   value: string | ReactNode;

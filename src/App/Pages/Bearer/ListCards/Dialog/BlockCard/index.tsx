@@ -49,10 +49,10 @@ export default function BlockCard() {
       }}
     >
       <Tabs defaultActiveKey="block" onChange={handleChangeTab} type="card">
-        <Tabs.TabPane tab="Bloquear Cartão" key={'block'}>
+        <Tabs.TabPane tab="Bloquear Cartão" key="block">
           <FormBlockCard formik={formik} />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Histórico de bloqueio" key={'historic'}>
+        <Tabs.TabPane tab="Histórico de bloqueio" key="historic">
           <Historic />
         </Tabs.TabPane>
       </Tabs>
