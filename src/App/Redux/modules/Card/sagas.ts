@@ -1,6 +1,5 @@
 import { fork, all, takeLatest, put, call, select } from 'redux-saga/effects';
 import { notification } from 'antd';
-import { IReducerAction, IApplicationState } from '..';
 import API from 'App/Services/Api';
 import endpoints from 'Config/endpoints';
 import {
@@ -11,6 +10,7 @@ import {
   formatNumber,
 } from 'App/Util/format';
 import history from 'App/Util/history';
+import { IReducerAction, IApplicationState } from '..';
 import {
   fetchCardsSuccess,
   cardsError,
