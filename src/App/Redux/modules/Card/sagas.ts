@@ -1,18 +1,4 @@
 import { fork, all, takeLatest, put, call, select } from 'redux-saga/effects';
-import {
-  CardsActionTypes,
-  ICard,
-  Pagination,
-  ICardsPagination,
-  IStatusCard,
-} from './types';
-import {
-  fetchCardsSuccess,
-  cardsError,
-  loadCharacteristics,
-  updateCardContactless,
-} from './actions';
-import { IReducerAction, IApplicationState } from '..';
 import API from 'App/Services/Api';
 import endpoints from 'Config/endpoints';
 import {
@@ -24,6 +10,20 @@ import {
 } from 'App/Util/format';
 import history from 'App/Util/history';
 import { notification } from 'antd';
+import { IReducerAction, IApplicationState } from '..';
+import {
+  fetchCardsSuccess,
+  cardsError,
+  loadCharacteristics,
+  updateCardContactless,
+} from './actions';
+import {
+  CardsActionTypes,
+  ICard,
+  Pagination,
+  ICardsPagination,
+  IStatusCard,
+} from './types';
 
 function* handleFilter(): Generator {
   const activeFilter = (yield select(
@@ -42,21 +42,24 @@ function* handleFilter(): Generator {
 
   return '';
 }
+function* handleCardCodes(cardCodes?: string[]): Generator {
+  if (cardCodes && cardCodes.length > 0) return cardCodes.join(',');
+
+  return yield select((state: IApplicationState) =>
+    state.search.result.map(r => r.card_code).join(',')
+  );
+}
 function* fetchCards(action: IReducerAction<Pagination>): Generator {
   try {
-    const payload = action.payload;
+    const { payload } = action;
 
-    const cardCodes = yield payload.cardCodes
-      ? payload.cardCodes.join(',')
-      : select((state: IApplicationState) =>
-          state.search.result.map(r => r.card_code).join(',')
-        );
+    const cardCodes = (yield handleCardCodes(payload.cardCodes)) as string;
 
     const page = payload.page === undefined ? 1 : payload.page;
 
     const rowsPerPage = 5;
 
-    const filter = yield handleFilter();
+    const filter = (yield handleFilter()) as string;
 
     const cardDetails = (yield call(
       API.get,
@@ -91,7 +94,7 @@ function* handleContactless(action: IReducerAction<string>): Generator {
     console.log('chegou aqui');
     notification.destroy();
     const card = (yield select((state: IApplicationState) =>
-      state.card.cards.find(card => card.card_code === action.payload)
+      state.card.cards.find(({ card_code }) => card_code === action.payload)
     )) as ICard;
 
     if (!card.contactless) {
@@ -115,7 +118,7 @@ function* handleCharacteristics(action: IReducerAction<string>): Generator {
   try {
     const cardCode = action.payload;
     const card = (yield select((state: IApplicationState) =>
-      state.card.cards.find(card => card.card_code === cardCode)
+      state.card.cards.find(({ card_code }) => card_code === cardCode)
     )) as ICard;
 
     if (card) {
@@ -133,7 +136,9 @@ function* handleCharacteristics(action: IReducerAction<string>): Generator {
 
       yield put(loadCharacteristics(formattedCharacteristics));
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function* watchFetchRequest(): Generator {
@@ -151,11 +156,13 @@ function* watchFetchRequest(): Generator {
 function handleCardsCache(action: IReducerAction<IApplicationState>): void {
   if (process.env.NODE_ENV === 'development') {
     return;
-  } else
+  }
+  if (
     action.payload &&
-      !action.payload.card &&
-      ['/bearer', '/extract'].includes(history.location.pathname);
-  history.push('/dashboard');
+    !action.payload.card &&
+    ['/bearer', '/extract'].includes(history.location.pathname)
+  )
+    history.push('/dashboard');
 }
 
 export function* cardsSaga(): Generator {

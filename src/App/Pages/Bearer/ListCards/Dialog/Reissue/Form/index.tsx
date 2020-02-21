@@ -141,7 +141,7 @@ export default function FormReissue({ formik }: IProps) {
       <Divider style={{ margin: '12px 0', height: 0 }} />
       <Row type="flex" gutter={16} align="middle" justify="space-between">
         <Col span={9}>
-          <Form.Item label={'Nome do destinatário'}>
+          <Form.Item label="Nome do destinatário">
             <Input
               value={formik.values.receiver}
               onChange={formik.handleChange}
@@ -152,7 +152,7 @@ export default function FormReissue({ formik }: IProps) {
         </Col>
         <Col span={6}>
           <Form.Item
-            label={'CEP'}
+            label="CEP"
             hasFeedback
             validateStatus={fetchingAddress ? 'validating' : ''}
           >
@@ -173,7 +173,7 @@ export default function FormReissue({ formik }: IProps) {
           </Form.Item>
         </Col>
         <Col span={9}>
-          <Form.Item label={'Endereço'}>
+          <Form.Item label="Endereço">
             <Input
               disabled
               value={formik.values.address.street}

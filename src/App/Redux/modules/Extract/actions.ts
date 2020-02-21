@@ -1,3 +1,4 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import {
   ExtractActionTypes,
   Pagination,
@@ -5,11 +6,8 @@ import {
   FilterPerDate,
 } from './types';
 import { IReducerAction } from '..';
-import FactoryAction from 'App/Util/FactoryAction';
 
-export const fetchExtract = (
-  params: Pagination & FilterPerDate
-): IReducerAction<Pagination & FilterPerDate> =>
+export const fetchExtract = (params: Pagination): IReducerAction<Pagination> =>
   FactoryAction(ExtractActionTypes.FETCH, params);
 
 export const fetchExtractSuccess = (
@@ -20,7 +18,10 @@ export const fetchExtractSuccess = (
 export const fetchExtractError = (): IReducerAction<{}> =>
   FactoryAction(ExtractActionTypes.FETCH_ERROR);
 
-export const updateCardCode = (
-  cardCode: string
-): IReducerAction<{ cardCode: string }> =>
-  FactoryAction(ExtractActionTypes.UPDATE_CARD_CODE, { cardCode });
+export const updateFilterExtract = (
+  dates: FilterPerDate
+): IReducerAction<FilterPerDate> =>
+  FactoryAction(ExtractActionTypes.SET_ACTIVE_FILTER, dates);
+
+export const resetFilterExtract = () =>
+  FactoryAction(ExtractActionTypes.RESET_FILTER);
