@@ -1,6 +1,6 @@
 import React from 'react';
-import Weather from './Weather';
 import { Row, Col, Divider } from 'antd';
+import Weather from './Weather';
 import Search from './Search';
 import FastAccess from './FastAccess';
 

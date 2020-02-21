@@ -18,6 +18,6 @@ export default function CardHeaderSkeleton() {
         />
       }
       key=""
-    ></Collapse.Panel>
+    />
   );
 }

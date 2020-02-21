@@ -1,10 +1,10 @@
 import React, { createRef, useEffect } from 'react';
 import { Row, Card, Typography, Input, Divider } from 'antd';
-import Dialog from './Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import { showDialog } from 'App/Redux/modules/Search';
 import { IApplicationState } from 'App/Redux/modules';
 import SearchRef from 'antd/lib/input/Search';
+import Dialog from './Dialog';
 
 export default function Search() {
   const openDialog = useSelector(

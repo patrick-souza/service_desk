@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pagination, Divider } from 'antd';
+
 type IProps = {
   onChange?:
     | ((page: number, pageSize?: number | undefined) => void)
@@ -24,7 +25,7 @@ export default function CustomPagination({
         onChange={onChange}
         current={current}
         defaultCurrent={defaultCurrent}
-        showTotal={total => `Total ${total} ${total > 1 ? 'Itens' : 'Item'}`}
+        showTotal={length => `Total ${length} ${length > 1 ? 'Itens' : 'Item'}`}
         total={total}
       />
     </>

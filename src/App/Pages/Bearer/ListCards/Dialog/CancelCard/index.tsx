@@ -49,10 +49,10 @@ export default function CancelCard() {
       }}
     >
       <Tabs defaultActiveKey="cancel" onChange={handleChangeTab} type="card">
-        <Tabs.TabPane tab="Cancelar Cartão" key={'cancel'}>
+        <Tabs.TabPane tab="Cancelar Cartão" key="cancel">
           <FormCancelCard formik={formik} />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Histórico de Cancelamento" key={'historic'}>
+        <Tabs.TabPane tab="Histórico de Cancelamento" key="historic">
           <Historic />
         </Tabs.TabPane>
       </Tabs>

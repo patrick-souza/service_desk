@@ -1,4 +1,8 @@
 import { all, fork, takeLatest, call, put, select } from 'redux-saga/effects';
+import { formatDate, formatCurrency } from 'App/Util/format';
+import endpoints from 'Config/endpoints';
+import API from 'App/Services/Api';
+import { notification } from 'antd';
 import {
   ExtractActionTypes,
   IExtract,
@@ -7,9 +11,6 @@ import {
 } from './types';
 import { IReducerAction, IApplicationState } from '..';
 import { fetchExtractSuccess, fetchExtractError } from './actions';
-import { formatDate, formatCurrency } from 'App/Util/format';
-import endpoints from 'Config/endpoints';
-import API from 'App/Services/Api';
 
 function translateExtract(response: {
   rows: any[];
@@ -46,35 +47,35 @@ function translateExtract(response: {
   });
 }
 
-export function* handleExtract(
-  action: IReducerAction<Pagination & FilterPerDate>
-): Generator {
+function* handlefilterByDate(): Generator {
+  const [start_date, end_date] = (yield select(
+    (state: IApplicationState) => state.extract.filter
+  )) as FilterPerDate;
+
+  if (start_date && end_date) {
+    return `&start_date=${start_date.format(
+      'YYYY-MM-DD'
+    )}&end_date=${end_date.format('YYYY-MM-DD')}`;
+  }
+  return '';
+}
+
+function* handleCardCode(cardCode?: string): Generator {
+  if (cardCode) return cardCode;
+
+  return yield select((state: IApplicationState) => state.extract.cardCode);
+}
+function* fetchExtract({ payload }: IReducerAction<Pagination>): Generator {
   try {
-    const payload = action.payload;
-
-    const start_date = payload.start_date
-      ? formatDate(payload.start_date, 'YYYY-MM-DD')
-      : '';
-    const end_date = payload.end_date
-      ? formatDate(payload.end_date, 'YYYY-MM-DD')
-      : '';
-
-    let filterPerDate = '';
-    if (start_date && end_date)
-      filterPerDate = `&start_date=${start_date}&end_date=${end_date}`;
-
     const page = payload.page === undefined ? 1 : payload.page + 1;
-    const rowsPerPage = payload.rowsPerPage || 5;
-    const cardCode = yield payload.cardCode
-      ? payload.cardCode
-      : select((state: IApplicationState) => {
-          const code = state.extract.cardCode;
-          return code;
-        });
+    const rowsPerPage = 5;
+    const cardCode = (yield handleCardCode(payload.cardCode)) as string;
 
-    const url = `${endpoints.telaunica_api}/extract?card_code=${cardCode}&page=${page}&rowsPerPage=${rowsPerPage}${filterPerDate}`;
+    const filter = (yield handlefilterByDate()) as string;
+
+    const url = `${endpoints.telaunica_api}/extract?card_code=${cardCode}&page=${page}&rowsPerPage=${rowsPerPage}${filter}`;
     const response = (yield call(API.get, url)) as {
-      rows: any[];
+      rows: IExtract[];
       count: number;
     };
 
@@ -82,14 +83,18 @@ export function* handleExtract(
 
     yield put(fetchExtractSuccess({ rows: extract, count: response.count }));
   } catch (error) {
+    notification.error({ message: 'Oops!', description: error.message });
+    console.log(error);
+
     yield put(fetchExtractError());
   }
 }
 
 function* watchFetchRequest(): Generator {
   yield all([
-    takeLatest(ExtractActionTypes.FETCH, handleExtract),
-    takeLatest(ExtractActionTypes.UPDATE_CARD_CODE, handleExtract),
+    takeLatest(ExtractActionTypes.FETCH, fetchExtract),
+    takeLatest(ExtractActionTypes.SET_ACTIVE_FILTER, fetchExtract),
+    takeLatest(ExtractActionTypes.RESET_FILTER, fetchExtract),
   ]);
 }
 

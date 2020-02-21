@@ -4,38 +4,33 @@ import Description from 'App/Components/Description';
 import { IExtract } from 'App/Redux/modules/Extract';
 
 type IProps = {
-  transactions: IExtract;
+  transaction: IExtract;
 };
 
-export default function ContentHeader(props: IProps) {
+export default function ContentHeader({ transaction }: IProps) {
   return (
     <Row type="flex" align="middle" style={{ marginRight: '-20px' }}>
-      {console.log(props.transactions)}
       <Description
         label="Estabelecimento"
-        value={props.transactions.establishmentCode}
+        value={transaction.establishmentCode}
         span={5}
       />
       <Description
         label="Data e hora"
-        value={props.transactions.formatted_registrationDate}
+        value={transaction.formatted_registrationDate}
         span={5}
       />
       <Description
         label="Status da transação"
-        value={props.transactions.situationTransaction.name}
+        value={transaction.situationTransaction.name}
         span={5}
       />
       <Description
         label="Tipo de transação"
-        value={props.transactions.typeTransaction.name}
+        value={transaction.typeTransaction.name}
         span={5}
       />
-      <Description
-        label="Valor"
-        value={props.transactions.formatted_value}
-        span={4}
-      />
+      <Description label="Valor" value={transaction.formatted_value} span={4} />
     </Row>
   );
 }
