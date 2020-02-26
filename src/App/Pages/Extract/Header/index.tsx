@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Row, Typography, Col, Divider } from 'antd';
 import Breadcrumb from 'App/Components/Breadcrumb';
 import Filter from './Filter';
@@ -6,7 +6,7 @@ import Filter from './Filter';
 type IProps = {
   balance: string;
 };
-export default function ExtractHeader({ balance }: IProps) {
+function ExtractHeader({ balance }: IProps) {
   return (
     <>
       <Breadcrumb
@@ -31,3 +31,5 @@ export default function ExtractHeader({ balance }: IProps) {
     </>
   );
 }
+
+export default memo(ExtractHeader);

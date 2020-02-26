@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Masked from 'react-input-mask';
 import { Input } from 'antd';
 
@@ -13,7 +13,7 @@ type IProps = {
   disabled?: boolean;
   ref?: React.RefObject<HTMLInputElement>;
 };
-export default function MaskedInput({
+function MaskedInput({
   mask,
   name,
   onChange,
@@ -41,3 +41,5 @@ export default function MaskedInput({
     </Masked>
   );
 }
+
+export default memo(MaskedInput);

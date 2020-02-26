@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Row, Typography } from 'antd';
 import LabelStatus from 'App/Components/LabelStatus';
 
-export default function LabelbyStatus() {
+function LabelbyStatus() {
   return (
     <Row type="flex" align="middle">
       <Typography.Text>Legenda :</Typography.Text>
@@ -14,3 +14,5 @@ export default function LabelbyStatus() {
     </Row>
   );
 }
+
+export default memo(LabelbyStatus);

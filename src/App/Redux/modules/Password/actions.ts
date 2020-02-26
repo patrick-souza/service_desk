@@ -1,9 +1,9 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import {
   HistoricResendPasswordActionTypes,
   IHistoricResendPassword,
 } from './types';
-import { IReducerAction } from './../index';
-import FactoryAction from 'App/Util/FactoryAction';
+import { IReducerAction } from '../index';
 
 export const postResendPassword = (
   type: string,

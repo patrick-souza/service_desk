@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Form, Select, Input } from 'antd';
 import { FormikProps } from 'formik';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import { ICancelCard } from 'App/Redux/modules/Cancel';
 type IProps = {
   formik: FormikProps<ICancelCard>;
 };
-export default function FormCancelCard({ formik }: IProps) {
+function FormCancelCard({ formik }: IProps) {
   const { isLoading, reasons } = useSelector(
     (state: IApplicationState) => state.reason
   );
@@ -58,3 +58,5 @@ export default function FormCancelCard({ formik }: IProps) {
     </Form>
   );
 }
+
+export default memo(FormCancelCard);

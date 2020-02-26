@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Row, Col, Button, Divider, Switch } from 'antd';
 import Description from 'App/Components/Description';
 import LabelStatus from 'App/Components/LabelStatus';
@@ -12,7 +12,7 @@ import {
 } from 'App/Redux/modules/Card';
 import CardActions from './CardActions';
 
-export default function CardDetails({
+function CardDetails({
   card_name,
   card_specifications,
   formatted_document,
@@ -94,3 +94,5 @@ export default function CardDetails({
     </>
   );
 }
+
+export default memo(CardDetails);

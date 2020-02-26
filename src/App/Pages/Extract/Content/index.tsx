@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Row, Divider, Card } from 'antd';
 import Description from 'App/Components/Description';
 import { IExtract } from 'App/Redux/modules/Extract';
@@ -7,7 +7,7 @@ type IProps = {
   transaction: IExtract;
 };
 
-export default function Content({ transaction }: IProps) {
+function Content({ transaction }: IProps) {
   return (
     <>
       <Divider style={{ marginTop: '0px', marginBottom: '12px' }} />
@@ -43,3 +43,5 @@ export default function Content({ transaction }: IProps) {
     </>
   );
 }
+
+export default memo(Content);

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, memo } from 'react';
 import {
   Collapse,
   Button,
@@ -16,7 +16,7 @@ import Content from './Content';
 import ExtractHeader from './Header';
 import ContentHeaderSkeleton from './Content/ContentHeader/Skeleton';
 
-export default function Extract() {
+function Extract() {
   const {
     transactions,
     isLoading,
@@ -99,3 +99,5 @@ export default function Extract() {
     </>
   );
 }
+
+export default memo(Extract);

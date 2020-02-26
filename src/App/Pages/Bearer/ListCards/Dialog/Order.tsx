@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Modal from 'App/Components/Modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
@@ -6,7 +6,7 @@ import { HideDialogOrderCard } from 'App/Redux/modules/Orders';
 import { Row, Icon, Typography, Col, Divider, Card, Skeleton } from 'antd';
 import Description from 'App/Components/Description';
 
-export default function OrderDialog() {
+function OrderDialog() {
   const { order, openDialog, isLoading } = useSelector(
     (state: IApplicationState) => state.order
   );
@@ -96,3 +96,5 @@ export default function OrderDialog() {
     </Modal>
   );
 }
+
+export default memo(OrderDialog);

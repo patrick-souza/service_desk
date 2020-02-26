@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Table } from 'antd';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 
-export default function Historic() {
+function Historic() {
   const { historicLoading, historic } = useSelector(
     (state: IApplicationState) => state.reissue
   );
@@ -33,3 +33,5 @@ export default function Historic() {
     />
   );
 }
+
+export default memo(Historic);

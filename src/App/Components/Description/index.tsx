@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, memo } from 'react';
 import { Row, Typography, Divider, Col, Icon } from 'antd';
 
 type IProps = {
@@ -7,12 +7,7 @@ type IProps = {
   extraAction?: () => void;
   span?: number;
 };
-export default function Description({
-  label,
-  value,
-  extraAction,
-  span,
-}: IProps) {
+function Description({ label, value, extraAction, span }: IProps) {
   return (
     <Col span={span}>
       <Row type="flex" align="middle">
@@ -33,3 +28,5 @@ export default function Description({
     </Col>
   );
 }
+
+export default memo(Description);

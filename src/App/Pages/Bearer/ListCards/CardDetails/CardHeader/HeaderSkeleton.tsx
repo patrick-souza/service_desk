@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Skeleton, Collapse } from 'antd';
 
-export default function CardHeaderSkeleton() {
+function CardHeaderSkeleton() {
   return (
     <Collapse.Panel
       style={{
@@ -21,3 +21,5 @@ export default function CardHeaderSkeleton() {
     />
   );
 }
+
+export default memo(CardHeaderSkeleton);

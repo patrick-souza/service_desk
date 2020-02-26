@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Icon, Table } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { hideDialogCharacteristics } from 'App/Redux/modules/Card';
 import { IApplicationState } from 'App/Redux/modules';
 import Modal from 'App/Components/Modal';
 
-export default function CharacteristicDialog() {
+function CharacteristicDialog() {
   const { openDialog, characteristics, loadingCharacteristics } = useSelector(
     (state: IApplicationState) => state.card
   );
@@ -56,3 +56,5 @@ export default function CharacteristicDialog() {
     </Modal>
   );
 }
+
+export default memo(CharacteristicDialog);

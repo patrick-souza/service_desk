@@ -25,8 +25,9 @@ export default function BlockCard() {
       reason: Yup.string().required(),
       description: Yup.string().required(),
     }),
-    onSubmit: ({ reason, description }) => {
+    onSubmit: ({ reason, description }, cb) => {
       dispatch(PostBlockCard(reason, description));
+      cb.resetForm();
     },
   });
 
@@ -45,6 +46,7 @@ export default function BlockCard() {
         formik.submitForm();
       }}
       onCancel={() => {
+        formik.resetForm();
         dispatch(hideDialogBlockCard());
       }}
     >

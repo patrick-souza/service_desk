@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Row, Skeleton, Col, Collapse } from 'antd';
 
-export default function ContentHeaderSkeleton() {
+function ContentHeaderSkeleton() {
   return (
     <Collapse.Panel
       header={
@@ -32,3 +32,5 @@ export default function ContentHeaderSkeleton() {
     />
   );
 }
+
+export default memo(ContentHeaderSkeleton);

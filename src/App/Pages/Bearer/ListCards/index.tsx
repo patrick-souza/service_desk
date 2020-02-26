@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, memo } from 'react';
 import { Row, Collapse, Empty } from 'antd';
 import Pagination from 'App/Components/Pagination';
 import { fetchCards } from 'App/Redux/modules/Card';
@@ -19,7 +19,7 @@ import CardHeader from './CardDetails/CardHeader';
 import ReissueDialog from './Dialog/Reissue';
 import CardHeaderSkeleton from './CardDetails/CardHeader/HeaderSkeleton';
 
-export default function ListCards() {
+function ListCards() {
   const { count, cards, isLoading, activeFilter } = useSelector(
     (state: IApplicationState) => state.card
   );
@@ -115,3 +115,5 @@ export default function ListCards() {
     </>
   );
 }
+
+export default memo(ListCards);

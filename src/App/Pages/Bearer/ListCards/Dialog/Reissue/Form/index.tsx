@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import {
   Form,
   Row,
@@ -15,11 +15,13 @@ import { IReissueCard } from 'App/Redux/modules/Reissue';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import cepPromisse from 'cep-promise';
+import MaskedInput from 'App/Components/MaskedInput';
+import { sanitizeValue } from 'App/Util/format';
 
 type IProps = {
   formik: FormikProps<IReissueCard>;
 };
-export default function FormReissue({ formik }: IProps) {
+function FormReissue({ formik }: IProps) {
   const { isLoading, reasons } = useSelector(
     (state: IApplicationState) => state.reason
   );
@@ -27,8 +29,11 @@ export default function FormReissue({ formik }: IProps) {
   const [fetchingAddress, setFetchingAddress] = useState(false);
   const handleAddress = async (zipcode: string) => {
     setFetchingAddress(true);
+    const sanitizedZipcode = sanitizeValue(zipcode);
     try {
-      const { city, neighborhood, state, street } = await cepPromisse(zipcode);
+      const { city, neighborhood, state, street } = await cepPromisse(
+        sanitizedZipcode
+      );
       formik.setValues({
         ...formik.values,
         address: {
@@ -156,11 +161,8 @@ export default function FormReissue({ formik }: IProps) {
             hasFeedback
             validateStatus={fetchingAddress ? 'validating' : ''}
           >
-            <Input
-              maxLength={8}
-              onPressEnter={e => {
-                handleAddress(e.currentTarget.value);
-              }}
+            <MaskedInput
+              mask="99999-999"
               disabled={fetchingAddress}
               value={formik.values.address.zipcode}
               onChange={formik.handleChange}
@@ -242,3 +244,5 @@ export default function FormReissue({ formik }: IProps) {
     </Form>
   );
 }
+
+export default memo(FormReissue);

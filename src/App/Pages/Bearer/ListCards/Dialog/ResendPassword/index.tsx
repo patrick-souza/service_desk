@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { IApplicationState } from 'App/Redux/modules';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Modal from 'App/Components/Modal';
-import { hideDialogResendPassword } from 'App/Redux/modules/Password';
+import {
+  hideDialogResendPassword,
+  postResendPassword,
+} from 'App/Redux/modules/Password';
 import { Tabs } from 'antd';
+import { sanitizeValue } from 'App/Util/format';
 import FormResendPassword from './Form';
 import Historic from './Historic';
 
-export default function ResendPassword() {
+function ResendPassword() {
   const { openDialog, isLoading } = useSelector(
     (state: IApplicationState) => state.historicResendPassword
   );
@@ -19,11 +23,20 @@ export default function ResendPassword() {
   const formik = useFormik({
     initialValues: {
       to: '',
+      recipient: '',
     },
     validationSchema: Yup.object().shape({
       to: Yup.string().required(),
+      recipient: Yup.string().required(),
     }),
-    onSubmit: values => console.log(values),
+    onSubmit: ({ to, recipient }, cb) => {
+      if (to === 'sms') {
+        const sanitizedRecipient = sanitizeValue(recipient);
+        dispatch(postResendPassword(to, sanitizedRecipient));
+      } else dispatch(postResendPassword(to, recipient));
+
+      cb.resetForm();
+    },
   });
 
   const handleChangeTab = () => {
@@ -40,6 +53,7 @@ export default function ResendPassword() {
         formik.submitForm();
       }}
       onCancel={() => {
+        formik.resetForm();
         dispatch(hideDialogResendPassword());
       }}
     >
@@ -54,3 +68,5 @@ export default function ResendPassword() {
     </Modal>
   );
 }
+
+export default memo(ResendPassword);

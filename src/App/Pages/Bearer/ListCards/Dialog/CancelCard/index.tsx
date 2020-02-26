@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import { useFormik } from 'formik';
@@ -9,7 +9,7 @@ import { HideDialogCancelCard, PostCancelCard } from 'App/Redux/modules/Cancel';
 import Historic from './Historic';
 import FormCancelCard from './Form';
 
-export default function CancelCard() {
+function CancelCard() {
   const { openDialog, isLoading } = useSelector(
     (state: IApplicationState) => state.cancelCard
   );
@@ -25,12 +25,13 @@ export default function CancelCard() {
       reason: Yup.string().required(),
       description: Yup.string().required(),
     }),
-    onSubmit: ({ reason, description }) => {
+    onSubmit: ({ reason, description }, cb) => {
       dispatch(PostCancelCard(reason, description));
+      cb.resetForm();
     },
   });
 
-  const handleChangeTab = (key: string) => {
+  const handleChangeTab = () => {
     formik.resetForm();
   };
 
@@ -45,6 +46,7 @@ export default function CancelCard() {
         formik.submitForm();
       }}
       onCancel={() => {
+        formik.resetForm();
         dispatch(HideDialogCancelCard());
       }}
     >
@@ -59,3 +61,5 @@ export default function CancelCard() {
     </Modal>
   );
 }
+
+export default memo(CancelCard);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Row, Card } from 'antd';
 import CardImage from 'App/Components/CardImage';
 import Description from 'App/Components/Description';
@@ -10,11 +10,7 @@ type IProps = {
   truncatedNumber: string;
   cardCode: string;
 };
-export default function ResultCards({
-  image,
-  truncatedNumber,
-  cardCode,
-}: IProps) {
+function ResultCards({ image, truncatedNumber, cardCode }: IProps) {
   const dispatch = useDispatch();
 
   return (
@@ -35,3 +31,5 @@ export default function ResultCards({
     </Card>
   );
 }
+
+export default memo(ResultCards);

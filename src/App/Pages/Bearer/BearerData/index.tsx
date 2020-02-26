@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Card, Typography, Row, Divider, Icon } from 'antd';
 import './index.css';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import Description from 'App/Components/Description';
 
-export default function BearerData() {
+function BearerData() {
   const { bearer, isLoading } = useSelector(
     (state: IApplicationState) => state.bearer
   );
@@ -26,3 +26,5 @@ export default function BearerData() {
     </Card>
   );
 }
+
+export default memo(BearerData);

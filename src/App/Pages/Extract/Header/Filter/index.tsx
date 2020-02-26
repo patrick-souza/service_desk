@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Col, Card, Row, Radio, Typography, Divider, DatePicker } from 'antd';
 import { useDispatch } from 'react-redux';
 import { RangePickerValue } from 'antd/lib/date-picker/interface';
@@ -8,7 +8,7 @@ import {
   resetFilterExtract,
 } from 'App/Redux/modules/Extract';
 
-export default function Filter() {
+function Filter() {
   const [activeFilter, setActiveFilter] = useState(null);
 
   const dispatch = useDispatch();
@@ -57,3 +57,5 @@ export default function Filter() {
     </Col>
   );
 }
+
+export default memo(Filter);

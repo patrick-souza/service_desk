@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, memo } from 'react';
 import { Typography, Divider, Row } from 'antd';
 import { IStatusCard } from 'App/Redux/modules/Card';
 
@@ -10,7 +10,7 @@ export const stateDictionary = {
   T: { label: '', color: '#FFF' },
 };
 
-function Circle({ color }: { color: string }) {
+const Circle = memo(({ color }: { color: string }) => {
   return (
     <div
       style={{
@@ -22,12 +22,12 @@ function Circle({ color }: { color: string }) {
       }}
     />
   );
-}
+});
 
 type IProps = {
   state: IStatusCard;
 };
-export default function LabelStatus({ state }: IProps) {
+function LabelStatus({ state }: IProps) {
   const { color, label } = useMemo(() => stateDictionary[state], [state]);
 
   return (
@@ -38,3 +38,5 @@ export default function LabelStatus({ state }: IProps) {
     </Row>
   );
 }
+
+export default memo(LabelStatus);
