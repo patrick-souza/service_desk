@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Col } from 'antd';
 import cardNotFound from 'assets/cardNotFound.jpg';
 
-export default function CardImage({ image }: { image?: string }) {
+function CardImage({ image }: { image?: string }) {
   const [errorImage, setErrorImage] = useState(false);
 
   return (
@@ -25,3 +25,5 @@ export default function CardImage({ image }: { image?: string }) {
     </Col>
   );
 }
+
+export default memo(CardImage);

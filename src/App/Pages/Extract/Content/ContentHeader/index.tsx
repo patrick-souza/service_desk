@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Row } from 'antd';
 import Description from 'App/Components/Description';
 import { IExtract } from 'App/Redux/modules/Extract';
@@ -7,7 +7,7 @@ type IProps = {
   transaction: IExtract;
 };
 
-export default function ContentHeader({ transaction }: IProps) {
+function ContentHeader({ transaction }: IProps) {
   return (
     <Row type="flex" align="middle" style={{ marginRight: '-20px' }}>
       <Description
@@ -34,3 +34,5 @@ export default function ContentHeader({ transaction }: IProps) {
     </Row>
   );
 }
+
+export default memo(ContentHeader);

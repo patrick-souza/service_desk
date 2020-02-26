@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { Breadcrumb as BreadcrumbAntd, Typography } from 'antd';
 import './index.css';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ type IProps = {
   pages: { path: string; breadcrumbName: string }[];
 };
 
-export default function Breadcrumb({ pages }: IProps) {
+function Breadcrumb({ pages }: IProps) {
   const itemRender = useCallback((route: Route, _: any, routes: Route[]) => {
     const last = routes.indexOf(route) === routes.length - 1;
 
@@ -25,3 +25,4 @@ export default function Breadcrumb({ pages }: IProps) {
     <BreadcrumbAntd itemRender={itemRender} routes={pages} separator=">" />
   );
 }
+export default memo(Breadcrumb);

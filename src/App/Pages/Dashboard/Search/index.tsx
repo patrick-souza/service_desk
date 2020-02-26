@@ -1,4 +1,4 @@
-import React, { createRef, useEffect } from 'react';
+import React, { createRef, useEffect, memo } from 'react';
 import { Row, Card, Typography, Input, Divider } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { showDialog } from 'App/Redux/modules/Search';
@@ -6,7 +6,7 @@ import { IApplicationState } from 'App/Redux/modules';
 import SearchRef from 'antd/lib/input/Search';
 import Dialog from './Dialog';
 
-export default function Search() {
+function Search() {
   const openDialog = useSelector(
     (state: IApplicationState) => state.search.openDialog
   );
@@ -43,3 +43,5 @@ export default function Search() {
     </Row>
   );
 }
+
+export default memo(Search);

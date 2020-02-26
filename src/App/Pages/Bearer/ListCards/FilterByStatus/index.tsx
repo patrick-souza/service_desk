@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Row, Radio, Card, Typography } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import { setActiveFilter } from 'App/Redux/modules/Card';
 
-export default function FilterByStatus() {
+function FilterByStatus() {
   const {
     total,
     active,
@@ -39,3 +39,5 @@ export default function FilterByStatus() {
     </Card>
   );
 }
+
+export default memo(FilterByStatus);

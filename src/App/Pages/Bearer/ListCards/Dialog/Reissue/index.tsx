@@ -65,14 +65,17 @@ export default function ReissueDialog() {
         number: Yup.number().required(),
         complement: Yup.string().required(),
         district: Yup.string().required(),
-        zipcode: Yup.number().required(),
+        zipcode: Yup.string()
+          .required()
+          .max(9),
         city: Yup.string().required(),
         state: Yup.string().required(),
       }),
     }),
     enableReinitialize: true,
-    onSubmit: values => {
+    onSubmit: (values, cb) => {
       dispatch(postReissueCard(values));
+      cb.resetForm();
     },
   });
 
@@ -91,6 +94,7 @@ export default function ReissueDialog() {
         formik.submitForm();
       }}
       onCancel={() => {
+        formik.resetForm();
         dispatch(hideDialogReissueCard());
       }}
     >

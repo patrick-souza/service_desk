@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, memo } from 'react';
 import { Row, Card, Icon, Divider, Typography } from 'antd';
 import { formatDate } from 'App/Util/format';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,7 +6,7 @@ import { IApplicationState } from 'App/Redux/modules';
 import { fetchWeather } from 'App/Redux/modules/Weather';
 import { fetchQuote } from 'App/Redux/modules/Quote';
 
-export default function Weather() {
+function Weather() {
   const {
     icon,
     temp,
@@ -105,3 +105,5 @@ export default function Weather() {
     </Card>
   );
 }
+
+export default memo(Weather);

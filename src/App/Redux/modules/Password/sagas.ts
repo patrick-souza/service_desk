@@ -1,9 +1,8 @@
-import {
-  IHistoricResendPassword,
-  HistoricResendPasswordActionTypes,
-} from './types';
 import { select, call, put, all, fork, takeLatest } from 'redux-saga/effects';
-import { IApplicationState, IReducerAction } from '..';
+import { notification } from 'antd';
+import endpoints from 'Config/endpoints';
+import { formatDate } from 'App/Util/format';
+import API from 'App/Services/Api';
 import {
   fetchHistoricSuccess,
   resendPasswordError,
@@ -11,11 +10,11 @@ import {
   postResendPasswordSuccess,
   hideDialogResendPassword,
 } from './actions';
-import { notification } from 'antd';
-import endpoints from 'Config/endpoints';
-import { formatDate } from 'App/Util/format';
-import API from 'App/Services/Api';
-import * as Yup from 'yup';
+import { IApplicationState, IReducerAction } from '..';
+import {
+  IHistoricResendPassword,
+  HistoricResendPasswordActionTypes,
+} from './types';
 
 function* handlePostResendPassword(
   action: IReducerAction<{ type: string; recipient: string }>
@@ -23,26 +22,6 @@ function* handlePostResendPassword(
   try {
     const { recipient, type } = action.payload;
 
-    const schema = Yup.object().shape({
-      recipient: Yup.string().when('type', {
-        is: type => type === 'email',
-        then: Yup.string()
-          .required()
-          .email(),
-        otherwise: Yup.string()
-          .required()
-          .length(11),
-      }),
-      type: Yup.string()
-        .oneOf(['email', 'sms'])
-        .required(),
-    });
-
-    if (!schema.isValidSync(action.payload)) {
-      notification.error({ message: 'Destinatário inválido' });
-      yield put(resendPasswordError());
-      return;
-    }
     const cardCode = yield select(
       (state: IApplicationState) => state.historicResendPassword.cardCode
     );

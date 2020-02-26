@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, memo } from 'react';
 import { Typography, Tabs, Row, Form } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -14,7 +14,7 @@ import {
 import Modal from 'App/Components/Modal';
 import ResultCards from './ResultCards';
 
-export default function Dialog() {
+function Dialog() {
   const { isLoading, openDialog, result } = useSelector(
     (state: IApplicationState) => state.search
   );
@@ -143,3 +143,5 @@ export default function Dialog() {
     </Modal>
   );
 }
+
+export default memo(Dialog);

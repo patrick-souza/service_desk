@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Row, Menu, Layout, Icon, Avatar, Typography, Divider } from 'antd';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import logoContaAqui from 'assets/logo-contaaqui.svg';
 import { Link } from 'react-router-dom';
 
-export default function Header() {
+function Header() {
   const { name, email } = useSelector(
     (state: IApplicationState) => state.auth.user
   );
@@ -62,3 +62,5 @@ export default function Header() {
     </Layout.Header>
   );
 }
+
+export default memo(Header);

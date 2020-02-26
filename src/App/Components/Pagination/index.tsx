@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Pagination, Divider } from 'antd';
 
 type IProps = {
@@ -10,7 +10,7 @@ type IProps = {
   current?: number;
 };
 
-export default function CustomPagination({
+function CustomPagination({
   total,
   onChange,
   defaultCurrent,
@@ -31,3 +31,5 @@ export default function CustomPagination({
     </>
   );
 }
+
+export default memo(CustomPagination);

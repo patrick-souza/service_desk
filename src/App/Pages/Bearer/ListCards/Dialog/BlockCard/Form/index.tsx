@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Form, Select, Input } from 'antd';
 import { IBlockCard } from 'App/Redux/modules/Block';
 import { FormikProps } from 'formik';
@@ -8,7 +8,7 @@ import { IApplicationState } from 'App/Redux/modules';
 type IProps = {
   formik: FormikProps<IBlockCard>;
 };
-export default function FormBlockCard({ formik }: IProps) {
+function FormBlockCard({ formik }: IProps) {
   const { isLoading, reasons } = useSelector(
     (state: IApplicationState) => state.reason
   );
@@ -58,3 +58,5 @@ export default function FormBlockCard({ formik }: IProps) {
     </Form>
   );
 }
+
+export default memo(FormBlockCard);

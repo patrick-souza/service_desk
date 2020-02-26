@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Row, Card, Typography, Divider, Button } from 'antd';
 
-export default function FastAccess() {
+function FastAccess() {
   return (
     <Row>
       <Card>
@@ -23,3 +23,5 @@ export default function FastAccess() {
     </Row>
   );
 }
+
+export default memo(FastAccess);

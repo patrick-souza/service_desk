@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, memo } from 'react';
 import { Modal, Icon } from 'antd';
 
 type IProps = {
@@ -11,7 +11,7 @@ type IProps = {
   loading?: boolean;
   width?: number | string;
 };
-export default function CustomModal({
+function CustomModal({
   visible,
   onCancel,
   onOk,
@@ -47,3 +47,5 @@ export default function CustomModal({
     </Modal>
   );
 }
+
+export default memo(CustomModal);
