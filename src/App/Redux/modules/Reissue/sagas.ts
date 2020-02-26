@@ -1,5 +1,9 @@
 import { all, fork, takeLatest, put, select, call } from 'redux-saga/effects';
 
+import endpoints from 'Config/endpoints';
+import API from 'App/Services/Api';
+import { formatDate } from 'App/Util/format';
+import { notification } from 'antd';
 import { IReducerAction, IApplicationState } from '..';
 import {
   postReissueCardSuccess,
@@ -8,16 +12,12 @@ import {
   hideDialogReissueCard,
   fetchHistoric,
 } from './actions';
-import endpoints from 'Config/endpoints';
 import {
   IReissueCard,
   IHistoricReissueCard,
   ReissueActionTypes,
 } from './types';
-import API from 'App/Services/Api';
-import { formatDate } from 'App/Util/format';
 import { fetchReasons, ReasonsGroups } from '../Reasons';
-import { notification } from 'antd';
 
 function* postReissueCard(action: IReducerAction<IReissueCard>) {
   try {
@@ -75,7 +75,9 @@ function* handleShowDialog(): Generator {
       put(fetchReasons(ReasonsGroups.REISSUE_CARD)),
       put(fetchHistoric()),
     ]);
-  } catch (error) {}
+  } catch (error) {
+    notification.error({ message: 'Oops!', description: error.message });
+  }
 }
 
 function* watchFetchRequest(): Generator {
@@ -86,6 +88,6 @@ function* watchFetchRequest(): Generator {
   ]);
 }
 
-export function* reissueSaga(): Generator {
+export default function* reissueSaga(): Generator {
   yield all([fork(watchFetchRequest)]);
 }

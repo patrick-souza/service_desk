@@ -1,17 +1,17 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-import { IOrder, OrderActionTypes } from './types';
+import endpoints from 'Config/endpoints';
+import { formatDate } from 'App/Util/format';
+import API from 'App/Services/Api';
+import { notification } from 'antd';
+import { IReducerAction } from '..';
 import {
   fetchOrderError,
   fetchOrderSuccess,
   HideDialogOrderCard,
 } from './actions';
-import { IReducerAction } from '..';
-import endpoints from 'Config/endpoints';
-import { formatDate } from 'App/Util/format';
-import API from 'App/Services/Api';
-import { notification } from 'antd';
+import { IOrder, OrderActionTypes } from './types';
 
-export function* handleOrder(action: IReducerAction<number>): Generator {
+function* handleOrder(action: IReducerAction<number>): Generator {
   try {
     const url = `${endpoints.telaunica_api}/tracking/${action.payload}`;
     const response = (yield call(API.get, url)) as IOrder;
@@ -44,6 +44,6 @@ export function* handleOrder(action: IReducerAction<number>): Generator {
   }
 }
 
-export function* orderSaga(): Generator {
+export default function* orderSaga(): Generator {
   yield all([takeLatest(OrderActionTypes.SHOW_DIALOG, handleOrder)]);
 }

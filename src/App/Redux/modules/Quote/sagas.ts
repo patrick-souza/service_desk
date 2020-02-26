@@ -1,18 +1,18 @@
 import { takeLatest, all, select, call, put } from 'redux-saga/effects';
+import endpoints from 'Config/endpoints';
+import API from 'App/Services/Api';
 import { QuoteActionTypes, IQuote } from './types';
 import { IApplicationState } from '..';
 import { fetchSuccess, fetchError } from './actions';
-import endpoints from 'Config/endpoints';
-import API from 'App/Services/Api';
 
-export function* handleQuote(): Generator {
+function* handleQuote(): Generator {
   try {
     const userId = yield select(({ auth }: IApplicationState) => {
-      let userId = '0';
+      let id = '0';
       if (auth.user) {
-        userId = auth.user.id;
+        id = auth.user.id;
       }
-      return userId;
+      return id;
     });
 
     const response = (yield call(
@@ -26,6 +26,6 @@ export function* handleQuote(): Generator {
   }
 }
 
-export function* quoteSaga(): Generator {
+export default function* quoteSaga(): Generator {
   yield all([takeLatest(QuoteActionTypes.FETCH, handleQuote)]);
 }

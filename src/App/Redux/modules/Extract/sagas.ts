@@ -98,6 +98,6 @@ function* watchFetchRequest(): Generator {
   ]);
 }
 
-export function* extractSaga(): Generator {
+export default function* extractSaga(): Generator {
   yield all([fork(watchFetchRequest)]);
 }

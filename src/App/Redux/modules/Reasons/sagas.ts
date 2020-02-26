@@ -1,9 +1,9 @@
 import { all, takeLatest, fork, put, call } from 'redux-saga/effects';
+import endpoints from 'Config/endpoints';
+import API from 'App/Services/Api';
 import { ReasonActionTypes, ReasonsGroups, IReason } from './types';
 import { fetchReasonsSuccess, fetchReasonsError } from './actions';
 import { IReducerAction } from '..';
-import endpoints from 'Config/endpoints';
-import API from 'App/Services/Api';
 
 function* handleReason(action: IReducerAction<ReasonsGroups>): Generator {
   try {
@@ -22,6 +22,6 @@ function* watchFetchRequest(): Generator {
   yield takeLatest(ReasonActionTypes.FETCH_REASON, handleReason);
 }
 
-export function* reasonSaga(): Generator {
+export default function* reasonSaga(): Generator {
   yield all([fork(watchFetchRequest)]);
 }

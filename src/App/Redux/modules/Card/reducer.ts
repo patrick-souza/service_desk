@@ -1,3 +1,4 @@
+import produce from 'immer';
 import { IReducerAction } from '..';
 import {
   ICardState,
@@ -6,7 +7,6 @@ import {
   IStatusCard,
   Characteristics,
 } from './types';
-import produce from 'immer';
 
 export const initialState: ICardState = {
   cards: [],
@@ -83,7 +83,9 @@ export const cardsReducer = (
           newState: IStatusCard;
         };
 
-        const card = draft.cards.find(card => card.card_code === cardCode);
+        const card = draft.cards.find(
+          ({ card_code }) => card_code === cardCode
+        );
 
         if (card) card.status = newState;
       });
@@ -103,7 +105,7 @@ export const cardsReducer = (
     case CardsActionTypes.UPDATE_CARD_CONTACTLESS: {
       return produce(state, draft => {
         const card = draft.cards.find(
-          card => card.card_code === action.payload
+          ({ card_code }) => card_code === action.payload
         );
         if (card && card.contactless) {
           card.contactless.status = !card.contactless.status;

@@ -1,6 +1,6 @@
+import produce from 'immer';
 import { IReducerAction } from '..';
 import { IReason, IReasonState, ReasonActionTypes } from './types';
-import produce from 'immer';
 
 export const initialState: IReasonState = {
   reasons: [],

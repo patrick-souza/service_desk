@@ -1,6 +1,6 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import { IBearer, BearerActionTypes } from './types';
 import { IReducerAction } from '..';
-import FactoryAction from 'App/Util/FactoryAction';
 
 export const fetchBearer = (cardholderId: string): IReducerAction<string> =>
   FactoryAction(BearerActionTypes.FETCH, cardholderId);

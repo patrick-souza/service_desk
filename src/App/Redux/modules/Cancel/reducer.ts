@@ -1,10 +1,10 @@
+import produce from 'immer';
 import { IReducerAction } from '..';
 import {
   CancelCardActionTypes,
   ICancelCardState,
   IHistoricCancel,
 } from './types';
-import produce from 'immer';
 
 export const initialState: ICancelCardState = {
   isLoading: false,

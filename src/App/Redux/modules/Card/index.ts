@@ -1,4 +1,4 @@
 export * from './actions';
-export * from './sagas';
+export { default as cardsSaga } from './sagas';
 export * from './types';
 export * from './reducer';

@@ -1,4 +1,8 @@
 import { fork, all, call, put, takeLatest, select } from 'redux-saga/effects';
+import endpoints from 'Config/endpoints';
+import { formatDate } from 'App/Util/format';
+import { notification } from 'antd';
+import API from 'App/Services/Api';
 import { IReducerAction, IApplicationState } from '..';
 import {
   postBlockCardSuccess,
@@ -8,11 +12,7 @@ import {
   fetchHistoric,
 } from './actions';
 import { BlockCardActionTypes, IHistoricBlock, IBlockCard } from './types';
-import endpoints from 'Config/endpoints';
 import { updateStateCard } from '../Card';
-import { formatDate } from 'App/Util/format';
-import { notification } from 'antd';
-import API from 'App/Services/Api';
 import { fetchReasons, ReasonsGroups } from '../Reasons';
 
 function* blockCard(action: IReducerAction<IBlockCard>): Generator {
@@ -80,6 +80,6 @@ function* watchFetchRequest(): Generator {
   ]);
 }
 
-export function* blockCardSaga(): Generator {
+export default function* blockCardSaga(): Generator {
   yield fork(watchFetchRequest);
 }

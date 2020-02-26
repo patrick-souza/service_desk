@@ -1,4 +1,4 @@
 export * from './actions';
-export * from './sagas';
+export { default as quoteSaga } from './sagas';
 export * from './types';
 export * from './reducer';

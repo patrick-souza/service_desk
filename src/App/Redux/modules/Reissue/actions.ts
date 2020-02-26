@@ -1,5 +1,5 @@
-import { IReducerAction } from './../index';
 import FactoryAction from 'App/Util/FactoryAction';
+import { IReducerAction } from '../index';
 import { IReissueCard, ReissueActionTypes } from './types';
 
 export const postReissueCard = (card: IReissueCard): IReducerAction<{}> =>

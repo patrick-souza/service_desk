@@ -9,7 +9,7 @@ import { AuthActionTypes, ISignin, responseApi } from './types';
 import { fetchAuthSuccess, fetchAuthError } from './actions';
 import { IReducerAction, IApplicationState } from '..';
 
-export function* handleAuth(action: IReducerAction<ISignin>): Generator {
+function* handleAuth(action: IReducerAction<ISignin>): Generator {
   try {
     notification.destroy();
     const credentials = { ...action.payload };
@@ -48,7 +48,7 @@ function* watchFetchRequest(): Generator {
   yield takeLatest(AuthActionTypes.FETCH, handleAuth);
 }
 
-export function* authSaga(): Generator {
+export default function* authSaga(): Generator {
   yield all([
     fork(watchFetchRequest),
     takeLatest('persist/REHYDRATE', persistToken),

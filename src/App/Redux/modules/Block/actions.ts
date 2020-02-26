@@ -1,6 +1,6 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import { IReducerAction } from '..';
 import { BlockCardActionTypes, IHistoricBlock, IBlockCard } from './types';
-import FactoryAction from 'App/Util/FactoryAction';
 
 export const PostBlockCard = (
   reason: number,

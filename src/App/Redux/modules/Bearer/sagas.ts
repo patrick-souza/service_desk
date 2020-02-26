@@ -1,7 +1,4 @@
 import { all, takeLatest, fork, call, put } from 'redux-saga/effects';
-import { BearerActionTypes, IBearer } from './types';
-import { IReducerAction } from '..';
-import { fetchSuccess, fetchError } from './actions';
 import endpoints from 'Config/endpoints';
 import API from 'App/Services/Api';
 import {
@@ -10,8 +7,11 @@ import {
   formatDate,
   format_phone,
 } from 'App/Util/format';
+import { BearerActionTypes, IBearer } from './types';
+import { IReducerAction } from '..';
+import { fetchSuccess, fetchError } from './actions';
 
-export function* handleBearer(action: IReducerAction<number>): Generator {
+function* handleBearer(action: IReducerAction<number>): Generator {
   try {
     const response = (yield call(
       API.get,
@@ -31,7 +31,7 @@ export function* handleBearer(action: IReducerAction<number>): Generator {
         response.type === 'PJ'
           ? format_cnpj(response.document)
           : format_cpf(response.document),
-      formatted_born: !!response.born
+      formatted_born: response.born
         ? formatDate(new Date(response.born), 'DD/MM/YYYY')
         : '',
       formatted_phone: format_phone(response.phone),
@@ -48,6 +48,6 @@ function* watchFetchRequest(): Generator {
   yield takeLatest(BearerActionTypes.FETCH, handleBearer);
 }
 
-export function* bearerSaga(): Generator {
+export default function* bearerSaga(): Generator {
   yield all([fork(watchFetchRequest)]);
 }

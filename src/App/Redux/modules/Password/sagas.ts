@@ -90,6 +90,6 @@ function* watchFetchRequest(): Generator {
   ]);
 }
 
-export function* historicResendPasswordSaga(): Generator {
+export default function* historicResendPasswordSaga(): Generator {
   yield all([fork(watchFetchRequest)]);
 }

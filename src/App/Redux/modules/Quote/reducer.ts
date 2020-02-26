@@ -1,5 +1,5 @@
-import { IReducerAction } from '..';
 import produce from 'immer';
+import { IReducerAction } from '..';
 import { IQuote, IQuoteState, QuoteActionTypes } from './types';
 
 export const initialState: IQuoteState = {

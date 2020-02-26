@@ -164,7 +164,7 @@ function handleCardsCache(action: IReducerAction<IApplicationState>): void {
     history.push('/dashboard');
 }
 
-export function* cardsSaga(): Generator {
+export default function* cardsSaga(): Generator {
   yield all([
     fork(watchFetchRequest),
     takeLatest('persist/REHYDRATE', handleCardsCache),

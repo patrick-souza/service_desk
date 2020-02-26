@@ -1,5 +1,9 @@
 import { fork, all, call, put, takeLatest, select } from 'redux-saga/effects';
-import { IReducerAction, IApplicationState } from '..';
+import endpoints from 'Config/endpoints';
+import { formatDate } from 'App/Util/format';
+import { notification } from 'antd';
+import API from 'App/Services/Api';
+import { CancelCardActionTypes, IHistoricCancel, ICancelCard } from './types';
 import {
   PostCancelCardSuccess,
   cancelCardError,
@@ -7,11 +11,7 @@ import {
   fetchHistoricSuccess,
   fetchHistoric,
 } from './actions';
-import { CancelCardActionTypes, IHistoricCancel, ICancelCard } from './types';
-import endpoints from 'Config/endpoints';
-import { formatDate } from 'App/Util/format';
-import { notification } from 'antd';
-import API from 'App/Services/Api';
+import { IReducerAction, IApplicationState } from '..';
 import { updateStateCard } from '../Card';
 import { fetchReasons, ReasonsGroups } from '../Reasons';
 
@@ -79,6 +79,6 @@ function* watchFetchRequest(): Generator {
   ]);
 }
 
-export function* cancelCardSaga(): Generator {
+export default function* cancelCardSaga(): Generator {
   yield all([fork(watchFetchRequest)]);
 }

@@ -1,6 +1,6 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import { IOrder, OrderActionTypes } from './types';
 import { IReducerAction } from '..';
-import FactoryAction from 'App/Util/FactoryAction';
 
 export const fetchOrderSuccess = (order: IOrder): IReducerAction<{}> =>
   FactoryAction(OrderActionTypes.FETCH_SUCCESS, order);
