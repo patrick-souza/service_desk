@@ -13,7 +13,8 @@ module.exports = override(
       '@text-color': 'fade(@primary-color, 65%)',
       '@text-color-secondary': 'fade(#FFF, 50%)',
       '@text-color-inverse': '@black',
-      '@heading-color': '@primary-color',
+      '@heading-color': '#122a4e',
+      '@layout-header-background': '#122a4e'
     },
   })
 );

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Row, Collapse } from 'antd';
+import { Row, Collapse, Empty } from 'antd';
 import Pagination from 'App/Components/Pagination';
 import { fetchCards } from 'App/Redux/modules/Card';
 import { useDispatch, useSelector } from 'react-redux';
@@ -89,6 +89,12 @@ export default function ListCards() {
                 </Collapse.Panel>
               ))}
         </Collapse>
+        {!isLoading && cards.length === 0 && (
+          <Empty
+            style={{ flex: 1 }}
+            description="Não encontramos nenhum cartão"
+          />
+        )}
       </Row>
       <Row type="flex" justify="end" align="middle">
         <Pagination

@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Modal from 'App/Components/Modal';
 import { hideDialogResendPassword } from 'App/Redux/modules/Password';
-import { Tabs, Table } from 'antd';
+import { Tabs } from 'antd';
 import FormResendPassword from './Form';
 import Historic from './Historic';
 

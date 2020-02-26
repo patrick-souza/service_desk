@@ -1,8 +1,9 @@
 import React from 'react';
-import { Modal, Icon, Table } from 'antd';
+import { Icon, Table } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { hideDialogCharacteristics } from 'App/Redux/modules/Card';
 import { IApplicationState } from 'App/Redux/modules';
+import Modal from 'App/Components/Modal';
 
 export default function CharacteristicDialog() {
   const { openDialog, characteristics, loadingCharacteristics } = useSelector(
@@ -44,7 +45,7 @@ export default function CharacteristicDialog() {
       onCancel={() => {
         dispatch(hideDialogCharacteristics());
       }}
-      title="CARACTERÍSTICAS"
+      title="Características"
     >
       <Table
         loading={loadingCharacteristics}

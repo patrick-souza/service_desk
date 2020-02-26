@@ -3,7 +3,10 @@ import { Row, Typography, Col, Divider } from 'antd';
 import Breadcrumb from 'App/Components/Breadcrumb';
 import Filter from './Filter';
 
-export default function ExtractHeader() {
+type IProps = {
+  balance: string;
+};
+export default function ExtractHeader({ balance }: IProps) {
   return (
     <>
       <Breadcrumb
@@ -21,7 +24,7 @@ export default function ExtractHeader() {
             <Typography.Text strong>Saldo Total</Typography.Text>
           </Row>
           <Row type="flex" justify="end">
-            <Typography.Title level={3}>R$ 0,00</Typography.Title>
+            <Typography.Title level={3}>{balance}</Typography.Title>
           </Row>
         </Col>
       </Row>
