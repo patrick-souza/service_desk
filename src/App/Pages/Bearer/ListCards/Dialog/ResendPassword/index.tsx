@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Modal from 'App/Components/Modal';
 import { hideDialogResendPassword } from 'App/Redux/modules/Password';
-import { Tabs, Table } from 'antd';
+import { Tabs } from 'antd';
 import FormResendPassword from './Form';
 import Historic from './Historic';
 
@@ -44,10 +44,10 @@ export default function ResendPassword() {
       }}
     >
       <Tabs defaultActiveKey="resend" onChange={handleChangeTab} type="card">
-        <Tabs.TabPane tab="Reenviar Senha" key={'resend'}>
+        <Tabs.TabPane tab="Reenviar Senha" key="resend">
           <FormResendPassword formik={formik} />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Histórico de Reenvio" key={'historic'}>
+        <Tabs.TabPane tab="Histórico de Reenvio" key="historic">
           <Historic />
         </Tabs.TabPane>
       </Tabs>

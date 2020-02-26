@@ -60,7 +60,7 @@ export type Characteristics = {
   type: 'Numeric' | 'Boolean' | 'Monetary' | 'String';
 };
 
-type Tier = 'partner' | 'gold' | 'diamond' | 'platinum';
+export type Tier = 'partner' | 'gold' | 'diamond' | 'platinum';
 
 export type Pagination = {
   rowsPerPage?: number;

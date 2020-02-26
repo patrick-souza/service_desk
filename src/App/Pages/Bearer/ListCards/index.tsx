@@ -1,32 +1,31 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Row, Collapse } from 'antd';
-import LabelbyStatus from './LabelbyStatus';
-import FilterByStatus from './FilterByStatus';
-import CardDetails from './CardDetails';
+import { Row, Collapse, Empty } from 'antd';
 import Pagination from 'App/Components/Pagination';
 import { fetchCards } from 'App/Redux/modules/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
+import { stateDictionary } from 'App/Components/LabelStatus';
+import { fetchBearer } from 'App/Redux/modules/Bearer';
+import LabelbyStatus from './LabelbyStatus';
+import FilterByStatus from './FilterByStatus';
+import CardDetails from './CardDetails';
 import BlockCard from './Dialog/BlockCard';
 import CancelCard from './Dialog/CancelCard';
 import ResendPassword from './Dialog/ResendPassword';
 import OrderDialog from './Dialog/Order';
 import CharacteristicsDialog from './Dialog/Characteristic';
 
-import { stateDictionary } from 'App/Components/LabelStatus';
 import CardHeader from './CardDetails/CardHeader';
 import ReissueDialog from './Dialog/Reissue';
 import CardHeaderSkeleton from './CardDetails/CardHeader/HeaderSkeleton';
-import { fetchBearer } from 'App/Redux/modules/Bearer';
 
 export default function ListCards() {
-  const {
-    count,
-    cards,
-    isLoading,
-    loadingContactless,
-    activeFilter,
-  } = useSelector((state: IApplicationState) => state.card);
+  const { count, cards, isLoading, activeFilter } = useSelector(
+    (state: IApplicationState) => state.card
+  );
+  const { loadingContactless } = useSelector(
+    (state: IApplicationState) => state.card
+  );
   const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
@@ -57,7 +56,6 @@ export default function ListCards() {
           expandIconPosition="right"
           onChange={(cardCode: string | string[]) => {
             if (Array.isArray(cardCode)) {
-              console.log('isArray');
               return;
             }
             const card = cards.find(({ card_code }) => card_code === cardCode);
@@ -71,6 +69,7 @@ export default function ListCards() {
           {isLoading
             ? [1, 2, 3].map(i => <CardHeaderSkeleton key={i} />)
             : cards.map(card => (
+                // eslint-disable-next-line react/jsx-indent
                 <Collapse.Panel
                   style={{
                     borderLeft: `4px solid ${
@@ -80,14 +79,7 @@ export default function ListCards() {
                     borderTop: '1px solid #ddd',
                     marginBottom: '16px',
                   }}
-                  header={
-                    <CardHeader
-                      tier={card.tier}
-                      truncate_number={card.truncate_number}
-                      formatted_balance={card.formatted_balance}
-                      image={card.image}
-                    />
-                  }
+                  header={<CardHeader {...card} />}
                   key={card.card_code}
                 >
                   <CardDetails
@@ -97,6 +89,12 @@ export default function ListCards() {
                 </Collapse.Panel>
               ))}
         </Collapse>
+        {!isLoading && cards.length === 0 && (
+          <Empty
+            style={{ flex: 1 }}
+            description="Não encontramos nenhum cartão"
+          />
+        )}
       </Row>
       <Row type="flex" justify="end" align="middle">
         <Pagination

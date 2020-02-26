@@ -8,9 +8,10 @@ import {
   hideDialogReissueCard,
   postReissueCard,
 } from 'App/Redux/modules/Reissue';
-import FormReissue from './Form';
 import * as Yup from 'yup';
+import FormReissue from './Form';
 import Historic from './Historic';
+
 export default function ReissueDialog() {
   const {
     openDialog,
@@ -19,19 +20,16 @@ export default function ReissueDialog() {
     isLoading,
     portador,
   } = useSelector((state: IApplicationState) => {
-    const { isLoading, openDialog, cardCode } = state.reissue;
-    const card = state.card.cards.find(card => card.card_code === cardCode);
-
-    const { zip_code, name: portador } = state.bearer.bearer;
-    let truncate_number = '';
-    if (card && card.truncate_number) truncate_number = card.truncate_number;
+    const card = state.card.cards.find(
+      ({ card_code }) => card_code === state.reissue.cardCode
+    );
 
     return {
-      isLoading,
-      openDialog,
-      truncate_number,
-      zip_code,
-      portador,
+      isLoading: state.reissue.isLoading,
+      openDialog: state.reissue.openDialog,
+      truncate_number: card && card.truncate_number ? card.truncate_number : '',
+      zip_code: state.bearer.bearer.zip_code,
+      portador: state.bearer.bearer.name,
     };
   });
 
@@ -97,10 +95,10 @@ export default function ReissueDialog() {
       }}
     >
       <Tabs defaultActiveKey="block" onChange={handleChangeTab} type="card">
-        <Tabs.TabPane tab="Reimissão de cartão" key={'reissue'}>
+        <Tabs.TabPane tab="Reimissão de cartão" key="reissue">
           <FormReissue formik={formik} />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Histórico de reemissão" key={'historic'}>
+        <Tabs.TabPane tab="Histórico de reemissão" key="historic">
           <Historic />
         </Tabs.TabPane>
       </Tabs>

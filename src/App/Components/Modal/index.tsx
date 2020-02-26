@@ -33,7 +33,7 @@ export default function CustomModal({
         size: 'large',
         loading,
         htmlType: 'submit',
-        disabled: !!!onOk,
+        disabled: !onOk,
       }}
       cancelButtonProps={{ size: 'large' }}
       okText={okText}

@@ -11,8 +11,9 @@ import {
   ITypeOfSearch,
   resetSearch,
 } from 'App/Redux/modules/Search';
-import ResultCards from './ResultCards';
 import Modal from 'App/Components/Modal';
+import ResultCards from './ResultCards';
+
 export default function Dialog() {
   const { isLoading, openDialog, result } = useSelector(
     (state: IApplicationState) => state.search
