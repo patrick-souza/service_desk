@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import { useFormik } from 'formik';
 import { Tabs } from 'antd';
-import * as Yup from 'yup';
+import Yup from 'App/Util/Yup';
 import Modal from 'App/Components/Modal';
 import { HideDialogCancelCard, PostCancelCard } from 'App/Redux/modules/Cancel';
 import Historic from './Historic';

@@ -3,7 +3,7 @@ import { Tabs } from 'antd';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
-import * as Yup from 'yup';
+import Yup from 'App/Util/Yup';
 import { hideDialogBlockCard, PostBlockCard } from 'App/Redux/modules/Block';
 import Modal from 'App/Components/Modal';
 import FormBlockCard from './Form';

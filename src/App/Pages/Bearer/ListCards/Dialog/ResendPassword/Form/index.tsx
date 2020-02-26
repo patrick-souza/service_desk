@@ -3,7 +3,7 @@ import { Form, Radio, Divider } from 'antd';
 import { FormikProps } from 'formik';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
-import * as Yup from 'yup';
+import Yup from 'App/Util/Yup';
 import CustomOption from './CustomRadio';
 
 type IProps = {

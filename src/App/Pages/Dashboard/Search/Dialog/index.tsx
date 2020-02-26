@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useCallback, memo } from 'react';
 import { Typography, Tabs, Row, Form } from 'antd';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import Yup from 'App/Util/Yup';
 import MaskedInput from 'App/Components/MaskedInput';
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';

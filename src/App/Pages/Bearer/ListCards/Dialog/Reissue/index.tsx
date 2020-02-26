@@ -8,7 +8,7 @@ import {
   hideDialogReissueCard,
   postReissueCard,
 } from 'App/Redux/modules/Reissue';
-import * as Yup from 'yup';
+import Yup from 'App/Util/Yup';
 import FormReissue from './Form';
 import Historic from './Historic';
 
