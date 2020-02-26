@@ -30,14 +30,17 @@ function* blockCard(action: IReducerAction<IBlockCard>): Generator {
     )) as { message: string };
 
     yield put(postBlockCardSuccess());
-    notification.success({ message: response.message as string });
+    notification.success({
+      message: 'Sucesso',
+      description: response.message as string,
+    });
     yield put(updateStateCard(cardCode, 'B'));
 
     yield put(hideDialogBlockCard());
   } catch (error) {
     yield put(blockCardError());
     error.data.errors.map((e: any) =>
-      notification.error({ message: e.message })
+      notification.error({ message: 'Oops!', description: e.message })
     );
   }
 }

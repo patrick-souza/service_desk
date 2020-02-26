@@ -1,5 +1,4 @@
 import { put, all, takeLatest, fork, call } from 'redux-saga/effects';
-
 import API from 'App/Services/Api';
 import endpoints from 'Config/endpoints';
 import history from 'App/Util/history';
@@ -32,7 +31,8 @@ function* handleAuth(action: IReducerAction<ISignin>): Generator {
   } catch (err) {
     if (err.data.errors)
       notification.error({
-        message: 'Login e/ou Senha inválidos',
+        message: 'Oops!',
+        description: 'Login e/ou Senha inválidos',
         placement: 'topLeft',
       });
     yield put(fetchAuthError());

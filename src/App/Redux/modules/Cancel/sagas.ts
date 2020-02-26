@@ -30,14 +30,17 @@ function* cancelCard(action: IReducerAction<ICancelCard>): Generator {
     )) as { message: string };
 
     yield put(PostCancelCardSuccess());
-    notification.success({ message: response.message as string });
+    notification.success({
+      message: 'Sucesso',
+      description: response.message as string,
+    });
     yield put(updateStateCard(cardCode, 'C'));
 
     yield put(HideDialogCancelCard());
   } catch (error) {
     yield put(cancelCardError());
     error.data.errors.map((e: any) =>
-      notification.error({ message: e.message })
+      notification.error({ message: 'Oops!', description: e.message })
     );
   }
 }
