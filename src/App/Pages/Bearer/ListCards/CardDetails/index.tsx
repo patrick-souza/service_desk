@@ -33,6 +33,7 @@ function CardDetails({
               <Description
                 label="Características"
                 value={card_specifications ? card_specifications.summary : ''}
+                data-test-id="bearer__card__characteristics"
                 extraAction={() => {
                   dispatch(showDialogCharacteristics(card_code));
                 }}
@@ -45,6 +46,7 @@ function CardDetails({
                 value={
                   contactless ? (
                     <Switch
+                      data-test-id="bearer__card__button_contactless"
                       loading={loadingContactless}
                       size="small"
                       checked={contactless.status}
@@ -77,6 +79,7 @@ function CardDetails({
           >
             <Link to="/extract">
               <Button
+                id="bearer__card__button_extract"
                 type="primary"
                 size="large"
                 onClick={(): void => {

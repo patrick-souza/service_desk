@@ -26,11 +26,21 @@ function FilterByStatus() {
           buttonStyle="solid"
           onChange={e => dispatch(setActiveFilter(e.target.value))}
         >
-          <Radio.Button value="T">Total - {total}</Radio.Button>
-          <Radio.Button value="A">Ativos - {active}</Radio.Button>
-          <Radio.Button value="C">Cancelados - {canceled}</Radio.Button>
-          <Radio.Button value="P">Pré-Bloqueio - {pre_block}</Radio.Button>
-          <Radio.Button value="B">Bloqueados - {blocked}</Radio.Button>
+          <Radio.Button value="T" id="bearer__card__filter__total">
+            Total - {total}
+          </Radio.Button>
+          <Radio.Button value="A" id="bearer__card__filter__active">
+            Ativos - {active}
+          </Radio.Button>
+          <Radio.Button value="C" id="bearer__card__filter__canceled">
+            Cancelados - {canceled}
+          </Radio.Button>
+          <Radio.Button value="P" id="bearer__card__filter__pre_block">
+            Pré-Bloqueio - {pre_block}
+          </Radio.Button>
+          <Radio.Button value="B" id="bearer__card__filter__blocked">
+            Bloqueados - {blocked}
+          </Radio.Button>
         </Radio.Group>
         <Typography.Text>
           <strong>Nº De Conta</strong> 1/10

@@ -13,7 +13,7 @@ export default function CardHeader({
 }: Partial<ICard>) {
   return (
     <Row type="flex" align="middle">
-      <CardImage image={image} />
+      <CardImage image={image} data-test-id="teste" />
       <Col span={20}>
         <Row type="flex" align="middle" justify="space-between">
           {tier && (

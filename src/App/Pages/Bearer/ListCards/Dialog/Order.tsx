@@ -21,6 +21,8 @@ function OrderDialog() {
         dispatch(HideDialogOrderCard());
       }}
       title="Informações do Pedido"
+      okId="bearer__order_modal__save__button"
+      cancelId="bearer__order_modal__cancel__button"
     >
       <Skeleton avatar loading={isLoading}>
         <Row type="flex">

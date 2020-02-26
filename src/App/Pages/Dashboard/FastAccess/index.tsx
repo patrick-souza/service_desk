@@ -9,14 +9,34 @@ function FastAccess() {
         <Divider style={{ height: '0px' }} />
 
         <Row type="flex" align="middle">
-          <Button block size="large" type="primary">
+          <Button
+            id="dashboard__fastaccess__synapse"
+            block
+            size="large"
+            type="primary"
+            onClick={(): void => {
+              window.open(
+                'http://hubfintech-synapse.xgen.com.br/Login.aspx?ReturnUrl=%2f'
+              );
+            }}
+          >
             Acessar Synapse
           </Button>
         </Row>
         <Divider style={{ height: '0px' }} />
         <Row type="flex" align="middle">
-          <Button block size="large" type="primary">
-            Acessar E-laerning
+          <Button
+            id="dashboard__fastaccess__elearning"
+            block
+            size="large"
+            type="primary"
+            onClick={(): void => {
+              window.open(
+                'https://hubfintech-learning.xgen.com.br/#/login?returnUrl=%252F'
+              );
+            }}
+          >
+            Acessar E-learning
           </Button>
         </Row>
       </Card>

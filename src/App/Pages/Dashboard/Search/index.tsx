@@ -36,6 +36,7 @@ function Search() {
             ref={inputRef}
             placeholder="CPF, CNPJ, ID do cartão e conta"
             enterButton
+            id="dashboard__search__button"
           />
         </Row>
       </Card>
