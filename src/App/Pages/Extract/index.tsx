@@ -1,5 +1,13 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Collapse, Button, Typography, Divider, Pagination, Row } from 'antd';
+import {
+  Collapse,
+  Button,
+  Typography,
+  Divider,
+  Pagination,
+  Row,
+  Empty,
+} from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import { fetchExtract } from 'App/Redux/modules/Extract';
@@ -9,9 +17,22 @@ import ExtractHeader from './Header';
 import ContentHeaderSkeleton from './Content/ContentHeader/Skeleton';
 
 export default function Extract() {
-  const { transactions, isLoading, transationTotal, filter } = useSelector(
-    (state: IApplicationState) => state.extract
-  );
+  const {
+    transactions,
+    isLoading,
+    transationTotal,
+    filter,
+    formatted_balance,
+  } = useSelector((state: IApplicationState) => {
+    const card = state.card.cards.find(
+      ({ card_code }) => card_code === state.extract.cardCode
+    );
+
+    return {
+      ...state.extract,
+      formatted_balance: card ? card.formatted_balance : 'R$ 0,00',
+    };
+  });
   const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
@@ -29,7 +50,7 @@ export default function Extract() {
   }, [filter]);
   return (
     <>
-      <ExtractHeader />
+      <ExtractHeader balance={formatted_balance} />
       <Divider />
       <Collapse
         bordered={false}
@@ -58,6 +79,12 @@ export default function Extract() {
               </Collapse.Panel>
             ))}
       </Collapse>
+      {!isLoading && transactions.length === 0 && (
+        <Empty
+          style={{ flex: 1 }}
+          description="Não encontramos nenhuma transação"
+        />
+      )}
       <Row type="flex" justify="end" align="middle">
         <Pagination
           onChange={page => {

@@ -52,6 +52,9 @@ export default function OrderDialog() {
             <Description
               label="Acompanhe seu pedido:"
               value={order.tracking_link}
+              extraAction={() => {
+                window.open(order.tracking_link);
+              }}
             />
           </Col>
         </Row>
