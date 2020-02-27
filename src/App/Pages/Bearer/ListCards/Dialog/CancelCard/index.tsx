@@ -49,8 +49,8 @@ function CancelCard() {
         formik.resetForm();
         dispatch(HideDialogCancelCard());
       }}
-      okId="bearer__cancel_modal__save__button"
-      cancelId="bearer__cancel_modal__cancel__button"
+      okId="bearer__dialog__cancel__save"
+      cancelId="bearer__dialog__cancel__cancel"
     >
       <Tabs defaultActiveKey="cancel" onChange={handleChangeTab} type="card">
         <Tabs.TabPane tab="Cancelar Cartão" key="cancel">

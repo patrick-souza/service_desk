@@ -97,8 +97,8 @@ export default function ReissueDialog() {
         formik.resetForm();
         dispatch(hideDialogReissueCard());
       }}
-      okId="bearer__reissue_modal__save__button"
-      cancelId="bearer__reissue_modal__cancel__button"
+      okId="bearer__dialog__reissue__save"
+      cancelId="bearer__dialog__reissue__cancel"
     >
       <Tabs defaultActiveKey="block" onChange={handleChangeTab} type="card">
         <Tabs.TabPane tab="Reimissão de cartão" key="reissue">

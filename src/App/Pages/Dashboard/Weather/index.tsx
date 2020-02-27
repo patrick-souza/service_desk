@@ -58,6 +58,7 @@ function Weather() {
     <Card
       style={{ backgroundColor: '#122a4e' }}
       loading={weahterLoading || quoteLoading}
+      id="dashboard__weather__quote"
     >
       <Row type="flex" align="middle" justify="space-around">
         <Typography.Text type="secondary">

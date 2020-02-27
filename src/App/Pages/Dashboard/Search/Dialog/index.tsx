@@ -94,7 +94,8 @@ function Dialog() {
       onCancel={() => {
         dispatch(hideDialog());
       }}
-      okId="dashboard__search__button_search"
+      okId="dialog__search__doc__btn"
+      cancelId="dialog__search__cancel__btn"
     >
       <Typography.Text strong>
         Selecione o que você quer buscar?
@@ -105,7 +106,7 @@ function Dialog() {
             <Tabs.TabPane
               tab={
                 <Typography.Text
-                  id={`dashboard__search_modal__${tab.name}`}
+                  id={`dialog__search__${tab.name}`}
                   strong={tab.key === activeTab}
                 >
                   {tab.placeholder}

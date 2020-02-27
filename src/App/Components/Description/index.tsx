@@ -13,13 +13,7 @@ function Description({ label, value, extraAction, span }: IProps) {
       <Row type="flex" align="middle">
         <Typography.Text strong>{label}</Typography.Text>
         <Divider type="vertical" style={{ height: 0, margin: '0 4px' }} />
-        {extraAction && (
-          <Icon
-            type="link"
-            data-test-id="bearer__card__characteristics"
-            onClick={extraAction}
-          />
-        )}
+        {extraAction && <Icon type="link" onClick={extraAction} />}
       </Row>
       <Row type="flex">
         {React.isValidElement(value) ? (

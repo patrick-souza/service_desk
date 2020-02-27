@@ -91,7 +91,6 @@ function* fetchCards(action: IReducerAction<Pagination>): Generator {
 
 function* handleContactless(action: IReducerAction<string>): Generator {
   try {
-    console.log('chegou aqui');
     notification.destroy();
     const card = (yield select((state: IApplicationState) =>
       state.card.cards.find(({ card_code }) => card_code === action.payload)

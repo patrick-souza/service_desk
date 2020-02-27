@@ -10,7 +10,7 @@ function FastAccess() {
 
         <Row type="flex" align="middle">
           <Button
-            id="dashboard__fastaccess__synapse"
+            id="dashboard__synapse"
             block
             size="large"
             type="primary"
@@ -26,7 +26,7 @@ function FastAccess() {
         <Divider style={{ height: '0px' }} />
         <Row type="flex" align="middle">
           <Button
-            id="dashboard__fastaccess__elearning"
+            id="dashboard__e-laerning"
             block
             size="large"
             type="primary"
