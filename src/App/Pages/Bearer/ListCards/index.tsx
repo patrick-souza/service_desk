@@ -14,7 +14,6 @@ import CancelCard from './Dialog/CancelCard';
 import ResendPassword from './Dialog/ResendPassword';
 import OrderDialog from './Dialog/Order';
 import CharacteristicsDialog from './Dialog/Characteristic';
-
 import CardHeader from './CardDetails/CardHeader';
 import ReissueDialog from './Dialog/Reissue';
 import CardHeaderSkeleton from './CardDetails/CardHeader/HeaderSkeleton';
@@ -71,6 +70,7 @@ function ListCards() {
             : cards.map(card => (
                 // eslint-disable-next-line react/jsx-indent
                 <Collapse.Panel
+                  id={`bearer__card__${card.card_code}`}
                   style={{
                     borderLeft: `4px solid ${
                       stateDictionary[card.status].color

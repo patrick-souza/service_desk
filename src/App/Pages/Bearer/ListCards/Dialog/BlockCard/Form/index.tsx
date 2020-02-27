@@ -28,6 +28,7 @@ function FormBlockCard({ formik }: IProps) {
           onChange={(value: string) => {
             formik.setFieldValue('reason', value);
           }}
+          id="bearer__dialog__reason__block"
           onBlur={() => formik.setFieldTouched('reason')}
         >
           {reasons.map(reason => (
@@ -53,6 +54,7 @@ function FormBlockCard({ formik }: IProps) {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="Descreva o motivo"
+          id="bearer__dialog__description__block"
         />
       </Form.Item>
     </Form>

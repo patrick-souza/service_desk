@@ -37,10 +37,18 @@ function Filter() {
             }}
             value={activeFilter}
           >
-            <Radio.Button value={0}>Hoje</Radio.Button>
-            <Radio.Button value={30}>30 dias</Radio.Button>
-            <Radio.Button value={60}>60 dias</Radio.Button>
-            <Radio.Button value={90}>90 dias</Radio.Button>
+            <Radio.Button value={0} id="extract__header__today">
+              Hoje
+            </Radio.Button>
+            <Radio.Button value={30} id="extract__header__30">
+              30 dias
+            </Radio.Button>
+            <Radio.Button value={60} id="extract__header__60">
+              60 dias
+            </Radio.Button>
+            <Radio.Button value={90} id="extract__header__90">
+              90 dias
+            </Radio.Button>
           </Radio.Group>
           <div>
             <Typography.Text strong>Por data:</Typography.Text>

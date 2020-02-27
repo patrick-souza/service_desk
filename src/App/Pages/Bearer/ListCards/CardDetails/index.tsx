@@ -77,6 +77,7 @@ function CardDetails({
           >
             <Link to="/extract">
               <Button
+                id="bearer__card__button__extract"
                 type="primary"
                 size="large"
                 onClick={(): void => {
