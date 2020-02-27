@@ -7,7 +7,7 @@ import { SearchError, hideDialog, dataSuccess } from './actions';
 import { IResultSearch, SearchActionTypes, ITypeOfSearch } from './types';
 import { IReducerAction, IApplicationState } from '..';
 import { fetchBearer } from '../Bearer';
-import { fetchCards } from '../Card';
+import { fetchCards, setActiveFilter } from '../Card';
 
 function* handleBearer(
   action: IReducerAction<{ typeOfSearch: ITypeOfSearch; termOfSearch: string }>
@@ -35,6 +35,7 @@ function* handleBearer(
     const [firstCard] = response;
 
     yield all([
+      put(setActiveFilter('T')),
       put(fetchCards({ cardCodes })),
       put(fetchBearer(firstCard.cardholder_id)),
     ]);
