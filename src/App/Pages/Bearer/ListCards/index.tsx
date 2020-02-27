@@ -49,10 +49,7 @@ function ListCards() {
       <Row type="flex">
         <FilterByStatus />
       </Row>
-      <Row
-        type="flex"
-        style={{ flexDirection: 'column', height: '118%', flex: 1 }}
-      >
+      <Row type="flex">
         <Col span={24} style={{ height: '100%', flex: 1 }}>
           <Scrollbar style={{ height: '100%', flex: 1 }}>
             <Collapse
