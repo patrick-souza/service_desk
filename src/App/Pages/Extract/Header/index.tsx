@@ -19,7 +19,7 @@ function ExtractHeader({ balance }: IProps) {
       <Divider style={{ margin: '12px 0', height: 0 }} />
       <Row type="flex" align="middle" justify="space-between">
         <Filter />
-        <Col span={12}>
+        <Col span={12} xl={4} xxl={12}>
           <Row type="flex" justify="end">
             <Typography.Text strong>Saldo Total</Typography.Text>
           </Row>

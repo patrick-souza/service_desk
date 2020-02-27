@@ -50,8 +50,8 @@ function ListCards() {
         <FilterByStatus />
       </Row>
       <Row type="flex">
-        <Col span={24} style={{ height: '100%', flex: 1 }}>
-          <Scrollbar style={{ height: '100%', flex: 1 }}>
+        <Col span={24}>
+          <Scrollbar style={{ height: '100%', minHeight: '450px' }}>
             <Collapse
               accordion
               bordered={false}

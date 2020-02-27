@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Divider } from 'antd';
+import Scrollbars from 'react-custom-scrollbars';
 import Weather from './Weather';
 import Search from './Search';
 import FastAccess from './FastAccess';
