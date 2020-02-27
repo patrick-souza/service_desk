@@ -33,7 +33,7 @@ export default function AuthRoute<T>(props: IProps<T>) {
 
         return (
           <Redirect
-            to={{ pathname: '/', state: { from: routeProps.location } }}
+            to={{ pathname: '/401', state: { from: routeProps.location } }}
           />
         );
       }}
