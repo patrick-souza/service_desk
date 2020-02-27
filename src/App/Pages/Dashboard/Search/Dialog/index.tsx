@@ -125,6 +125,7 @@ function Dialog() {
                   help={formik.errors.termSearch}
                 >
                   <MaskedInput
+                    id={`dialog__input__search__${tab.name}`}
                     mask={tab.mask}
                     name="termSearch"
                     placeholder={`Digite o ${tab.placeholder}`}

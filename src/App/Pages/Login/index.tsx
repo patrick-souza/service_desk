@@ -20,9 +20,9 @@ export default function Login() {
             <img src={contaAqui} alt="conta aqui logo" />
           </Row>
           <Row type="flex" justify="center">
-            <Typography.Paragraph type="secondary" disabled>
-              Seja bem-vindo! Por favor faça o login na sua conta.
-            </Typography.Paragraph>
+            <Typography.Text>
+              <p>Seja bem-vindo! Por favor faça o login na sua conta.</p>
+            </Typography.Text>
           </Row>
         </div>
         <FormLogin />
