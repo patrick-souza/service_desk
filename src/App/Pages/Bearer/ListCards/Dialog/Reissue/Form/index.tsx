@@ -28,30 +28,32 @@ function FormReissue({ formik }: IProps) {
 
   const [fetchingAddress, setFetchingAddress] = useState(false);
   const handleAddress = async (zipcode: string) => {
-    setFetchingAddress(true);
-    const sanitizedZipcode = sanitizeValue(zipcode);
-    try {
-      const { city, neighborhood, state, street } = await cepPromisse(
-        sanitizedZipcode
-      );
-      formik.setValues({
-        ...formik.values,
-        address: {
-          ...formik.values.address,
-          district: neighborhood,
-          city,
-          state,
-          street,
-        },
-      });
-    } catch (error) {
-      formik.setFieldValue('address.street', '');
-      formik.setFieldValue('address.district', '');
-      formik.setFieldValue('address.city', '');
-      formik.setFieldValue('address.state', '');
-      notification.error({ message: 'Cep não encontrado' });
-    } finally {
-      setFetchingAddress(false);
+    if (zipcode) {
+      setFetchingAddress(true);
+      const sanitizedZipcode = sanitizeValue(zipcode);
+      try {
+        const { city, neighborhood, state, street } = await cepPromisse(
+          sanitizedZipcode
+        );
+        formik.setValues({
+          ...formik.values,
+          address: {
+            ...formik.values.address,
+            district: neighborhood,
+            city,
+            state,
+            street,
+          },
+        });
+      } catch (error) {
+        formik.setFieldValue('address.street', '');
+        formik.setFieldValue('address.district', '');
+        formik.setFieldValue('address.city', '');
+        formik.setFieldValue('address.state', '');
+        notification.error({ message: 'Cep não encontrado' });
+      } finally {
+        setFetchingAddress(false);
+      }
     }
   };
 

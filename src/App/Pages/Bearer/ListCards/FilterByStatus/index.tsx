@@ -12,6 +12,7 @@ function FilterByStatus() {
     pre_block,
     canceled,
     activeFilter,
+    isLoading,
   } = useSelector((state: IApplicationState) => state.card);
   const dispatch = useDispatch();
   return (
@@ -19,6 +20,7 @@ function FilterByStatus() {
       type="inner"
       size="small"
       style={{ width: '100%', margin: '8px 0px', maxHeight: '60px' }}
+      loading={isLoading}
     >
       <Row type="flex" align="middle" justify="space-between">
         <Radio.Group

@@ -11,6 +11,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import { fetchExtract } from 'App/Redux/modules/Extract';
+import Scrollbar from 'App/Components/Scrollbar';
 import Header from './Content/ContentHeader';
 import Content from './Content';
 import ExtractHeader from './Header';
@@ -51,40 +52,46 @@ function Extract() {
   return (
     <>
       <ExtractHeader balance={formatted_balance} />
+
       <Divider />
-      <Collapse
-        bordered={false}
-        expandIconPosition="right"
-        style={{ background: '#F0F2F5' }}
-        expandIcon={() => (
-          <Button type="primary">
-            <Typography.Text type="secondary">Detalhes</Typography.Text>
-          </Button>
-        )}
-      >
-        {isLoading
-          ? [1, 2, 3, 4, 5].map(i => <ContentHeaderSkeleton key={i} />)
-          : transactions.map(transaction => (
-              // eslint-disable-next-line react/jsx-indent
-              <Collapse.Panel
-                header={<Header transaction={transaction} />}
-                key={transaction.trasactionCode}
-                style={{
-                  background: '#fff',
-                  marginBottom: '16px',
-                  border: 0,
-                }}
-              >
-                <Content transaction={transaction} />
-              </Collapse.Panel>
-            ))}
-      </Collapse>
-      {!isLoading && transactions.length === 0 && (
-        <Empty
-          style={{ flex: 1 }}
-          description="Não encontramos nenhuma transação"
-        />
-      )}
+      <Scrollbar style={{ minHeight: '600px' }}>
+        <Row type="flex">
+          <Collapse
+            bordered={false}
+            expandIconPosition="right"
+            style={{ background: '#F0F2F5', width: '100%' }}
+            expandIcon={() => (
+              <Button type="primary">
+                <Typography.Text type="secondary">Detalhes</Typography.Text>
+              </Button>
+            )}
+          >
+            {isLoading
+              ? [1, 2, 3, 4, 5].map(i => <ContentHeaderSkeleton key={i} />)
+              : transactions.map(transaction => (
+                  // eslint-disable-next-line react/jsx-indent
+                  <Collapse.Panel
+                    header={<Header transaction={transaction} />}
+                    key={transaction.trasactionCode}
+                    style={{
+                      background: '#fff',
+                      marginBottom: '16px',
+                      border: 0,
+                    }}
+                  >
+                    <Content transaction={transaction} />
+                  </Collapse.Panel>
+                ))}
+          </Collapse>
+          {!isLoading && transactions.length === 0 && (
+            <Empty
+              style={{ flex: 1 }}
+              description="Não encontramos nenhuma transação"
+            />
+          )}
+        </Row>
+      </Scrollbar>
+      <Divider style={{ height: 0 }} />
       <Row type="flex" justify="end" align="middle">
         <Pagination
           onChange={page => {
