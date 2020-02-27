@@ -11,7 +11,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
 import { fetchExtract } from 'App/Redux/modules/Extract';
-import Scrollbar from 'App/Components/Scrollbar';
+import Scrollbar from 'react-custom-scrollbars';
 import Header from './Content/ContentHeader';
 import Content from './Content';
 import ExtractHeader from './Header';
