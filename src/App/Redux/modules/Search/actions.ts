@@ -1,6 +1,6 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import { IReducerAction } from '..';
 import { SearchActionTypes, IResultSearch, ITypeOfSearch } from './types';
-import FactoryAction from 'App/Util/FactoryAction';
 
 export const fetchDataBearer = (
   typeOfSearch: ITypeOfSearch,

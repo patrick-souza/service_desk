@@ -1,6 +1,6 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import { ReasonActionTypes, IReason, ReasonsGroups } from './types';
 import { IReducerAction } from '..';
-import FactoryAction from 'App/Util/FactoryAction';
 
 export const fetchReasons = (
   type: ReasonsGroups

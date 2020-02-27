@@ -1,7 +1,16 @@
 import React, { useState, memo } from 'react';
-import { Radio, Row, Icon, Input, Form, Divider, Tooltip } from 'antd';
+import {
+  Radio,
+  Row,
+  Icon,
+  Input,
+  Form,
+  Divider,
+  Tooltip,
+  Typography,
+} from 'antd';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import Yup from 'App/Util/Yup';
 import MaskedInput from 'App/Components/MaskedInput';
 
 type IProps = {
@@ -95,11 +104,13 @@ function CustomOption({
           </Tooltip>
         </div>
       ) : (
-        <Icon
-          type="edit"
-          onClick={() => setEdit(prev => !prev)}
-          theme="twoTone"
-        />
+        <Tooltip title="Editar">
+          <Icon
+            type="edit"
+            onClick={() => setEdit(prev => !prev)}
+            theme="twoTone"
+          />
+        </Tooltip>
       )}
     </Row>
   );

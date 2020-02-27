@@ -1,5 +1,5 @@
-import { IReducerAction } from '..';
 import produce from 'immer';
+import { IReducerAction } from '..';
 import { IWeather, IWeatherState, WeatherActionTypes } from './types';
 
 export const initialState: IWeatherState = {

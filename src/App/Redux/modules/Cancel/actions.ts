@@ -1,6 +1,6 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import { IReducerAction } from '..';
 import { CancelCardActionTypes, IHistoricCancel, ICancelCard } from './types';
-import FactoryAction from 'App/Util/FactoryAction';
 
 export const PostCancelCard = (
   reason: number,

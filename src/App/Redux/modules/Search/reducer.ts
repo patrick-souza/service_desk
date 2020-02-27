@@ -1,6 +1,6 @@
+import produce from 'immer';
 import { IReducerAction } from '..';
 import { ISearchState, SearchActionTypes, IResultSearch } from './types';
-import produce from 'immer';
 
 export const initialState: ISearchState = {
   result: [],

@@ -1,6 +1,6 @@
+import produce from 'immer';
 import { IReducerAction } from '..';
 import { IOrder, IOrderState, OrderActionTypes } from './types';
-import produce from 'immer';
 
 export const initialState: IOrderState = {
   openDialog: false,

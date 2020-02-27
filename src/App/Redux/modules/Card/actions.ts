@@ -1,3 +1,4 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import { IReducerAction } from '..';
 import {
   CardsActionTypes,
@@ -6,7 +7,6 @@ import {
   IStatusCard,
   Characteristics,
 } from './types';
-import FactoryAction from 'App/Util/FactoryAction';
 
 export const fetchCards = (params: Pagination): IReducerAction<Pagination> =>
   FactoryAction(CardsActionTypes.FETCH_CARDS, params);

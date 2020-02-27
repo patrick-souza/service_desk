@@ -1,6 +1,6 @@
+import produce from 'immer';
 import { IReducerAction } from '..';
 import { BlockCardActionTypes, IBlockCardState, IHistoricBlock } from './types';
-import produce from 'immer';
 
 export const initialState: IBlockCardState = {
   isLoading: false,

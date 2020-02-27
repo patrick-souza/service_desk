@@ -2,13 +2,13 @@ import React, { memo } from 'react';
 import { IApplicationState } from 'App/Redux/modules';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import Yup from 'App/Util/Yup';
 import Modal from 'App/Components/Modal';
 import {
   hideDialogResendPassword,
   postResendPassword,
 } from 'App/Redux/modules/Password';
-import { Tabs } from 'antd';
+import { Tabs, Typography } from 'antd';
 import { sanitizeValue } from 'App/Util/format';
 import FormResendPassword from './Form';
 import Historic from './Historic';
@@ -62,6 +62,11 @@ function ResendPassword() {
       <Tabs defaultActiveKey="resend" onChange={handleChangeTab} type="card">
         <Tabs.TabPane tab="Reenviar Senha" key="resend">
           <FormResendPassword formik={formik} />
+          {(formik.errors.recipient || formik.errors.to) && (
+            <Typography.Text type="danger">
+              Destinatário é um campo obrigatório
+            </Typography.Text>
+          )}
         </Tabs.TabPane>
         <Tabs.TabPane tab="Histórico de Reenvio" key="historic">
           <Historic />

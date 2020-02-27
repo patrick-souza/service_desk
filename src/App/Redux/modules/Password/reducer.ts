@@ -5,6 +5,7 @@ import {
   HistoricResendPasswordActionTypes,
   IHistoricResendPassword,
 } from './types';
+
 export const initialState: IHistoricResendPasswordState = {
   cardCode: '',
   openDialog: false,

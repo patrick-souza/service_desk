@@ -1,17 +1,18 @@
 import { takeLatest, all, select, call, put } from 'redux-saga/effects';
+import endpoints from 'Config/endpoints';
+import API from 'App/Services/Api';
 import { WeatherActionTypes, IWeather } from './types';
 import { IApplicationState } from '..';
 import { fetchSuccess, fetchError } from './actions';
-import endpoints from 'Config/endpoints';
-import API from 'App/Services/Api';
-export function* handleWeather(): Generator {
+
+function* handleWeather(): Generator {
   try {
     const userId = yield select(({ auth }: IApplicationState) => {
-      let userId = '0';
+      let id = '0';
       if (auth.user) {
-        userId = auth.user.id;
+        id = auth.user.id;
       }
-      return userId;
+      return id;
     });
 
     const response = (yield call(
@@ -29,6 +30,6 @@ export function* handleWeather(): Generator {
   }
 }
 
-export function* weatherSaga(): Generator {
+export default function* weatherSaga(): Generator {
   yield all([takeLatest(WeatherActionTypes.FETCH, handleWeather)]);
 }

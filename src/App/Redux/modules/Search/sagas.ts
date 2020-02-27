@@ -1,15 +1,15 @@
 import { all, takeLatest, call, put, select } from 'redux-saga/effects';
-import { IReducerAction, IApplicationState } from '..';
-import { IResultSearch, SearchActionTypes, ITypeOfSearch } from './types';
-import { SearchError, hideDialog, dataSuccess } from './actions';
 import { notification } from 'antd';
 import endpoints from 'Config/endpoints';
 import API from 'App/Services/Api';
 import history from 'App/Util/history';
+import { SearchError, hideDialog, dataSuccess } from './actions';
+import { IResultSearch, SearchActionTypes, ITypeOfSearch } from './types';
+import { IReducerAction, IApplicationState } from '..';
 import { fetchBearer } from '../Bearer';
 import { fetchCards } from '../Card';
 
-export function* handleBearer(
+function* handleBearer(
   action: IReducerAction<{ typeOfSearch: ITypeOfSearch; termOfSearch: string }>
 ): Generator {
   try {
@@ -24,23 +24,22 @@ export function* handleBearer(
     yield put(dataSuccess(response));
 
     if (typeOfSearch === 'ORDER_ID' || typeOfSearch === 'ORDER_ITEM_ID') return;
-    else {
-      yield put(hideDialog());
 
-      const cardCodes = response.reduce(
-        (codes: string[], result) => [...codes, result.card_code],
-        []
-      );
+    yield put(hideDialog());
 
-      const [firstCard] = response;
+    const cardCodes = response.reduce(
+      (codes: string[], result) => [...codes, result.card_code],
+      []
+    );
 
-      yield all([
-        put(fetchCards({ cardCodes })),
-        put(fetchBearer(firstCard.cardholder_id)),
-      ]);
+    const [firstCard] = response;
 
-      history.push('/bearer');
-    }
+    yield all([
+      put(fetchCards({ cardCodes })),
+      put(fetchBearer(firstCard.cardholder_id)),
+    ]);
+
+    history.push('/bearer');
   } catch (err) {
     if (err.data.errors) {
       const [error] = err.data.errors;
@@ -68,7 +67,7 @@ function* selectCardOnSearch(action: IReducerAction<string>): Generator {
   }
 }
 
-export function* searchSaga(): Generator {
+export default function* searchSaga(): Generator {
   yield all([
     takeLatest(SearchActionTypes.FETCH, handleBearer),
     takeLatest(SearchActionTypes.SELECT_CARD, selectCardOnSearch),

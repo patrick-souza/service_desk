@@ -84,7 +84,6 @@ function* fetchExtract({ payload }: IReducerAction<Pagination>): Generator {
     yield put(fetchExtractSuccess({ rows: extract, count: response.count }));
   } catch (error) {
     notification.error({ message: 'Oops!', description: error.message });
-    console.log(error);
 
     yield put(fetchExtractError());
   }
@@ -98,6 +97,6 @@ function* watchFetchRequest(): Generator {
   ]);
 }
 
-export function* extractSaga(): Generator {
+export default function* extractSaga(): Generator {
   yield all([fork(watchFetchRequest)]);
 }

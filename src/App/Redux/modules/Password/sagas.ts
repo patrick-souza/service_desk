@@ -35,11 +35,14 @@ function* handlePostResendPassword(
     yield put(postResendPasswordSuccess());
     yield put(hideDialogResendPassword());
 
-    notification.success({ message: 'Senha enviada com sucesso' });
+    notification.success({
+      message: 'Sucesso',
+      description: 'Senha enviada com sucesso',
+    });
   } catch (err) {
     if (err.data.errors)
       err.data.errors.foreach((e: any) =>
-        notification.error({ message: e.message })
+        notification.error({ message: 'Oops!', description: e.message })
       );
     yield put(resendPasswordError());
   }
@@ -68,7 +71,7 @@ function* handleHistoricPassword(): Generator {
     yield put(resendPasswordError());
     if (error.data.errors)
       error.data.errors.foreach((e: any) =>
-        notification.error({ message: e.message })
+        notification.error({ message: 'Oops!', description: e.message })
       );
   }
 }
@@ -90,6 +93,6 @@ function* watchFetchRequest(): Generator {
   ]);
 }
 
-export function* historicResendPasswordSaga(): Generator {
+export default function* historicResendPasswordSaga(): Generator {
   yield all([fork(watchFetchRequest)]);
 }

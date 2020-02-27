@@ -1,5 +1,4 @@
 import { put, all, takeLatest, fork, call } from 'redux-saga/effects';
-
 import API from 'App/Services/Api';
 import endpoints from 'Config/endpoints';
 import history from 'App/Util/history';
@@ -9,7 +8,7 @@ import { AuthActionTypes, ISignin, responseApi } from './types';
 import { fetchAuthSuccess, fetchAuthError } from './actions';
 import { IReducerAction, IApplicationState } from '..';
 
-export function* handleAuth(action: IReducerAction<ISignin>): Generator {
+function* handleAuth(action: IReducerAction<ISignin>): Generator {
   try {
     notification.destroy();
     const credentials = { ...action.payload };
@@ -32,7 +31,8 @@ export function* handleAuth(action: IReducerAction<ISignin>): Generator {
   } catch (err) {
     if (err.data.errors)
       notification.error({
-        message: 'Login e/ou Senha inválidos',
+        message: 'Oops!',
+        description: 'Login e/ou Senha inválidos',
         placement: 'topLeft',
       });
     yield put(fetchAuthError());
@@ -48,7 +48,7 @@ function* watchFetchRequest(): Generator {
   yield takeLatest(AuthActionTypes.FETCH, handleAuth);
 }
 
-export function* authSaga(): Generator {
+export default function* authSaga(): Generator {
   yield all([
     fork(watchFetchRequest),
     takeLatest('persist/REHYDRATE', persistToken),

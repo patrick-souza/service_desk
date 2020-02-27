@@ -50,7 +50,8 @@ export const extractReducer = (
         draft.isLoading = true;
 
         const [startDate, endDate] = payload as FilterPerDate;
-        if (startDate && endDate) draft.filter = [startDate, endDate];
+        if (startDate && endDate)
+          draft.filter = [startDate, endDate.add(1, 'days')];
       });
     }
     case ExtractActionTypes.RESET_FILTER: {

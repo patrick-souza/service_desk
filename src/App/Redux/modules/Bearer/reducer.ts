@@ -1,6 +1,6 @@
+import produce from 'immer';
 import { IReducerAction } from '..';
 import { IBearer, IBearerState, BearerActionTypes } from './types';
-import produce from 'immer';
 
 export const initialState: IBearerState = {
   bearer: {} as IBearer,

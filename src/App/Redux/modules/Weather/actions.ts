@@ -1,6 +1,6 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import { WeatherActionTypes, IWeather } from './types';
 import { IReducerAction } from '..';
-import FactoryAction from 'App/Util/FactoryAction';
 
 export const fetchWeather = (): IReducerAction<{}> =>
   FactoryAction(WeatherActionTypes.FETCH, {});

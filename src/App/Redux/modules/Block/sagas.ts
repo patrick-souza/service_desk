@@ -1,4 +1,8 @@
 import { fork, all, call, put, takeLatest, select } from 'redux-saga/effects';
+import endpoints from 'Config/endpoints';
+import { formatDate } from 'App/Util/format';
+import { notification } from 'antd';
+import API from 'App/Services/Api';
 import { IReducerAction, IApplicationState } from '..';
 import {
   postBlockCardSuccess,
@@ -8,11 +12,7 @@ import {
   fetchHistoric,
 } from './actions';
 import { BlockCardActionTypes, IHistoricBlock, IBlockCard } from './types';
-import endpoints from 'Config/endpoints';
 import { updateStateCard } from '../Card';
-import { formatDate } from 'App/Util/format';
-import { notification } from 'antd';
-import API from 'App/Services/Api';
 import { fetchReasons, ReasonsGroups } from '../Reasons';
 
 function* blockCard(action: IReducerAction<IBlockCard>): Generator {
@@ -30,14 +30,17 @@ function* blockCard(action: IReducerAction<IBlockCard>): Generator {
     )) as { message: string };
 
     yield put(postBlockCardSuccess());
-    notification.success({ message: response.message as string });
+    notification.success({
+      message: 'Sucesso',
+      description: response.message as string,
+    });
     yield put(updateStateCard(cardCode, 'B'));
 
     yield put(hideDialogBlockCard());
   } catch (error) {
     yield put(blockCardError());
     error.data.errors.map((e: any) =>
-      notification.error({ message: e.message })
+      notification.error({ message: 'Oops!', description: e.message })
     );
   }
 }
@@ -80,6 +83,6 @@ function* watchFetchRequest(): Generator {
   ]);
 }
 
-export function* blockCardSaga(): Generator {
+export default function* blockCardSaga(): Generator {
   yield fork(watchFetchRequest);
 }

@@ -1,6 +1,6 @@
+import FactoryAction from 'App/Util/FactoryAction';
 import { QuoteActionTypes, IQuote } from './types';
 import { IReducerAction } from '..';
-import FactoryAction from 'App/Util/FactoryAction';
 
 export const fetchQuote = (): IReducerAction<{}> =>
   FactoryAction(QuoteActionTypes.FETCH, {});

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Icon, Input, Button } from 'antd';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import Yup from 'App/Util/Yup';
 import './index.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuth } from 'App/Redux/modules/Auth';

@@ -1,4 +1,4 @@
 export * from './actions';
+export { default as searchSaga } from './sagas';
 export * from './types';
-export * from './sagas';
 export * from './reducer';
