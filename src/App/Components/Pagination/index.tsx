@@ -18,7 +18,7 @@ function CustomPagination({
 }: IProps) {
   return (
     <>
-      <Divider style={{ height: 0 }} />
+      <Divider style={{ height: 0, margin: '8px 0' }} />
       <Pagination
         pageSizeOptions={['5']}
         defaultPageSize={5}

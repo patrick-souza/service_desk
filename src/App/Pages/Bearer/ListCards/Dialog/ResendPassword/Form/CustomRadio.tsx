@@ -1,14 +1,5 @@
 import React, { useState, memo } from 'react';
-import {
-  Radio,
-  Row,
-  Icon,
-  Input,
-  Form,
-  Divider,
-  Tooltip,
-  Typography,
-} from 'antd';
+import { Radio, Row, Icon, Input, Form, Divider, Tooltip } from 'antd';
 import { useFormik } from 'formik';
 import Yup from 'App/Util/Yup';
 import MaskedInput from 'App/Components/MaskedInput';

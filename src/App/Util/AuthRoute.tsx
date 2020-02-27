@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Layout } from 'antd';
 import Header from 'App/Components/Header';
 import { IApplicationState } from 'App/Redux/modules';
+import Scrollbars from 'react-custom-scrollbars';
 
 type IProps<T> = {
   component: React.ComponentType<T>;
@@ -23,11 +24,11 @@ export default function AuthRoute<T>(props: IProps<T>) {
           return (
             <Layout>
               <Header />
-              <Layout.Content
-                style={{ padding: '30px', minHeight: 'calc(100vh - 64px)' }}
-              >
-                <Component {...routeProps} />
-              </Layout.Content>
+              <Scrollbars autoHide style={{ minHeight: 'calc(100vh - 64px)' }}>
+                <Layout.Content style={{ padding: '30px' }}>
+                  <Component {...routeProps} />
+                </Layout.Content>
+              </Scrollbars>
             </Layout>
           );
 

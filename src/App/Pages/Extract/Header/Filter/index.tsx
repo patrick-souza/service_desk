@@ -25,7 +25,7 @@ function Filter() {
     handleFilter([moment().subtract(days, 'days'), moment()]);
 
   return (
-    <Col span={12}>
+    <Col span={12} xl={20} xxl={12}>
       <Card size="small" bordered={false}>
         <Row type="flex" justify="space-between">
           <Radio.Group
