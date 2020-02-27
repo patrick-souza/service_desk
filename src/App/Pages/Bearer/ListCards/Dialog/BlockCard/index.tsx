@@ -45,6 +45,8 @@ export default function BlockCard() {
       onOk={() => {
         formik.submitForm();
       }}
+      okId="bearer__dialog__block__save"
+      cancelId="bearer__dialog__block__cancel"
       onCancel={() => {
         formik.resetForm();
         dispatch(hideDialogBlockCard());

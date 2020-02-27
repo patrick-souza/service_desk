@@ -52,6 +52,8 @@ function ResendPassword() {
       onOk={() => {
         formik.submitForm();
       }}
+      okId="bearer__dialog__password__save"
+      cancelId="bearer__dialog__password__cancel"
       onCancel={() => {
         formik.resetForm();
         dispatch(hideDialogResendPassword());

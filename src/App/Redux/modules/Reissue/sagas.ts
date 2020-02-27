@@ -37,11 +37,11 @@ function* postReissueCard(action: IReducerAction<IReissueCard>) {
 
     yield all([put(postReissueCardSuccess()), put(hideDialogReissueCard())]);
 
-    notification.success({ message: response.message });
+    notification.success({ message: 'Sucesso', description: response.message });
   } catch (err) {
     if (err.data.errors)
       err.data.errors.map((e: any) =>
-        notification.error({ message: e.message })
+        notification.error({ message: 'Oops!', description: e.message })
       );
 
     yield put(reissueCardError());

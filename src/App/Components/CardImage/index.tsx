@@ -2,7 +2,7 @@ import React, { useState, memo } from 'react';
 import { Col } from 'antd';
 import cardNotFound from 'assets/cardNotFound.jpg';
 
-function CardImage({ image }: { image?: string }) {
+function CardImage({ image, id }: { image?: string; id?: string }) {
   const [errorImage, setErrorImage] = useState(false);
 
   return (
@@ -16,6 +16,7 @@ function CardImage({ image }: { image?: string }) {
       }}
     >
       <img
+        id={id}
         src={errorImage ? cardNotFound : image}
         width={102}
         height={64}

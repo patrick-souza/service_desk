@@ -91,7 +91,6 @@ function* fetchCards(action: IReducerAction<Pagination>): Generator {
 
 function* handleContactless(action: IReducerAction<string>): Generator {
   try {
-    console.log('chegou aqui');
     notification.destroy();
     const card = (yield select((state: IApplicationState) =>
       state.card.cards.find(({ card_code }) => card_code === action.payload)
@@ -110,6 +109,7 @@ function* handleContactless(action: IReducerAction<string>): Generator {
     notification.success({ message: 'Sucesso', description: response.message });
     yield put(updateCardContactless(action.payload));
   } catch (error) {
+    notification.error({ message: 'Oops!', description: error.message });
     yield put(cardsError());
   }
 }
@@ -136,7 +136,7 @@ function* handleCharacteristics(action: IReducerAction<string>): Generator {
       yield put(loadCharacteristics(formattedCharacteristics));
     }
   } catch (error) {
-    console.log(error);
+    notification.error({ message: 'Oops!', description: error.message });
   }
 }
 

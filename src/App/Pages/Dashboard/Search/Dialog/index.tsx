@@ -94,6 +94,8 @@ function Dialog() {
       onCancel={() => {
         dispatch(hideDialog());
       }}
+      okId="dialog__search__doc__btn"
+      cancelId="dialog__search__cancel__btn"
     >
       <Typography.Text strong>
         Selecione o que você quer buscar?
@@ -101,7 +103,17 @@ function Dialog() {
       <Form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <Tabs defaultActiveKey="CPF" onChange={handleChangeTab} type="card">
           {tabs.map(tab => (
-            <Tabs.TabPane tab={tab.placeholder} key={tab.key}>
+            <Tabs.TabPane
+              tab={
+                <Typography.Text
+                  id={`dialog__search__${tab.name}`}
+                  strong={tab.key === activeTab}
+                >
+                  {tab.placeholder}
+                </Typography.Text>
+              }
+              key={tab.key}
+            >
               <Row type="flex" style={{ minHeight: '100px' }} align="middle">
                 <Form.Item
                   style={{ width: '100%' }}

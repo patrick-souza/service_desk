@@ -10,6 +10,8 @@ type IProps = {
   title?: string | React.ReactNode;
   loading?: boolean;
   width?: number | string;
+  okId?: string;
+  cancelId?: string;
 };
 function CustomModal({
   visible,
@@ -21,6 +23,8 @@ function CustomModal({
   title,
   loading,
   width,
+  okId,
+  cancelId,
 }: PropsWithChildren<IProps>) {
   return (
     <Modal
@@ -34,8 +38,9 @@ function CustomModal({
         loading,
         htmlType: 'submit',
         disabled: !onOk,
+        id: okId,
       }}
-      cancelButtonProps={{ size: 'large' }}
+      cancelButtonProps={{ size: 'large', id: cancelId }}
       okText={okText}
       cancelText={cancelText}
       onOk={onOk}

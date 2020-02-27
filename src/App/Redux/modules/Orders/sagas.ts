@@ -39,7 +39,7 @@ function* handleOrder(action: IReducerAction<number>): Generator {
     yield all([put(fetchOrderError()), put(HideDialogOrderCard())]);
     if (error.status === 404)
       error.data.errors.map((e: any) =>
-        notification.error({ message: e.message })
+        notification.error({ message: 'Oops!', description: e.message })
       );
   }
 }

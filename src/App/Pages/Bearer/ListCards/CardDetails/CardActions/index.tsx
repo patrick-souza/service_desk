@@ -16,6 +16,7 @@ export default function CardActions({ cardCode }: IProps) {
   return (
     <Row type="flex">
       <Button
+        id="bearer__card__password"
         size="large"
         onClick={() => {
           dispatch(showDialogResendPassword(cardCode));
@@ -27,6 +28,7 @@ export default function CardActions({ cardCode }: IProps) {
 
       <Button
         size="large"
+        id="bearer__card__reissue"
         onClick={() => {
           dispatch(showDialogReissueCard(cardCode));
         }}
@@ -37,6 +39,7 @@ export default function CardActions({ cardCode }: IProps) {
 
       <Button
         size="large"
+        id="bearer__card__cancel"
         onClick={() => {
           dispatch(ShowDialogCancelCard(cardCode));
         }}
@@ -47,6 +50,7 @@ export default function CardActions({ cardCode }: IProps) {
 
       <Button
         size="large"
+        id="bearer__card__block"
         onClick={() => {
           dispatch(showDialogBlockCard(cardCode));
         }}
@@ -57,6 +61,7 @@ export default function CardActions({ cardCode }: IProps) {
 
       <Button
         size="large"
+        id="bearer__card__order"
         onClick={() => {
           dispatch(ShowDialogOrderCard(cardCode));
         }}

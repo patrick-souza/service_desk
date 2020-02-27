@@ -46,6 +46,8 @@ function CharacteristicDialog() {
         dispatch(hideDialogCharacteristics());
       }}
       title="Características"
+      okId="bearer__characteristics_modal__save__button"
+      cancelId="bearer__characteristics_modal__cancel__button"
     >
       <Table
         loading={loadingCharacteristics}

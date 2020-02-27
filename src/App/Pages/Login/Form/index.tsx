@@ -49,6 +49,7 @@ export default function NormalLoginForm() {
           onChange={formik.handleChange}
           name="username"
           disabled={isLoading}
+          id="login__username"
         />
       </Form.Item>
       <Form.Item
@@ -65,9 +66,16 @@ export default function NormalLoginForm() {
           onChange={formik.handleChange}
           name="password"
           disabled={isLoading}
+          id="login__password"
         />
       </Form.Item>
-      <Button type="primary" htmlType="submit" size="large" loading={isLoading}>
+      <Button
+        type="primary"
+        htmlType="submit"
+        size="large"
+        loading={isLoading}
+        id="login__signin"
+      >
         Entrar
       </Button>
     </Form>
