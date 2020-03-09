@@ -10,12 +10,12 @@ function Historic() {
   const columns = [
     {
       title: 'Responsável',
-      dataIndex: 'user',
+      dataIndex: 'user.name',
       key: '_id',
     },
     {
       title: 'Motivo',
-      dataIndex: 'payload.situacao.situacao',
+      dataIndex: 'payload.situacao.nome',
       key: 'payload.situacao.situacao',
     },
     {
