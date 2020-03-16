@@ -10,7 +10,7 @@ function Historic() {
   const columns = [
     {
       title: 'Responsável',
-      dataIndex: 'user',
+      dataIndex: 'user.name',
       key: '_id',
     },
     {
