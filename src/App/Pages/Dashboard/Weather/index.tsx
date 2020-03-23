@@ -67,7 +67,7 @@ function Weather() {
           {formatDate(now, 'HH:mm')}
         </Typography.Text>
         <Divider type="vertical" />
-        <Typography.Text type="secondary">
+        <Typography.Text type="secondary" id="dashboard__weather">
           <img src={icon} alt={icon} width={40} height={40} />
           <Divider type="vertical" style={{ height: '0' }} />
           {temp} ºC
@@ -91,6 +91,7 @@ function Weather() {
       </Typography.Text>
       <Divider type="horizontal" style={{ height: '0px' }} />
       <Typography.Paragraph
+        id="dashboard__quotes"
         type="secondary"
         ellipsis={{ rows: 4, expandable: true }}
         style={{ fontStyle: 'italic' }}

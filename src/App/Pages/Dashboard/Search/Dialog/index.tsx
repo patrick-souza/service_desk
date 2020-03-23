@@ -52,20 +52,20 @@ function Dialog() {
       },
       {
         key: 'ACCOUNT_ID',
-        placeholder: 'Nº da Conta',
+        placeholder: 'N da Conta',
         mask: '99999999999999999',
         name: 'nº_conta',
       },
       {
         key: 'ORDER_ID',
-        placeholder: 'Nº do Pedido',
+        placeholder: 'N do Pedido',
         mask: '99999999999999999',
         name: 'nº_pedido',
         resultList: true,
       },
       {
         key: 'ORDER_ITEM_ID',
-        placeholder: 'Nº do Item',
+        placeholder: 'N do Item',
         mask: '99999999999999999',
         name: 'nº_item_do_pedido',
         resultList: true,
