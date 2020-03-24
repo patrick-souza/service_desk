@@ -1,5 +1,5 @@
-import React from 'react';
-import { Tabs } from 'antd';
+import React, { useState } from 'react';
+import { Tabs, Typography } from 'antd';
 import { useFormik } from 'formik';
 import Modal from 'App/Components/Modal';
 import { IApplicationState } from 'App/Redux/modules';
@@ -13,6 +13,7 @@ import FormReissue from './Form';
 import Historic from './Historic';
 
 export default function ReissueDialog() {
+  const [activeKey, setActiveKey] = useState('reissue');
   const {
     openDialog,
     truncate_number,
@@ -79,7 +80,8 @@ export default function ReissueDialog() {
     },
   });
 
-  const handleChangeTab = () => {
+  const handleChangeTab = (key: string) => {
+    setActiveKey(key);
     formik.resetForm();
   };
 
@@ -101,10 +103,30 @@ export default function ReissueDialog() {
       cancelId="bearer__dialog__reissue__cancel"
     >
       <Tabs defaultActiveKey="block" onChange={handleChangeTab} type="card">
-        <Tabs.TabPane tab="Reimissão de cartão" key="reissue">
+        <Tabs.TabPane
+          tab={
+            <Typography.Text
+              id="dialog__reissue__reissue_card"
+              strong={activeKey === 'reissue'}
+            >
+              Reimissão de cartão
+            </Typography.Text>
+          }
+          key="reissue"
+        >
           <FormReissue formik={formik} />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Histórico de reemissão" key="historic">
+        <Tabs.TabPane
+          tab={
+            <Typography.Text
+              id="dialog__reissue__historic"
+              strong={activeKey === 'historic'}
+            >
+              Histórico de reemissão
+            </Typography.Text>
+          }
+          key="historic"
+        >
           <Historic />
         </Tabs.TabPane>
       </Tabs>

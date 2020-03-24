@@ -1,5 +1,5 @@
-import React from 'react';
-import { Tabs } from 'antd';
+import React, { useState } from 'react';
+import { Tabs, Typography } from 'antd';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from 'App/Redux/modules';
@@ -10,6 +10,8 @@ import FormBlockCard from './Form';
 import Historic from './Historic';
 
 export default function BlockCard() {
+  const [activeKey, setActiveKey] = useState('block');
+
   const { openDialog, isLoading } = useSelector(
     (state: IApplicationState) => state.blockCard
   );
@@ -31,7 +33,8 @@ export default function BlockCard() {
     },
   });
 
-  const handleChangeTab = () => {
+  const handleChangeTab = (key: string) => {
+    setActiveKey(key);
     formik.resetForm();
   };
 
@@ -53,10 +56,30 @@ export default function BlockCard() {
       }}
     >
       <Tabs defaultActiveKey="block" onChange={handleChangeTab} type="card">
-        <Tabs.TabPane tab="Bloquear Cartão" key="block">
+        <Tabs.TabPane
+          tab={
+            <Typography.Text
+              id="dialog__block__block_card"
+              strong={activeKey === 'block'}
+            >
+              Bloquear Cartão
+            </Typography.Text>
+          }
+          key="block"
+        >
           <FormBlockCard formik={formik} />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Histórico de bloqueio" key="historic">
+        <Tabs.TabPane
+          tab={
+            <Typography.Text
+              id="dialog__block__historic"
+              strong={activeKey === 'historic'}
+            >
+              Histórico de bloqueio
+            </Typography.Text>
+          }
+          key="historic"
+        >
           <Historic />
         </Tabs.TabPane>
       </Tabs>

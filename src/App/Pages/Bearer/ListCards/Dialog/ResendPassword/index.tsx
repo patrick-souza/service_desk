@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import { IApplicationState } from 'App/Redux/modules';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
@@ -17,6 +17,8 @@ function ResendPassword() {
   const { openDialog, isLoading } = useSelector(
     (state: IApplicationState) => state.historicResendPassword
   );
+
+  const [activeKey, setActiveKey] = useState('resend');
 
   const dispatch = useDispatch();
 
@@ -39,7 +41,8 @@ function ResendPassword() {
     },
   });
 
-  const handleChangeTab = () => {
+  const handleChangeTab = (key: string) => {
+    setActiveKey(key);
     formik.resetForm();
   };
 
@@ -60,7 +63,17 @@ function ResendPassword() {
       }}
     >
       <Tabs defaultActiveKey="resend" onChange={handleChangeTab} type="card">
-        <Tabs.TabPane tab="Reenviar Senha" key="resend">
+        <Tabs.TabPane
+          tab={
+            <Typography.Text
+              id="dialog__password__resend_password"
+              strong={activeKey === 'resend'}
+            >
+              Reenviar Senha
+            </Typography.Text>
+          }
+          key="resend"
+        >
           <FormResendPassword formik={formik} />
           {(formik.errors.recipient || formik.errors.to) && (
             <Typography.Text type="danger">
@@ -68,7 +81,17 @@ function ResendPassword() {
             </Typography.Text>
           )}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Histórico de Reenvio" key="historic">
+        <Tabs.TabPane
+          tab={
+            <Typography.Text
+              id="dialog_password_historic"
+              strong={activeKey === 'historic'}
+            >
+              Histórico de Reenvio
+            </Typography.Text>
+          }
+          key="historic"
+        >
           <Historic />
         </Tabs.TabPane>
       </Tabs>
