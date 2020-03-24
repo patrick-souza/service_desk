@@ -138,15 +138,19 @@ function Dialog() {
               </Row>
               {tab.resultList && result.length >= 1 && (
                 <>
-                  {result.map(({ image, truncated_number, card_code }) => (
-                    <Row type="flex" justify="center" key={card_code}>
-                      <ResultCards
-                        image={image}
-                        truncatedNumber={truncated_number}
-                        cardCode={card_code}
-                      />
-                    </Row>
-                  ))}
+                  {result.map(
+                    ({ image, truncated_number, card_code }, index) => (
+                      <Row type="flex" justify="center" key={card_code}>
+                        <ResultCards
+                          // eslint-disable-next-line react/jsx-curly-brace-presence
+                          id={`dashboard__search__result__${index}`}
+                          image={image}
+                          truncatedNumber={truncated_number}
+                          cardCode={card_code}
+                        />
+                      </Row>
+                    )
+                  )}
                 </>
               )}
             </Tabs.TabPane>

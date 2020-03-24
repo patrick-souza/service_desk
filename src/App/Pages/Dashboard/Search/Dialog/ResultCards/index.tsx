@@ -9,12 +9,14 @@ type IProps = {
   image?: string;
   truncatedNumber: string;
   cardCode: string;
+  id: string;
 };
-function ResultCards({ image, truncatedNumber, cardCode }: IProps) {
+function ResultCards({ image, truncatedNumber, cardCode, id }: IProps) {
   const dispatch = useDispatch();
 
   return (
     <Card
+      id={id}
       style={{ padding: '12px 12px 12px 0' }}
       hoverable
       type="inner"
