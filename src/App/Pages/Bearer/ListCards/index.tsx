@@ -75,6 +75,7 @@ function ListCards() {
                 : cards.map(card => (
                     // eslint-disable-next-line react/jsx-indent
                     <Collapse.Panel
+                      id={`bearer__card__${card.card_code}`}
                       style={{
                         borderLeft: `4px solid ${
                           stateDictionary[card.status].color
