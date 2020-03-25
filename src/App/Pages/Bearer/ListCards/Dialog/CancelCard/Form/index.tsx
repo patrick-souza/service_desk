@@ -22,6 +22,7 @@ function FormCancelCard({ formik }: IProps) {
         help={formik.errors.reason}
       >
         <Select
+          id="form__cancel__select_reason"
           loading={isLoading}
           style={{ width: '100%' }}
           placeholder="Selecione o motivo"
@@ -49,6 +50,7 @@ function FormCancelCard({ formik }: IProps) {
         help={formik.errors.description}
       >
         <Input.TextArea
+          id="form__cancel__reason"
           name="description"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
